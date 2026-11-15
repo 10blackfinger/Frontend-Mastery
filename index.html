@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Frontend Mastery — من الصفر إلى الاحتراف</title>
+<title>Frontend Mastery — منصة تعلّم متكاملة</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -23,15 +23,14 @@
   --ease:cubic-bezier(.22,1,.36,1);
 }
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--text);font-family:var(--font-ar);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
+body{background:var(--bg);color:var(--text);font-family:var(--font-ar);line-height:1.75;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
 body.lang-en{font-family:var(--font-en);direction:ltr}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
-ul{list-style:none}
+ul,ol{list-style:none}
 ::selection{background:rgba(168,85,247,.35);color:#fff}
 
-/* BG */
 #bg3d{position:fixed;inset:0;z-index:0;pointer-events:none}
 #bg3d canvas{display:block}
 .bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;
@@ -83,13 +82,13 @@ section{padding:110px 0;position:relative}
 
 /* HERO */
 .hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 90px;position:relative}
-.hero-inner{max-width:920px;margin:0 auto;text-align:center;padding:0 24px}
+.hero-inner{max-width:960px;margin:0 auto;text-align:center;padding:0 24px}
 .hero-badge{display:inline-flex;align-items:center;gap:9px;padding:8px 18px;border-radius:100px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25);font-size:.82rem;font-weight:600;color:#c4b5fd;margin-bottom:32px;animation:fadeUp .9s var(--ease) both}
 .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--secondary);box-shadow:0 0 10px var(--secondary);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
 .hero h1{font-size:clamp(2.4rem,6.2vw,4.6rem);font-weight:900;line-height:1.1;letter-spacing:-.03em;margin-bottom:26px;animation:fadeUp .9s .1s var(--ease) both}
 .hero h1 .grad{background:linear-gradient(120deg,#818cf8 0%,#c084fc 45%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
-.hero p.lead{font-size:clamp(1.02rem,1.8vw,1.22rem);color:var(--muted);max-width:680px;margin:0 auto 42px;animation:fadeUp .9s .2s var(--ease) both}
+.hero p.lead{font-size:clamp(1.02rem,1.8vw,1.18rem);color:var(--muted);max-width:720px;margin:0 auto 42px;animation:fadeUp .9s .2s var(--ease) both}
 .hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s .3s var(--ease) both}
 .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;max-width:820px;margin:78px auto 0;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;animation:fadeUp .9s .45s var(--ease) both}
 .stat{background:var(--bg);padding:26px 14px;text-align:center;transition:background .3s}
@@ -103,7 +102,7 @@ section{padding:110px 0;position:relative}
 @keyframes scrollDot{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
 
 /* SEC HEAD */
-.sec-head{text-align:center;max-width:740px;margin:0 auto 64px}
+.sec-head{text-align:center;max-width:760px;margin:0 auto 64px}
 .sec-eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#a5b4fc;margin-bottom:16px;padding:6px 16px;border-radius:100px;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.18)}
 .sec-head h2{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800;letter-spacing:-.025em;line-height:1.18;margin-bottom:16px}
 .sec-head p{color:var(--muted);font-size:1.02rem}
@@ -112,27 +111,53 @@ section{padding:110px 0;position:relative}
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 
-/* STAGES */
-.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
-.stage{position:relative;padding:36px 28px;border-radius:var(--radius);background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--border);backdrop-filter:blur(14px);transition:all .45s var(--ease);overflow:hidden}
-.stage::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(160deg,rgba(99,102,241,.14),transparent 55%);opacity:0;transition:opacity .45s var(--ease)}
-.stage:hover{transform:translateY(-7px);border-color:var(--border-hi);box-shadow:0 24px 60px -22px rgba(99,102,241,.45)}
-.stage:hover::before{opacity:1}
-.stage>*{position:relative;z-index:1}
-.stage-icon{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:1.5rem;margin-bottom:22px;background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(168,85,247,.15));border:1px solid rgba(139,92,246,.28)}
-.stage-tag{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--secondary);margin-bottom:9px}
-.stage h3{font-size:1.3rem;font-weight:800;margin-bottom:12px;letter-spacing:-.01em}
-.stage p{color:var(--muted);font-size:.92rem;line-height:1.75;margin-bottom:20px}
-.stage-list{display:flex;flex-direction:column;gap:9px}
-.stage-list li{display:flex;align-items:center;gap:10px;font-size:.86rem;color:#cbd5e1}
-.stage-list li::before{content:"";width:6px;height:6px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 0 8px rgba(139,92,246,.6)}
+/* ============================================================
+   LEARNING MAP (ROADMAP)
+   ============================================================ */
+.roadmap-wrap{position:relative;padding:20px 0}
+.roadmap{display:grid;grid-template-columns:repeat(4,1fr);gap:20px;position:relative;max-width:1180px;margin:0 auto}
+.roadmap::before{content:"";position:absolute;top:44px;left:calc(12.5% + 20px);right:calc(12.5% + 20px);height:2px;background:linear-gradient(90deg,rgba(99,102,241,.15),rgba(168,85,247,.5),rgba(168,85,247,.5),rgba(6,182,212,.15));z-index:0}
 
-/* MODULES GRID */
+.phase{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;z-index:1}
+.phase-node{width:88px;height:88px;border-radius:50%;display:grid;place-items:center;font-size:1.8rem;background:linear-gradient(160deg,rgba(99,102,241,.18),rgba(168,85,247,.1));border:2px solid rgba(139,92,246,.4);box-shadow:0 8px 32px -8px rgba(139,92,246,.5),inset 0 0 24px rgba(139,92,246,.15);margin-bottom:22px;position:relative;transition:transform .4s var(--ease)}
+.phase:hover .phase-node{transform:scale(1.08) rotate(-4deg)}
+.phase-node::after{content:"";position:absolute;inset:-8px;border-radius:50%;border:1px solid rgba(139,92,246,.15);animation:phasePulse 3s infinite}
+@keyframes phasePulse{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:0;transform:scale(1.15)}}
+.phase-name{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a5b4fc;margin-bottom:8px}
+.phase h3{font-size:1.15rem;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
+.phase-desc{font-size:.82rem;color:var(--muted);line-height:1.6;margin-bottom:18px;max-width:240px}
+.phase-mods{display:flex;flex-direction:column;gap:7px;width:100%;max-width:220px}
+.phase-mod{display:flex;align-items:center;gap:10px;padding:9px 13px;border-radius:10px;background:rgba(255,255,255,.03);border:1px solid var(--border);font-size:.8rem;text-align:start;transition:all .3s var(--ease);cursor:pointer;position:relative;overflow:hidden}
+.phase-mod:hover{border-color:var(--border-hi);background:rgba(139,92,246,.08);transform:translateY(-2px)}
+.phase-mod .pm-num{font-family:var(--font-mono);font-size:.72rem;font-weight:600;color:#a5b4fc;flex-shrink:0;min-width:22px}
+.phase-mod .pm-title{flex:1;font-weight:600;color:#cbd5e1;font-size:.78rem;line-height:1.3}
+.phase-mod .pm-check{width:16px;height:16px;border-radius:50%;border:1.5px solid rgba(255,255,255,.15);flex-shrink:0;display:grid;place-items:center;transition:all .3s var(--ease)}
+.phase-mod .pm-check svg{width:9px;height:9px;opacity:0;transform:scale(0);transition:all .3s var(--ease)}
+.phase-mod.done{border-color:rgba(16,185,129,.35);background:rgba(16,185,129,.06)}
+.phase-mod.done .pm-check{background:var(--green);border-color:var(--green)}
+.phase-mod.done .pm-check svg{opacity:1;transform:scale(1)}
+
+/* ============================================================
+   HOW TO USE (platform intro)
+   ============================================================ */
+.how-to{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:1100px;margin:0 auto}
+.how-card{padding:32px 26px;border-radius:var(--radius);background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.012));border:1px solid var(--border);backdrop-filter:blur(14px);position:relative;overflow:hidden;transition:all .4s var(--ease)}
+.how-card:hover{transform:translateY(-5px);border-color:var(--border-hi);box-shadow:0 20px 50px -20px rgba(99,102,241,.4)}
+.how-num{position:absolute;top:18px;inset-inline-end:22px;font-family:var(--font-mono);font-size:3.2rem;font-weight:700;background:linear-gradient(135deg,rgba(129,140,248,.15),rgba(192,132,252,.05));-webkit-background-clip:text;background-clip:text;color:transparent;line-height:1}
+.how-icon{width:48px;height:48px;border-radius:13px;display:grid;place-items:center;font-size:1.4rem;margin-bottom:18px;background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(168,85,247,.12));border:1px solid rgba(139,92,246,.25)}
+.how-card h4{font-size:1.1rem;font-weight:800;margin-bottom:10px}
+.how-card p{font-size:.88rem;color:var(--muted);line-height:1.75}
+
+/* ============================================================
+   MODULE CARDS
+   ============================================================ */
 .modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
 .module{position:relative;padding:30px 28px;border-radius:var(--radius);background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.012));border:1px solid var(--border);backdrop-filter:blur(14px);transition:all .45s var(--ease);overflow:hidden;cursor:pointer}
 .module::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.13),transparent 55%);opacity:0;transition:opacity .4s var(--ease)}
 .module:hover::after{opacity:1}
 .module:hover{transform:translateY(-6px);border-color:var(--border-hi);box-shadow:0 26px 64px -26px rgba(99,102,241,.5)}
+.module.done{border-color:rgba(16,185,129,.3)}
+.module.done::before{content:"✓";position:absolute;top:14px;inset-inline-end:18px;width:26px;height:26px;border-radius:50%;background:var(--green);color:#fff;display:grid;place-items:center;font-size:.85rem;font-weight:800;z-index:2;box-shadow:0 4px 16px rgba(16,185,129,.5)}
 .module-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
 .module-num{font-family:var(--font-mono);font-size:1.6rem;font-weight:600;line-height:1;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
 .module-level{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:100px;background:rgba(6,182,212,.1);color:#67e8f9;border:1px solid rgba(6,182,212,.22)}
@@ -140,6 +165,9 @@ section{padding:110px 0;position:relative}
 .module-level.adv{background:rgba(244,63,94,.1);color:#fda4af;border-color:rgba(244,63,94,.22)}
 .module h3{font-size:1.15rem;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
 .module > p{color:var(--muted);font-size:.87rem;line-height:1.7;margin-bottom:18px}
+.module-meta{display:flex;align-items:center;gap:14px;font-size:.75rem;color:var(--dim);margin-bottom:16px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+.module-meta span{display:flex;align-items:center;gap:5px}
+.module-meta svg{width:13px;height:13px;opacity:.7}
 .topics{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
 .topics li{font-size:.76rem;font-weight:500;padding:5px 11px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);color:#cbd5e1;transition:all .25s var(--ease)}
 .module:hover .topics li{border-color:rgba(139,92,246,.22);background:rgba(139,92,246,.07)}
@@ -149,11 +177,11 @@ section{padding:110px 0;position:relative}
 body.lang-en .module:hover .module-cta svg{transform:translateX(4px)}
 
 /* ============================================================
-   LESSON MODAL — full learning experience
+   LESSON MODAL
    ============================================================ */
 .lesson-overlay{position:fixed;inset:0;z-index:2000;background:rgba(3,4,10,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:opacity .35s var(--ease);overflow-y:auto;padding:40px 20px}
 .lesson-overlay.open{opacity:1;pointer-events:auto}
-.lesson-modal{max-width:960px;margin:0 auto;background:linear-gradient(165deg,#0c0d20,#080918);border:1px solid var(--border-hi);border-radius:22px;box-shadow:0 40px 120px -20px rgba(0,0,0,.8);transform:translateY(30px) scale(.98);transition:transform .45s var(--ease);overflow:hidden}
+.lesson-modal{max-width:980px;margin:0 auto;background:linear-gradient(165deg,#0c0d20,#080918);border:1px solid var(--border-hi);border-radius:22px;box-shadow:0 40px 120px -20px rgba(0,0,0,.8);transform:translateY(30px) scale(.98);transition:transform .45s var(--ease);overflow:hidden}
 .lesson-overlay.open .lesson-modal{transform:none}
 .lesson-head{position:sticky;top:0;z-index:10;padding:26px 32px 22px;background:linear-gradient(180deg,rgba(12,13,32,.98),rgba(12,13,32,.88));backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
 .lesson-head-left{flex:1}
@@ -163,10 +191,8 @@ body.lang-en .module:hover .module-cta svg{transform:translateX(4px)}
 .lesson-close{width:42px;height:42px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;transition:all .25s;flex-shrink:0}
 .lesson-close:hover{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.4);color:#fda4af}
 .lesson-close svg{width:18px;height:18px}
-
 .lesson-body{padding:32px}
 
-/* Learning objectives box */
 .objectives{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(99,102,241,.05));border:1px solid rgba(6,182,212,.22);margin-bottom:32px}
 .objectives h4{font-size:.95rem;font-weight:800;margin-bottom:14px;color:#67e8f9;display:flex;align-items:center;gap:9px}
 .objectives h4 svg{width:18px;height:18px}
@@ -174,18 +200,19 @@ body.lang-en .module:hover .module-cta svg{transform:translateX(4px)}
 .objectives li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:#cbd5e1;line-height:1.65}
 .objectives li::before{content:"✓";color:var(--green);font-weight:800;flex-shrink:0;margin-top:1px}
 
-/* Lesson section */
 .lesson-section{margin-bottom:36px}
-.lesson-section h3{font-size:1.18rem;font-weight:800;margin-bottom:14px;letter-spacing:-.01em;display:flex;align-items:center;gap:11px}
-.lesson-section h3 .lnum{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--accent));font-size:.85rem;font-family:var(--font-mono);font-weight:600;flex-shrink:0}
-.lesson-section p{color:#cbd5e1;font-size:.95rem;line-height:1.85;margin-bottom:14px}
-.lesson-section p strong{color:#e0e7ff;font-weight:700}
-.lesson-section p code{font-family:var(--font-mono);font-size:.85em;padding:2px 7px;border-radius:6px;background:rgba(99,102,241,.13);color:#c7d2fe;border:1px solid rgba(99,102,241,.2)}
-.lesson-section ul.bullets{display:flex;flex-direction:column;gap:9px;margin:14px 0 18px}
-.lesson-section ul.bullets li{display:flex;align-items:flex-start;gap:11px;font-size:.92rem;color:#cbd5e1;line-height:1.7}
-.lesson-section ul.bullets li::before{content:"";width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:9px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+.lesson-section h3{font-size:1.2rem;font-weight:800;margin-bottom:14px;letter-spacing:-.01em;display:flex;align-items:center;gap:11px;color:#e0e7ff}
+.lesson-section h3 .lnum{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--accent));font-size:.85rem;font-family:var(--font-mono);font-weight:600;flex-shrink:0;box-shadow:0 4px 14px -4px rgba(99,102,241,.6)}
+.lesson-section .lesson-body-text{color:#cbd5e1;font-size:.95rem;line-height:1.9}
+.lesson-section .lesson-body-text p{margin-bottom:14px}
+.lesson-section .lesson-body-text p:last-child{margin-bottom:0}
+.lesson-section .lesson-body-text strong{color:#e0e7ff;font-weight:700}
+.lesson-section .lesson-body-text em{color:#c4b5fd;font-style:italic}
+.lesson-section .lesson-body-text code{font-family:var(--font-mono);font-size:.85em;padding:2px 7px;border-radius:6px;background:rgba(99,102,241,.13);color:#c7d2fe;border:1px solid rgba(99,102,241,.2)}
+.lesson-section .lesson-body-text ul{display:flex;flex-direction:column;gap:9px;margin:14px 0}
+.lesson-section .lesson-body-text ul li{display:flex;align-items:flex-start;gap:11px;font-size:.92rem;color:#cbd5e1;line-height:1.7}
+.lesson-section .lesson-body-text ul li::before{content:"•";color:#a5b4fc;font-weight:800;flex-shrink:0}
 
-/* Code block */
 .code-block{margin:18px 0;border-radius:13px;overflow:hidden;border:1px solid var(--border);background:#0a0c18}
 .code-head{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border)}
 .code-lang{font-family:var(--font-mono);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a5b4fc;display:flex;align-items:center;gap:8px}
@@ -196,43 +223,61 @@ body.lang-en .module:hover .module-cta svg{transform:translateX(4px)}
 .code-block pre{padding:18px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:.83rem;line-height:1.75;color:#e0e7ff;direction:ltr;text-align:left;white-space:pre;tab-size:2}
 .code-block pre::-webkit-scrollbar{height:8px}
 .code-block pre::-webkit-scrollbar-thumb{background:rgba(139,92,246,.3);border-radius:4px}
-/* Syntax tokens */
-.tok-tag{color:#f472b6}
-.tok-attr{color:#a5b4fc}
-.tok-str{color:#86efac}
-.tok-comment{color:#64748b;font-style:italic}
-.tok-kw{color:#c084fc;font-weight:600}
-.tok-fn{color:#67e8f9}
-.tok-num{color:#fbbf24}
-.tok-prop{color:#93c5fd}
-.tok-punc{color:#94a3b8}
-.tok-sel{color:#f472b6}
-.tok-dec{color:#c084fc}
-.tok-val{color:#86efac}
+.tok-tag{color:#f472b6}.tok-attr{color:#a5b4fc}.tok-str{color:#86efac}.tok-comment{color:#64748b;font-style:italic}
+.tok-kw{color:#c084fc;font-weight:600}.tok-fn{color:#67e8f9}.tok-num{color:#fbbf24}
+.tok-prop{color:#93c5fd}.tok-punc{color:#94a3b8}.tok-sel{color:#f472b6}.tok-dec{color:#c084fc}.tok-val{color:#86efac}
 
-/* Mistakes box */
-.mistakes{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(244,63,94,.07),rgba(245,158,11,.04));border:1px solid rgba(244,63,94,.22);margin-bottom:32px}
+.tip{padding:16px 20px;border-radius:12px;background:linear-gradient(135deg,rgba(245,158,11,.08),rgba(245,158,11,.03));border:1px solid rgba(245,158,11,.28);margin:16px 0;display:flex;gap:12px;align-items:flex-start}
+.tip-icon{flex-shrink:0;width:24px;height:24px;border-radius:50%;background:rgba(245,158,11,.18);display:grid;place-items:center;font-size:.85rem}
+.tip-content{flex:1;font-size:.88rem;color:#fde68a;line-height:1.75}
+.tip-content strong{color:#fbbf24}
+
+.key-takeaways{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(168,85,247,.08),rgba(99,102,241,.04));border:1px solid rgba(168,85,247,.22);margin-bottom:24px}
+.key-takeaways h4{font-size:.95rem;font-weight:800;margin-bottom:14px;color:#d8b4fe;display:flex;align-items:center;gap:9px}
+.key-takeaways h4 svg{width:18px;height:18px}
+.key-takeaways ul{display:flex;flex-direction:column;gap:9px}
+.key-takeaways li{font-size:.9rem;color:#cbd5e1;line-height:1.7;padding-inline-start:22px;position:relative}
+.key-takeaways li::before{content:"→";position:absolute;inset-inline-start:0;color:#c084fc;font-weight:800}
+
+.mistakes{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(244,63,94,.07),rgba(245,158,11,.04));border:1px solid rgba(244,63,94,.22);margin-bottom:24px}
 .mistakes h4{font-size:.95rem;font-weight:800;margin-bottom:14px;color:#fda4af;display:flex;align-items:center;gap:9px}
 .mistakes h4 svg{width:18px;height:18px}
 .mistakes ul{display:flex;flex-direction:column;gap:11px}
 .mistakes li{font-size:.89rem;color:#cbd5e1;line-height:1.7;padding-inline-start:22px;position:relative}
 .mistakes li::before{content:"✗";position:absolute;inset-inline-start:0;color:var(--red);font-weight:800}
 
-/* Exercises */
-.exercises{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(6,182,212,.04));border:1px solid rgba(16,185,129,.22)}
+.exercises{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(6,182,212,.04));border:1px solid rgba(16,185,129,.22);margin-bottom:24px}
 .exercises h4{font-size:.95rem;font-weight:800;margin-bottom:14px;color:#6ee7b7;display:flex;align-items:center;gap:9px}
 .exercises h4 svg{width:18px;height:18px}
 .exercises ol{display:flex;flex-direction:column;gap:11px;counter-reset:ex}
 .exercises li{font-size:.89rem;color:#cbd5e1;line-height:1.7;padding-inline-start:30px;position:relative;counter-increment:ex}
 .exercises li::before{content:counter(ex);position:absolute;inset-inline-start:0;top:0;width:21px;height:21px;border-radius:6px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.35);color:#6ee7b7;font-size:.72rem;font-weight:800;display:grid;place-items:center;font-family:var(--font-mono)}
 
-/* Lesson nav footer */
+.complete-btn{display:flex;align-items:center;justify-content:center;gap:10px;width:100%;padding:16px;border-radius:13px;background:linear-gradient(135deg,rgba(16,185,129,.15),rgba(16,185,129,.05));border:1.5px solid rgba(16,185,129,.4);color:#6ee7b7;font-weight:700;font-size:.95rem;margin-bottom:24px;transition:all .3s var(--ease)}
+.complete-btn:hover{background:rgba(16,185,129,.2);border-color:var(--green);transform:translateY(-2px)}
+.complete-btn.done{background:var(--green);color:#fff;border-color:var(--green);box-shadow:0 8px 28px -8px rgba(16,185,129,.7)}
+.complete-btn svg{width:18px;height:18px}
+
 .lesson-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:28px;margin-top:14px;border-top:1px solid var(--border)}
 .lesson-nav button{display:flex;align-items:center;gap:9px;padding:11px 18px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border);font-size:.85rem;font-weight:600;color:var(--text);transition:all .25s}
 .lesson-nav button:hover:not(:disabled){border-color:var(--border-hi);background:rgba(139,92,246,.1)}
 .lesson-nav button:disabled{opacity:.35;cursor:not-allowed}
 .lesson-nav svg{width:15px;height:15px}
 .lesson-nav .mid-info{font-size:.78rem;color:var(--dim);font-family:var(--font-mono)}
+
+/* ============================================================
+   FLOATING PROGRESS WIDGET
+   ============================================================ */
+.progress-widget{position:fixed;bottom:24px;inset-inline-end:24px;z-index:850;display:flex;align-items:center;gap:14px;padding:12px 18px 12px 14px;border-radius:100px;background:rgba(12,13,32,.92);backdrop-filter:blur(20px);border:1px solid var(--border-hi);box-shadow:0 14px 40px -10px rgba(0,0,0,.7);cursor:pointer;transition:all .35s var(--ease);opacity:0;transform:translateY(20px);pointer-events:none}
+.progress-widget.visible{opacity:1;transform:none;pointer-events:auto}
+.progress-widget:hover{transform:translateY(-3px);border-color:var(--accent);box-shadow:0 20px 48px -10px rgba(139,92,246,.5)}
+.progress-ring{position:relative;width:44px;height:44px;flex-shrink:0}
+.progress-ring svg{transform:rotate(-90deg);width:100%;height:100%}
+.progress-ring .ring-bg{fill:none;stroke:rgba(255,255,255,.08);stroke-width:4}
+.progress-ring .ring-fill{fill:none;stroke:url(#ringGrad);stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset .8s var(--ease)}
+.progress-ring .ring-pct{position:absolute;inset:0;display:grid;place-items:center;font-size:.68rem;font-weight:800;font-family:var(--font-mono);color:#a5b4fc}
+.progress-text .progress-count{font-size:.88rem;font-weight:800;color:var(--text);line-height:1.1}
+.progress-text .progress-label{font-size:.7rem;color:var(--muted);font-weight:600}
 
 /* PROJECTS */
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
@@ -255,9 +300,8 @@ body.lang-en .module:hover .module-cta svg{transform:translateX(4px)}
 .cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(139,92,246,.22),transparent 55%),radial-gradient(circle at 75% 80%,rgba(6,182,212,.16),transparent 55%)}
 .cta>*{position:relative;z-index:1}
 .cta h2{font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;margin-bottom:16px}
-.cta p{color:#cbd5e1;max-width:560px;margin:0 auto 34px;font-size:1.02rem}
+.cta p{color:#cbd5e1;max-width:600px;margin:0 auto 34px;font-size:1.02rem}
 
-/* FOOTER */
 footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56px 0 40px;margin-top:60px}
 .footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
 .footer-inner .logo{font-size:1rem}
@@ -266,18 +310,24 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56
 .footer-links a:hover{color:var(--text)}
 .footer-copy{font-size:.8rem;color:var(--dim);text-align:center;width:100%;margin-top:34px;padding-top:26px;border-top:1px solid var(--border)}
 
-/* TOAST */
-.toast{position:fixed;bottom:28px;inset-inline-start:50%;transform:translateX(-50%) translateY(20px);padding:12px 22px;border-radius:11px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:#6ee7b7;font-size:.85rem;font-weight:600;opacity:0;pointer-events:none;transition:all .35s var(--ease);z-index:3000;backdrop-filter:blur(10px)}
+.toast{position:fixed;bottom:100px;inset-inline-start:50%;transform:translateX(-50%) translateY(20px);padding:12px 22px;border-radius:11px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:#6ee7b7;font-size:.85rem;font-weight:600;opacity:0;pointer-events:none;transition:all .35s var(--ease);z-index:3000;backdrop-filter:blur(10px)}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
 
 /* RESPONSIVE */
-@media(max-width:1024px){.stages{grid-template-columns:1fr;max-width:560px;margin:0 auto}.stats{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:1024px){
+  .roadmap{grid-template-columns:repeat(2,1fr);gap:40px 20px}
+  .roadmap::before{display:none}
+  .how-to{grid-template-columns:1fr;max-width:560px}
+  .stats{grid-template-columns:repeat(2,1fr)}
+}
 @media(max-width:768px){
   section{padding:80px 0}
   .nav-links{display:none}
   .hero{padding:120px 0 70px}
   .hero-actions{flex-direction:column;align-items:stretch}
   .hero-actions .btn{width:100%}
+  .roadmap{grid-template-columns:1fr;gap:40px}
+  .phase-desc{max-width:none}
   .modules-grid,.projects-grid{grid-template-columns:1fr}
   .scroll-hint{display:none}
   .cta{padding:52px 24px}
@@ -289,6 +339,8 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56
   .lesson-body{padding:22px 20px}
   .lesson-nav{flex-direction:column}
   .lesson-nav button{width:100%;justify-content:center}
+  .progress-widget{bottom:16px;inset-inline-end:16px;padding:8px 14px 8px 10px;gap:10px}
+  .progress-ring{width:36px;height:36px}
 }
 </style>
 </head>
@@ -306,7 +358,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56
       <div class="logo-text"><span class="t1">Frontend</span><span class="t2">Mastery</span></div>
     </a>
     <div class="nav-links">
-      <a href="#stages" data-en="Roadmap" data-ar="المسار">المسار</a>
+      <a href="#roadmap" data-en="Learning Map" data-ar="خريطة التعلم">خريطة التعلم</a>
       <a href="#modules" data-en="Curriculum" data-ar="المنهج">المنهج</a>
       <a href="#projects" data-en="Projects" data-ar="المشاريع">المشاريع</a>
       <a href="#cta" data-en="Start Now" data-ar="ابدأ الآن">ابدأ الآن</a>
@@ -320,95 +372,148 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56
 
 <main>
 
+<!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-inner">
     <div class="hero-badge">
       <span class="dot"></span>
-      <span data-en="Complete bilingual curriculum — from zero to job-ready" data-ar="منهج ثنائي اللغة كامل — من الصفر إلى جاهز للعمل">منهج ثنائي اللغة كامل — من الصفر إلى جاهز للعمل</span>
+      <span data-en="A complete bilingual learning platform — from zero to job-ready" data-ar="منصة تعلم متكاملة ثنائية اللغة — من الصفر إلى جاهز للعمل">منصة تعلم متكاملة ثنائية اللغة — من الصفر إلى جاهز للعمل</span>
     </div>
     <h1>
       <span data-en="Master Frontend<br>From Zero to" data-ar="احترف تطوير الويب<br>من الصفر إلى">احترف تطوير الويب<br>من الصفر إلى</span>
       <span class="grad" data-en="Professional" data-ar="الاحتراف">الاحتراف</span>
     </h1>
-    <p class="lead" data-en="Ten detailed modules, real code examples, common mistakes to avoid, and hands-on exercises. Click any module to open the full lesson — explained in Arabic and English." data-ar="عشر وحدات مفصّلة، أمثلة كود حقيقية، أخطاء شائعة يجب تجنّبها، وتمارين عملية. اضغط أي وحدة لفتح الدرس الكامل — بشرح عربي وإنجليزي.">عشر وحدات مفصّلة، أمثلة كود حقيقية، أخطاء شائعة يجب تجنّبها، وتمارين عملية. اضغط أي وحدة لفتح الدرس الكامل — بشرح عربي وإنجليزي.</p>
+    <p class="lead" data-en="10 modules · 45+ detailed lessons · real code examples · common mistakes · practice exercises · progress tracking. Everything you need in one place — explained in Arabic and English, step by step." data-ar="10 وحدات · أكثر من 45 درساً مفصلاً · أمثلة كود حقيقية · أخطاء شائعة · تمارين عملية · تتبع تقدمك. كل ما تحتاجه في مكان واحد — بشرح عربي وإنجليزي، خطوة بخطوة.">10 وحدات · أكثر من 45 درساً مفصلاً · أمثلة كود حقيقية · أخطاء شائعة · تمارين عملية · تتبع تقدمك. كل ما تحتاجه في مكان واحد — بشرح عربي وإنجليزي، خطوة بخطوة.</p>
     <div class="hero-actions">
-      <a href="#modules" class="btn btn-primary">
-        <span data-en="Open Curriculum" data-ar="افتح المنهج">افتح المنهج</span>
+      <a href="#roadmap" class="btn btn-primary">
+        <span data-en="View Learning Map" data-ar="استعرض خريطة التعلم">استعرض خريطة التعلم</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
-      <a href="#stages" class="btn btn-ghost">
-        <span data-en="View Roadmap" data-ar="استعرض المسار">استعرض المسار</span>
+      <a href="#modules" class="btn btn-ghost">
+        <span data-en="Start Module 01" data-ar="ابدأ الوحدة 01">ابدأ الوحدة 01</span>
       </a>
     </div>
     <div class="stats">
       <div class="stat"><div class="num">10</div><div class="lbl" data-en="Modules" data-ar="وحدات">وحدات</div></div>
-      <div class="stat"><div class="num">60+</div><div class="lbl" data-en="Lessons" data-ar="دروس">دروس</div></div>
-      <div class="stat"><div class="num">15+</div><div class="lbl" data-en="Projects" data-ar="مشاريع">مشاريع</div></div>
+      <div class="stat"><div class="num">45+</div><div class="lbl" data-en="Lessons" data-ar="دروس">دروس</div></div>
+      <div class="stat"><div class="num">120h</div><div class="lbl" data-en="Content" data-ar="محتوى">محتوى</div></div>
       <div class="stat"><div class="num">100%</div><div class="lbl" data-en="Free" data-ar="مجاني">مجاني</div></div>
     </div>
   </div>
   <div class="scroll-hint"><div class="mouse"></div></div>
 </section>
 
-<section id="stages">
+<!-- LEARNING MAP -->
+<section id="roadmap">
   <div class="container">
     <div class="sec-head reveal">
-      <span class="sec-eyebrow" data-en="Learning Path" data-ar="مسار التعلم">مسار التعلم</span>
-      <h2 data-en="Three stages. One clear destination." data-ar="ثلاث مراحل. هدف واحد واضح.">ثلاث مراحل. هدف واحد واضح.</h2>
-      <p data-en="Each stage builds on the previous — follow them in order and you'll cover everything needed for a real frontend role." data-ar="كل مرحلة تبني على ما قبلها — اتبعها بالترتيب وستغطي كل ما تحتاجه لدور تطوير واجهات حقيقي.">كل مرحلة تبني على ما قبلها — اتبعها بالترتيب وستغطي كل ما تحتاجه لدور تطوير واجهات حقيقي.</p>
+      <span class="sec-eyebrow" data-en="Learning Map" data-ar="خريطة التعلم">خريطة التعلم</span>
+      <h2 data-en="Four phases. One clear journey." data-ar="أربع مراحل. رحلة واحدة واضحة.">أربع مراحل. رحلة واحدة واضحة.</h2>
+      <p data-en="Follow the map from left to right (or right to left in Arabic). Each phase builds on the previous one — you will not skip anything and you will not get lost." data-ar="اتبع الخريطة من اليمين إلى اليسار (أو من اليسار إلى اليمين في الإنجليزية). كل مرحلة تبني على ما قبلها — لن تتخطى شيئاً ولن تضيع.">اتبع الخريطة من اليمين إلى اليسار (أو من اليسار إلى اليمين في الإنجليزية). كل مرحلة تبني على ما قبلها — لن تتخطى شيئاً ولن تضيع.</p>
     </div>
-    <div class="stages">
-      <article class="stage reveal">
-        <div class="stage-icon">🌱</div>
-        <div class="stage-tag" data-en="Stage 01 · Modules 1–4" data-ar="المرحلة 01 · الوحدات 1–4">المرحلة 01 · الوحدات 1–4</div>
-        <h3 data-en="Foundations" data-ar="التأسيس">التأسيس</h3>
-        <p data-en="Learn how the web actually works, then master HTML and CSS — the two languages every frontend developer uses every single day." data-ar="تعلّم كيف يعمل الويب فعلياً، ثم أتقن HTML و CSS — اللغتين التي يستخدمها كل مطور واجهات كل يوم.">تعلّم كيف يعمل الويب فعلياً، ثم أتقن HTML و CSS — اللغتين التي يستخدمها كل مطور واجهات كل يوم.</p>
-        <ul class="stage-list">
-          <li data-en="How browsers, servers, DNS and HTTP work together" data-ar="كيف يتعامل المتصفح والخادم و DNS و HTTP معاً">كيف يتعامل المتصفح والخادم و DNS و HTTP معاً</li>
-          <li data-en="Semantic, accessible HTML5 structure" data-ar="هيكل HTML5 الدلالي وسهل الوصول">هيكل HTML5 الدلالي وسهل الوصول</li>
-          <li data-en="CSS fundamentals, Flexbox and Grid layouts" data-ar="أساسيات CSS وتخطيطات Flexbox و Grid">أساسيات CSS وتخطيطات Flexbox و Grid</li>
-          <li data-en="Mobile-first responsive design" data-ar="التصميم المتجاوب للموبايل أولاً">التصميم المتجاوب للموبايل أولاً</li>
-        </ul>
-      </article>
-      <article class="stage reveal">
-        <div class="stage-icon">⚡</div>
-        <div class="stage-tag" data-en="Stage 02 · Modules 5–7" data-ar="المرحلة 02 · الوحدات 5–7">المرحلة 02 · الوحدات 5–7</div>
-        <h3 data-en="Mastery" data-ar="الإتقان">الإتقان</h3>
-        <p data-en="Add real interactivity with modern JavaScript, work with APIs and async code, and use the same tooling professional teams rely on." data-ar="أضف تفاعلاً حقيقياً مع JavaScript الحديثة، وتعامَل مع APIs والكود غير المتزامن، واستخدم نفس الأدوات التي تعتمد عليها الفرق الاحترافية.">أضف تفاعلاً حقيقياً مع JavaScript الحديثة، وتعامَل مع APIs والكود غير المتزامن، واستخدم نفس الأدوات التي تعتمد عليها الفرق الاحترافية.</p>
-        <ul class="stage-list">
-          <li data-en="Modern JavaScript ES6+ (variables, functions, arrays, objects)" data-ar="JavaScript الحديثة ES6+ (متغيرات، دوال، مصفوفات، كائنات)">JavaScript الحديثة ES6+ (متغيرات، دوال، مصفوفات، كائنات)</li>
-          <li data-en="DOM manipulation, events and async / await" data-ar="التعامل مع DOM والأحداث و async / await">التعامل مع DOM والأحداث و async / await</li>
-          <li data-en="Fetching real data from APIs" data-ar="جلب بيانات حقيقية من APIs">جلب بيانات حقيقية من APIs</li>
-          <li data-en="Git, GitHub, npm and Vite" data-ar="Git و GitHub و npm و Vite">Git و GitHub و npm و Vite</li>
-        </ul>
-      </article>
-      <article class="stage reveal">
-        <div class="stage-icon">🚀</div>
-        <div class="stage-tag" data-en="Stage 03 · Modules 8–10" data-ar="المرحلة 03 · الوحدات 8–10">المرحلة 03 · الوحدات 8–10</div>
-        <h3 data-en="Professional" data-ar="الاحتراف">الاحتراف</h3>
-        <p data-en="Build production apps with React, professional styling systems, performance optimization and automated deployment." data-ar="ابنِ تطبيقات بمستوى الإنتاج باستخدام React وأنظمة تصميم احترافية وتحسين الأداء والنشر التلقائي.">ابنِ تطبيقات بمستوى الإنتاج باستخدام React وأنظمة تصميم احترافية وتحسين الأداء والنشر التلقائي.</p>
-        <ul class="stage-list">
-          <li data-en="React components, state, hooks and routing" data-ar="مكونات React والحالة والـ hooks والتوجيه">مكونات React والحالة والـ hooks والتوجيه</li>
-          <li data-en="Tailwind, SASS and design systems" data-ar="Tailwind و SASS وأنظمة التصميم">Tailwind و SASS وأنظمة التصميم</li>
-          <li data-en="Performance: Core Web Vitals & Lighthouse" data-ar="الأداء: Core Web Vitals و Lighthouse">الأداء: Core Web Vitals و Lighthouse</li>
-          <li data-en="Testing, CI/CD and deploying to Vercel" data-ar="الاختبار و CI/CD والنشر على Vercel">الاختبار و CI/CD والنشر على Vercel</li>
-        </ul>
-      </article>
+
+    <div class="roadmap-wrap reveal">
+      <div class="roadmap">
+
+        <!-- PHASE 1 -->
+        <div class="phase">
+          <div class="phase-node">🌱</div>
+          <div class="phase-name" data-en="Phase 01 · Foundation" data-ar="المرحلة 01 · التأسيس">المرحلة 01 · التأسيس</div>
+          <h3 data-en="Build the Base" data-ar="ابنِ الأساس">ابنِ الأساس</h3>
+          <p class="phase-desc" data-en="Understand how the web works, then write clean HTML and beautiful CSS — the two languages you will use every single day." data-ar="افهم كيف يعمل الويب، ثم اكتب HTML نظيفاً و CSS جميلاً — اللغتين التي ستستخدمهما كل يوم.">افهم كيف يعمل الويب، ثم اكتب HTML نظيفاً و CSS جميلاً — اللغتين التي ستستخدمهما كل يوم.</p>
+          <div class="phase-mods">
+            <button class="phase-mod" data-mod="1"><span class="pm-num">01</span><span class="pm-title" data-en="Web Fundamentals" data-ar="أساسيات الويب">أساسيات الويب</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+            <button class="phase-mod" data-mod="2"><span class="pm-num">02</span><span class="pm-title" data-en="HTML5 Essentials" data-ar="أساسيات HTML5">أساسيات HTML5</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+            <button class="phase-mod" data-mod="3"><span class="pm-num">03</span><span class="pm-title" data-en="CSS3 Essentials" data-ar="أساسيات CSS3">أساسيات CSS3</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+          </div>
+        </div>
+
+        <!-- PHASE 2 -->
+        <div class="phase">
+          <div class="phase-node">⚡</div>
+          <div class="phase-name" data-en="Phase 02 · Interaction" data-ar="المرحلة 02 · التفاعل">المرحلة 02 · التفاعل</div>
+          <h3 data-en="Bring Pages to Life" data-ar="أحيِ الصفحات">أحيِ الصفحات</h3>
+          <p class="phase-desc" data-en="Add real interactivity with modern JavaScript, then learn how to fetch data from real APIs and handle it like a pro." data-ar="أضف تفاعلاً حقيقياً بـ JavaScript الحديثة، ثم تعلّم جلب البيانات من APIs حقيقية والتعامل معها كالمحترفين.">أضف تفاعلاً حقيقياً بـ JavaScript الحديثة، ثم تعلّم جلب البيانات من APIs حقيقية والتعامل معها كالمحترفين.</p>
+          <div class="phase-mods">
+            <button class="phase-mod" data-mod="4"><span class="pm-num">04</span><span class="pm-title" data-en="Responsive Design" data-ar="التصميم المتجاوب">التصميم المتجاوب</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+            <button class="phase-mod" data-mod="5"><span class="pm-num">05</span><span class="pm-title" data-en="JavaScript Basics" data-ar="أساسيات JavaScript">أساسيات JavaScript</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+            <button class="phase-mod" data-mod="6"><span class="pm-num">06</span><span class="pm-title" data-en="Advanced JavaScript" data-ar="JavaScript المتقدمة">JavaScript المتقدمة</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+          </div>
+        </div>
+
+        <!-- PHASE 3 -->
+        <div class="phase">
+          <div class="phase-node">🚀</div>
+          <div class="phase-name" data-en="Phase 03 · Mastery" data-ar="المرحلة 03 · الإتقان">المرحلة 03 · الإتقان</div>
+          <h3 data-en="Work Like a Pro" data-ar="اعمل كالمحترفين">اعمل كالمحترفين</h3>
+          <p class="phase-desc" data-en="Learn the tools that professional teams use every day: Git, modern build tools, React components, and design systems." data-ar="تعلّم الأدوات التي تستخدمها الفرق الاحترافية يومياً: Git وأدوات البناء الحديثة ومكونات React وأنظمة التصميم.">تعلّم الأدوات التي تستخدمها الفرق الاحترافية يومياً: Git وأدوات البناء الحديثة ومكونات React وأنظمة التصميم.</p>
+          <div class="phase-mods">
+            <button class="phase-mod" data-mod="7"><span class="pm-num">07</span><span class="pm-title" data-en="Git & Tools" data-ar="Git والأدوات">Git والأدوات</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+            <button class="phase-mod" data-mod="8"><span class="pm-num">08</span><span class="pm-title" data-en="React Fundamentals" data-ar="أساسيات React">أساسيات React</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+            <button class="phase-mod" data-mod="9"><span class="pm-num">09</span><span class="pm-title" data-en="Advanced Styling" data-ar="التنسيق المتقدم">التنسيق المتقدم</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+          </div>
+        </div>
+
+        <!-- PHASE 4 -->
+        <div class="phase">
+          <div class="phase-node">🏆</div>
+          <div class="phase-name" data-en="Phase 04 · Launch" data-ar="المرحلة 04 · الإطلاق">المرحلة 04 · الإطلاق</div>
+          <h3 data-en="Ship to the World" data-ar="أطلق للعالم">أطلق للعالم</h3>
+          <p class="phase-desc" data-en="Optimize for performance, write tests, and deploy real applications that thousands of users can visit with confidence." data-ar="حسّن الأداء، اكتب اختبارات، وانشر تطبيقات حقيقية يستطيع آلاف المستخدمين زيارتها بثقة.">حسّن الأداء، اكتب اختبارات، وانشر تطبيقات حقيقية يستطيع آلاف المستخدمين زيارتها بثقة.</p>
+          <div class="phase-mods">
+            <button class="phase-mod" data-mod="10"><span class="pm-num">10</span><span class="pm-title" data-en="Performance & Deploy" data-ar="الأداء والنشر">الأداء والنشر</span><span class="pm-check"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span></button>
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 </section>
 
+<!-- HOW TO USE -->
+<section id="how-to">
+  <div class="container">
+    <div class="sec-head reveal">
+      <span class="sec-eyebrow" data-en="How to Learn" data-ar="كيف تتعلم">كيف تتعلم</span>
+      <h2 data-en="A simple, proven method." data-ar="طريقة بسيطة ومجرّبة.">طريقة بسيطة ومجرّبة.</h2>
+      <p data-en="This platform is built to be used, not just read. Follow these three steps for every module." data-ar="هذه المنصة صُممت لتُستخدم، لا لتُقرأ فقط. اتبع هذه الخطوات الثلاث لكل وحدة.">هذه المنصة صُممت لتُستخدم، لا لتُقرأ فقط. اتبع هذه الخطوات الثلاث لكل وحدة.</p>
+    </div>
+    <div class="how-to">
+      <div class="how-card reveal">
+        <div class="how-num">01</div>
+        <div class="how-icon">📖</div>
+        <h4 data-en="Read the lesson" data-ar="اقرأ الدرس">اقرأ الدرس</h4>
+        <p data-en="Open the module and read every lesson carefully. Read the explanation first, then look at the code. Understand WHY before HOW." data-ar="افتح الوحدة واقرأ كل درس بعناية. اقرأ الشرح أولاً، ثم انظر إلى الكود. افهم «لماذا» قبل «كيف».">افتح الوحدة واقرأ كل درس بعناية. اقرأ الشرح أولاً، ثم انظر إلى الكود. افهم «لماذا» قبل «كيف».</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">02</div>
+        <div class="how-icon">💻</div>
+        <h4 data-en="Code along" data-ar="برمج معي">برمج معي</h4>
+        <p data-en="Copy each code block into VS Code and run it. Change one thing at a time and see what happens. Reading code without typing it teaches nothing." data-ar="انسخ كل كتلة كود في VS Code وشغّلها. غيّر شيئاً واحداً في كل مرة وشاهد ما يحدث. قراءة الكود دون كتابته لا تعلّم شيئاً.">انسخ كل كتلة كود في VS Code وشغّلها. غيّر شيئاً واحداً في كل مرة وشاهد ما يحدث. قراءة الكود دون كتابته لا تعلّم شيئاً.</p>
+      </div>
+      <div class="how-card reveal">
+        <div class="how-num">03</div>
+        <div class="how-icon">✅</div>
+        <h4 data-en="Practice & mark done" data-ar="تدرّب وأكمل">تدرّب وأكمل</h4>
+        <p data-en="Solve the practice exercises. When you can explain the topic to a friend, mark the module complete and move on." data-ar="حل التمارين العملية. عندما تستطيع شرح الموضوع لصديق، ضع علامة «مكتمل» على الوحدة وانتقل للتالية.">حل التمارين العملية. عندما تستطيع شرح الموضوع لصديق، ضع علامة «مكتمل» على الوحدة وانتقل للتالية.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODULES -->
 <section id="modules">
   <div class="container">
     <div class="sec-head reveal">
       <span class="sec-eyebrow" data-en="Full Curriculum" data-ar="المنهج الكامل">المنهج الكامل</span>
-      <h2 data-en="Ten detailed modules. Click any one to start learning." data-ar="عشر وحدات مفصّلة. اضغط أي واحدة لبدء التعلّم.">عشر وحدات مفصّلة. اضغط أي واحدة لبدء التعلّم.</h2>
-      <p data-en="Every module includes objectives, step-by-step explanations, real code examples, common mistakes and practice exercises." data-ar="كل وحدة تحتوي على أهداف، شرح خطوة بخطوة، أمثلة كود حقيقية، أخطاء شائعة، وتمارين عملية.">كل وحدة تحتوي على أهداف، شرح خطوة بخطوة، أمثلة كود حقيقية، أخطاء شائعة، وتمارين عملية.</p>
+      <h2 data-en="Ten detailed modules. Click any to start." data-ar="عشر وحدات مفصّلة. اضغط أي واحدة للبدء.">عشر وحدات مفصّلة. اضغط أي واحدة للبدء.</h2>
+      <p data-en="Each module has learning objectives, 4–6 detailed lessons with code, common mistakes and practice exercises." data-ar="كل وحدة تضم أهدافاً تعليمية، 4–6 دروس مفصّلة مع كود، أخطاء شائعة، وتمارين عملية.">كل وحدة تضم أهدافاً تعليمية، 4–6 دروس مفصّلة مع كود، أخطاء شائعة، وتمارين عملية.</p>
     </div>
     <div class="modules-grid" id="modulesGrid"></div>
   </div>
 </section>
 
+<!-- PROJECTS -->
 <section id="projects">
   <div class="container">
     <div class="sec-head reveal">
@@ -475,11 +580,12 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56
   </div>
 </section>
 
+<!-- CTA -->
 <section id="cta">
   <div class="container">
     <div class="cta reveal">
       <h2 data-en="Your journey starts with one line of code." data-ar="رحلتك تبدأ بسطر واحد من الكود.">رحلتك تبدأ بسطر واحد من الكود.</h2>
-      <p data-en="Pick Module 01, open your editor, and write your first HTML file today. Progress compounds — one commit at a time." data-ar="اختر الوحدة 01، افتح محررك، واكتب أول ملف HTML اليوم. التقدم يتراكم — كوميت واحد في كل مرة.">اختر الوحدة 01، افتح محررك، واكتب أول ملف HTML اليوم. التقدم يتراكم — كوميت واحد في كل مرة.</p>
+      <p data-en="Open Module 01, read the first lesson, write your first HTML file, and mark it complete. Then repeat — one step at a time." data-ar="افتح الوحدة 01، اقرأ الدرس الأول، اكتب أول ملف HTML، وأكمله. ثم كرر — خطوة واحدة في كل مرة.">افتح الوحدة 01، اقرأ الدرس الأول، اكتب أول ملف HTML، وأكمله. ثم كرر — خطوة واحدة في كل مرة.</p>
       <a href="#modules" class="btn btn-primary">
         <span data-en="Open Module 01" data-ar="افتح الوحدة 01">افتح الوحدة 01</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -498,7 +604,7 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56
         <div class="logo-text"><span class="t1">Frontend</span><span class="t2">Mastery</span></div>
       </a>
       <div class="footer-links">
-        <a href="#stages" data-en="Roadmap" data-ar="المسار">المسار</a>
+        <a href="#roadmap" data-en="Learning Map" data-ar="خريطة التعلم">خريطة التعلم</a>
         <a href="#modules" data-en="Curriculum" data-ar="المنهج">المنهج</a>
         <a href="#projects" data-en="Projects" data-ar="المشاريع">المشاريع</a>
         <a href="#top" data-en="Back to top" data-ar="إلى الأعلى">إلى الأعلى</a>
@@ -515,397 +621,561 @@ footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56
   <div class="lesson-modal" id="lessonModal"></div>
 </div>
 
+<!-- FLOATING PROGRESS WIDGET -->
+<div class="progress-widget" id="progressWidget">
+  <div class="progress-ring">
+    <svg viewBox="0 0 44 44">
+      <defs>
+        <linearGradient id="ringGrad" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0%" stop-color="#6366f1"/>
+          <stop offset="50%" stop-color="#a855f7"/>
+          <stop offset="100%" stop-color="#06b6d4"/>
+        </linearGradient>
+      </defs>
+      <circle class="ring-bg" cx="22" cy="22" r="18"/>
+      <circle class="ring-fill" cx="22" cy="22" r="18" stroke-dasharray="113" stroke-dashoffset="113"/>
+    </svg>
+    <div class="ring-pct" id="ringPct">0%</div>
+  </div>
+  <div class="progress-text">
+    <div class="progress-count" id="progressCount">0 / 10</div>
+    <div class="progress-label" data-en="completed" data-ar="مكتمل">مكتمل</div>
+  </div>
+</div>
+
 <div class="toast" id="toast">Copied!</div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ============================================================
-   CURRICULUM DATA — real teaching content, bilingual
+   CURRICULUM — detailed content, bilingual
    ============================================================ */
 const curriculum = [
 
 /* ---------- MODULE 1 ---------- */
 {
-  id: 1, level: 'beginner',
-  title_en: "How the Web Actually Works",
-  title_ar: "كيف يعمل الويب فعلياً",
-  short_en: "Before writing any code, understand what happens between typing a URL and seeing a page.",
-  short_ar: "قبل كتابة أي كود، افهم ما يحدث بين كتابة الرابط وظهور الصفحة.",
-  tags_en: ["Browsers","DNS","HTTP","DevTools"],
-  tags_ar: ["المتصفحات","DNS","HTTP","أدوات المطور"],
-  objectives_en: [
-    "Explain the difference between client and server",
-    "Describe how a URL becomes a rendered page",
-    "Open DevTools and inspect a real website",
-    "Set up VS Code for frontend work"
+  id:1, level:'beginner',
+  title_en:"How the Web Actually Works", title_ar:"كيف يعمل الويب فعلياً",
+  short_en:"Before writing any code, understand what happens between typing a URL and seeing a page.",
+  short_ar:"قبل كتابة أي كود، افهم ما يحدث بين كتابة الرابط وظهور الصفحة.",
+  tags_en:["Browsers","DNS","HTTP","DevTools","VS Code"],
+  tags_ar:["المتصفحات","DNS","HTTP","أدوات المطور","VS Code"],
+  time_en:"3–4 hours", time_ar:"3–4 ساعات",
+  prereq_en:"No experience needed", prereq_ar:"لا يلزم أي خبرة سابقة",
+  objectives_en:[
+    "Explain what happens between typing a URL and seeing a page",
+    "Tell the difference between client and server",
+    "Understand how DNS translates names into IP addresses",
+    "Read an HTTP request and response",
+    "Set up VS Code with the right extensions"
   ],
-  objectives_ar: [
-    "اشرح الفرق بين العميل (client) والخادم (server)",
-    "صف كيف يتحول الرابط إلى صفحة معروضة",
-    "افتح أدوات المتصفح وافحص موقعاً حقيقياً",
-    "جهّز VS Code للعمل على الواجهات"
+  objectives_ar:[
+    "اشرح ما يحدث بين كتابة الرابط وظهور الصفحة",
+    "ميّز بين العميل (client) والخادم (server)",
+    "افهم كيف يحوّل DNS الأسماء إلى عناوين IP",
+    "اقرأ طلب واستجابة HTTP",
+    "جهّز VS Code مع الإضافات الصحيحة"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "Client and Server",
-      title_ar: "العميل والخادم",
-      content_en: "The web is a conversation between two computers. Your <strong>client</strong> (the browser on your phone or laptop) asks for something. A <strong>server</strong> (a powerful computer somewhere in the world) answers with files. Every website you've ever visited works this way.<br><br>The browser's job is to <em>render</em> — to turn HTML, CSS and JavaScript into the page you see. The server's job is to <em>store and send</em> those files.",
-      content_ar: "الويب هو محادثة بين جهازين. <strong>العميل</strong> (المتصفح على هاتفك أو حاسبك) يطلب شيئاً. و<strong>الخادم</strong> (حاسب قوي في مكان ما في العالم) يجيب بملفات. كل موقع زرته يعمل بهذه الطريقة.<br><br>وظيفة المتصفح هي <em>العرض (render)</em> — تحويل HTML و CSS و JavaScript إلى الصفحة التي تراها. ووظيفة الخادم هي <em>التخزين والإرسال</em> لهذه الملفات.",
-      code: `Browser (Client)          Server
-   |                        |
-   |  "Give me /index.html" |
-   | ---------------------> |
-   |                        |
-   | <---- HTML file ------ |
-   |                        |
-   | Renders the page       |`,
-      codeLang: "text"
+      title_en:"The web is a conversation", title_ar:"الويب هو محادثة",
+      content_en:`<p>Every time you open a website, two computers are talking to each other. Your <strong>client</strong> (the browser on your phone or laptop) sends a request. A <strong>server</strong> (a powerful computer somewhere in the world) sends back the files.</p>
+<p>The browser's job is to <em>render</em> — to turn HTML, CSS and JavaScript into the page you see. The server's job is to <em>store and deliver</em> those files. This separation is the single most important idea in web development.</p>
+<p>When you become a frontend developer, your entire work happens inside the browser. You write files that the server will eventually send to users — but your responsibility is what those files <em>do</em> once they arrive.</p>`,
+      content_ar:`<p>في كل مرة تفتح موقعاً، حاسبان يتحادثان. <strong>العميل</strong> (المتصفح على هاتفك أو حاسبك) يرسل طلباً. و<strong>الخادم</strong> (حاسب قوي في مكان ما في العالم) يعيد الملفات.</p>
+<p>وظيفة المتصفح هي <em>العرض</em> — تحويل HTML و CSS و JavaScript إلى الصفحة التي تراها. ووظيفة الخادم هي <em>التخزين والتوصيل</em> لهذه الملفات. هذا الفصل هو أهم فكرة في تطوير الويب.</p>
+<p>عندما تصبح مطور واجهات، كل عملك يحدث داخل المتصفح. تكتب ملفات سيرسلها الخادم للمستخدمين لاحقاً — لكن مسؤوليتك هي ما تفعله هذه الملفات <em>بعد وصولها</em>.</p>`,
+      code:`Browser (Client)              Server
+     |                            |
+     |  1. "GET /index.html"      |
+     | -------------------------> |
+     |                            |
+     |  2. HTML + CSS + JS files  |
+     | <------------------------- |
+     |                            |
+  3. Renders the page            `,
+      codeLang:"text"
     },
     {
-      title_en: "DNS — the phonebook of the internet",
-      title_ar: "DNS — دليل الهاتف للإنترنت",
-      content_en: "When you type <code>google.com</code>, your computer has no idea where that is. <strong>DNS (Domain Name System)</strong> translates the human-friendly name into a numeric IP address like <code>142.250.190.46</code> — the actual location of the server. Think of it as the phonebook of the internet.",
-      content_ar: "عندما تكتب <code>google.com</code>، حاسبك لا يعرف أين هذا. <strong>DNS</strong> يحوّل الاسم البشري إلى عنوان IP رقمي مثل <code>142.250.190.46</code> — الموقع الفعلي للخادم. فكّر فيه كدليل هاتف الإنترنت.",
-      code: `google.com   →  142.250.190.46
-youtube.com  →  142.250.72.14
-localhost    →  127.0.0.1`,
-      codeLang: "text"
+      title_en:"DNS — the internet's phonebook", title_ar:"DNS — دليل هاتف الإنترنت",
+      content_en:`<p>When you type <code>google.com</code>, your computer has no idea where that is. Computers use numbers, not names. <strong>DNS (Domain Name System)</strong> translates human-readable names into numeric <strong>IP addresses</strong> — the actual coordinates of the server.</p>
+<p>This happens in milliseconds, hundreds of times a day, without you ever noticing. When you register a domain name, you tell the DNS system "when someone asks for my domain, point them to this IP address."</p>`,
+      content_ar:`<p>عندما تكتب <code>google.com</code>، حاسبك لا يعرف أين هذا. الحواسيب تستخدم الأرقام، لا الأسماء. <strong>DNS</strong> يحوّل الأسماء المقروءة بشرياً إلى <strong>عناوين IP</strong> رقمية — الإحداثيات الفعلية للخادم.</p>
+<p>يحدث هذا في أجزاء من الثانية، مئات المرات يومياً، دون أن تلاحظ. عندما تسجّل نطاقاً، تخبر نظام DNS «عندما يسأل أحد عن نطاقي، وجّهه إلى عنوان IP هذا».</p>`,
+      code:`google.com    →  142.250.190.46
+youtube.com   →  142.250.72.14
+github.com    →  140.82.121.3
+localhost     →  127.0.0.1   (your own computer)`,
+      codeLang:"text"
     },
     {
-      title_en: "HTTP — how they talk",
-      title_ar: "HTTP — كيف يتحدثان",
-      content_en: "<strong>HTTP (HyperText Transfer Protocol)</strong> is the language client and server use. When you visit a page, the browser sends a <code>GET</code> request; the server responds with a status code like <code>200 OK</code> (success) or <code>404 Not Found</code>. HTTPS is the same protocol but encrypted — always use HTTPS in production.",
-      content_ar: "<strong>HTTP</strong> هي اللغة التي يستخدمها العميل والخادم. عندما تزور صفحة، يرسل المتصفح طلب <code>GET</code>؛ يرد الخادم برمز حالة مثل <code>200 OK</code> (نجاح) أو <code>404 Not Found</code> (غير موجود). HTTPS هو نفس البروتوكول لكن مشفّر — استخدم HTTPS دائماً في الإنتاج.",
-      code: `GET /index.html HTTP/1.1
+      title_en:"HTTP — the language of requests", title_ar:"HTTP — لغة الطلبات",
+      content_en:`<p><strong>HTTP (HyperText Transfer Protocol)</strong> is the language client and server use to talk. Every request has a <em>method</em> (GET to read, POST to send data, PUT to update, DELETE to remove), a <em>path</em>, and <em>headers</em>. Every response has a <em>status code</em> and a <em>body</em>.</p>
+<p>Status codes tell you what happened: <code>200 OK</code> means success, <code>301</code> means moved, <code>404</code> means not found, <code>500</code> means server error. You will see these codes every day as a developer.</p>
+<p><strong>HTTPS</strong> is the same protocol but encrypted. Always use HTTPS in production — modern browsers mark HTTP sites as "not secure."</p>`,
+      content_ar:`<p><strong>HTTP</strong> هي اللغة التي يستخدمها العميل والخادم للتواصل. كل طلب له <em>طريقة</em> (GET للقراءة، POST للإرسال، PUT للتحديث، DELETE للحذف)، و<em>مسار</em>، و<em>رؤوس (headers)</em>. وكل استجابة لها <em>رمز حالة</em> و<em>محتوى (body)</em>.</p>
+<p>رموز الحالة تخبرك بما حدث: <code>200 OK</code> نجاح، <code>301</code> نُقل، <code>404</code> غير موجود، <code>500</code> خطأ في الخادم. سترى هذه الأكواد يومياً كمطور.</p>
+<p><strong>HTTPS</strong> هو نفس البروتوكول لكن مشفّر. استخدم HTTPS دائماً في الإنتاج — المتصفحات الحديثة تعلّم مواقع HTTP بأنها «غير آمنة».</p>`,
+      code:`GET /index.html HTTP/1.1
 Host: example.com
+User-Agent: Mozilla/5.0
 
 HTTP/1.1 200 OK
 Content-Type: text/html
 Content-Length: 1256
 
 <!DOCTYPE html>...`,
-      codeLang: "http"
+      codeLang:"http"
     },
     {
-      title_en: "Your first HTML file",
-      title_ar: "أول ملف HTML لك",
-      content_en: "Create a folder, open it in VS Code, and add a file called <code>index.html</code>. Paste this, save it, and double-click to open in your browser — you just built a website.",
-      content_ar: "أنشئ مجلداً، افتحه في VS Code، وأضف ملفاً باسم <code>index.html</code>. الصق هذا الكود، احفظه، وافتحه بنقرة مزدوجة في المتصفح — لقد بنيت موقعاً.",
-      code: `<!DOCTYPE html>
-<html lang="en">
+      title_en:"Your setup — VS Code", title_ar:"إعدادك — VS Code",
+      content_en:`<p>Before writing your first file, set up your work environment. Install <strong>VS Code</strong> (free), then add these extensions: <em>Live Server</em> (auto-refresh in browser), <em>Prettier</em> (auto-formatting), and <em>Auto Rename Tag</em> (keeps open/close tags synced).</p>
+<p>Create a folder on your desktop called <code>my-first-site</code>. Open it in VS Code. This folder is your entire project. Every website starts this simple.</p>`,
+      content_ar:`<p>قبل كتابة أول ملف، جهّز بيئة عملك. ثبّت <strong>VS Code</strong> (مجاني)، ثم أضف هذه الإضافات: <em>Live Server</em> (تحديث تلقائي في المتصفح)، <em>Prettier</em> (تنسيق تلقائي)، و<em>Auto Rename Tag</em> (مزامنة فتح وإغلاق الوسوم).</p>
+<p>أنشئ مجلداً على سطح المكتب باسم <code>my-first-site</code>. افتحه في VS Code. هذا المجلد هو مشروعك بالكامل. كل موقع يبدأ بهذه البساطة.</p>`,
+      code:`📁 my-first-site/
+   ├── 📄 index.html
+   ├── 📄 styles.css
+   └── 📄 script.js`,
+      codeLang:"text"
+    },
+    {
+      title_en:"Your first HTML file", title_ar:"أول ملف HTML لك",
+      content_en:`<p>Create <code>index.html</code> inside your folder. Paste this code, save it, and click "Go Live" at the bottom of VS Code (Live Server). Your browser will open with your first website.</p>
+<p>Read the code carefully — every line has a purpose. The <code>&lt;!DOCTYPE html&gt;</code> tells the browser this is HTML5. The <code>&lt;head&gt;</code> holds information <em>about</em> the page. The <code>&lt;body&gt;</code> holds what users actually see.</p>`,
+      content_ar:`<p>أنشئ <code>index.html</code> داخل مجلدك. الصق هذا الكود، احفظه، واضغط «Go Live» في أسفل VS Code (Live Server). سيفتح المتصفح مع أول موقع لك.</p>
+<p>اقرأ الكود بعناية — كل سطر له غرض. <code>&lt;!DOCTYPE html&gt;</code> يخبر المتصفح أن هذا HTML5. <code>&lt;head&gt;</code> يحمل معلومات <em>عن</em> الصفحة. <code>&lt;body&gt;</code> يحمل ما يراه المستخدمون فعلاً.</p>`,
+      code:`<!DOCTYPE html>
+<html lang="ar">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My First Site</title>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <p>I just built my first website.</p>
+  <h1>مرحباً بالعالم!</h1>
+  <p>لقد بنيت أول موقع لي.</p>
 </body>
 </html>`,
-      codeLang: "html"
+      codeLang:"html"
     }
   ],
-  mistakes_en: [
-    "Skipping DevTools — F12 is your best debugging friend",
-    "Confusing the server with the browser (browsers cannot store your data)",
-    "Working without an editor like VS Code — Notepad slows you down"
+  takeaways_en:[
+    "The web is a client–server conversation, not magic",
+    "DNS translates names into IP addresses so browsers know where to look",
+    "HTTP requests have methods, paths and headers; responses have status codes",
+    "VS Code + Live Server is all you need to start writing code today"
   ],
-  mistakes_ar: [
-    "تجاهل أدوات المتصفح — F12 هو أفضل صديق لك في التصحيح",
-    "الخلط بين الخادم والمتصفح (المتصفح لا يخزّن بياناتك)",
-    "العمل بدون محرر مثل VS Code — Notepad يبطئك"
+  takeaways_ar:[
+    "الويب محادثة بين عميل وخادم، ليس سحراً",
+    "DNS يحوّل الأسماء إلى عناوين IP حتى يعرف المتصفح أين ينظر",
+    "طلبات HTTP لها طرق ومسارات ورؤوس؛ والاستجابات لها رموز حالة",
+    "VS Code + Live Server هما كل ما تحتاجه لبدء الكتابة اليوم"
   ],
-  exercises_en: [
-    "Open any website, press F12, and look at the Network tab while reloading. What files were loaded?",
-    "View the page source (Ctrl+U) of a site you like. Find one <code>&lt;h1&gt;</code> tag.",
-    "Create your own <code>index.html</code> with your name and a short paragraph about yourself."
+  mistakes_en:[
+    "Skipping DevTools (F12) — your #1 debugging tool as a developer",
+    "Confusing the browser with the server (browsers cannot store data for you)",
+    "Working without a code editor — Notepad slows you down drastically",
+    "Forgetting <code>charset=UTF-8</code> and getting broken Arabic characters"
   ],
-  exercises_ar: [
+  mistakes_ar:[
+    "تجاهل أدوات المتصفح (F12) — أداة التصحيح الأولى كمطور",
+    "الخلط بين المتصفح والخادم (المتصفح لا يخزّن بياناتك)",
+    "العمل بدون محرر كود — Notepad يبطئك كثيراً",
+    "نسيان <code>charset=UTF-8</code> فتظهر الحروف العربية مشوّهة"
+  ],
+  exercises_en:[
+    "Open any website, press F12, and inspect the Network tab while reloading. What files were loaded?",
+    "Run <code>ping google.com</code> in your terminal. What IP address do you get?",
+    "Create your own <code>index.html</code> with your name, a photo, and a short paragraph about yourself."
+  ],
+  exercises_ar:[
     "افتح أي موقع، اضغط F12، وراقب تبويب Network أثناء إعادة التحميل. ما الملفات التي حُمّلت؟",
-    "اعرض الكود المصدري (Ctrl+U) لموقع تحبه. ابحث عن وسم <code>&lt;h1&gt;</code> واحد.",
-    "أنشئ <code>index.html</code> خاصاً بك يحتوي اسمك وفقرة قصيرة عنك."
+    "شغّل <code>ping google.com</code> في الطرفية. ما عنوان IP الذي تحصل عليه؟",
+    "أنشئ <code>index.html</code> خاصاً بك يحتوي اسمك وصورة وفقرة قصيرة عنك."
   ]
 },
 
 /* ---------- MODULE 2 ---------- */
 {
-  id: 2, level: 'beginner',
-  title_en: "HTML5 Essentials",
-  title_ar: "أساسيات HTML5",
-  short_en: "Build clean, semantic structure that browsers, search engines and screen readers all understand.",
-  short_ar: "ابنِ هيكلاً نظيفاً ودلالياً تفهمه المتصفحات ومحركات البحث وقارئات الشاشة.",
-  tags_en: ["Semantic tags","Forms","Media","Accessibility"],
-  tags_ar: ["الوسوم الدلالية","النماذج","الوسائط","سهولة الوصول"],
-  objectives_en: [
+  id:2, level:'beginner',
+  title_en:"HTML5 Essentials", title_ar:"أساسيات HTML5",
+  short_en:"Build clean, semantic, accessible structure that browsers, search engines and screen readers all understand.",
+  short_ar:"ابنِ هيكلاً نظيفاً ودلالياً وسهل الوصول تفهمه المتصفحات ومحركات البحث وقارئات الشاشة.",
+  tags_en:["Semantic tags","Forms","Media","Accessibility","SEO"],
+  tags_ar:["الوسوم الدلالية","النماذج","الوسائط","سهولة الوصول","SEO"],
+  time_en:"6–8 hours", time_ar:"6–8 ساعات",
+  prereq_en:"Module 01", prereq_ar:"الوحدة 01",
+  objectives_en:[
     "Write valid HTML5 documents from scratch",
-    "Use semantic tags instead of generic divs",
+    "Choose semantic tags over generic divs",
     "Build accessible forms with proper labels",
-    "Embed images, video and audio correctly"
+    "Embed images, video and audio correctly",
+    "Understand how HTML structure affects SEO"
   ],
-  objectives_ar: [
+  objectives_ar:[
     "كتابة مستندات HTML5 صحيحة من الصفر",
-    "استخدام الوسوم الدلالية بدلاً من divs العامة",
+    "اختيار الوسوم الدلالية بدلاً من divs العامة",
     "بناء نماذج سهلة الوصول مع تسميات صحيحة",
-    "إدراج الصور والفيديو والصوت بشكل صحيح"
+    "إدراج الصور والفيديو والصوت بشكل صحيح",
+    "فهم كيف يؤثر هيكل HTML في SEO"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "The anatomy of an HTML document",
-      title_ar: "تشريح مستند HTML",
-      content_en: "Every HTML page follows the same skeleton. The <code>&lt;head&gt;</code> holds information <em>about</em> the page (title, character encoding, styles). The <code>&lt;body&gt;</code> holds everything users actually see.",
-      content_ar: "كل صفحة HTML تتبع نفس الهيكل. يحمل <code>&lt;head&gt;</code> معلومات <em>عن</em> الصفحة (العنوان، ترميز الأحرف، الأنماط). ويحمل <code>&lt;body&gt;</code> كل ما يراه المستخدم فعلاً.",
-      code: `<!DOCTYPE html>          <!-- tells browser: this is HTML5 -->
-<html lang="ar">        <!-- language matters for accessibility -->
+      title_en:"The anatomy of an HTML document", title_ar:"تشريح مستند HTML",
+      content_en:`<p>Every HTML page follows the same skeleton. The <code>&lt;head&gt;</code> holds information <em>about</em> the page: the title shown in the browser tab, the character encoding, links to CSS files, meta tags for social media. None of this is visible on the page itself.</p>
+<p>The <code>&lt;body&gt;</code> holds everything users actually see: headings, paragraphs, images, buttons, forms. Every visible element on every website lives inside <code>&lt;body&gt;</code>.</p>
+<p>Between <code>&lt;head&gt;</code> and <code>&lt;body&gt;</code>, you have a complete mental model: <em>head = metadata, body = content</em>. That's the whole skeleton.</p>`,
+      content_ar:`<p>كل صفحة HTML تتبع نفس الهيكل. <code>&lt;head&gt;</code> يحمل معلومات <em>عن</em> الصفحة: العنوان الظاهر في تبويب المتصفح، ترميز الأحرف، روابط ملفات CSS، وسوم meta لوسائل التواصل. لا شيء من هذا يظهر على الصفحة.</p>
+<p><code>&lt;body&gt;</code> يحمل كل ما يراه المستخدمون فعلاً: عناوين، فقرات، صور، أزرار، نماذج. كل عنصر مرئي في أي موقع يسكن داخل <code>&lt;body&gt;</code>.</p>
+<p>بين <code>&lt;head&gt;</code> و<code>&lt;body&gt;</code>، لديك نموذج ذهني كامل: <em>head = بيانات وصفية، body = محتوى</em>. هذا هو الهيكل كله.</p>`,
+      code:`<!DOCTYPE html>
+<html lang="ar">
 <head>
-  <meta charset="UTF-8">   <!-- supports Arabic, emojis, all characters -->
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Page</title>   <!-- shown on the browser tab -->
+  <title>My Page</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <!-- Everything users see goes here -->
+  <h1>مرحباً</h1>
+  <p>هذا محتوى مرئي.</p>
 </body>
 </html>`,
-      codeLang: "html"
+      codeLang:"html"
     },
     {
-      title_en: "Semantic vs non-semantic tags",
-      title_ar: "الوسوم الدلالية وغير الدلالية",
-      content_en: "A <code>&lt;div&gt;</code> says nothing about its purpose. Semantic tags like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code> and <code>&lt;footer&gt;</code> tell the browser <em>and</em> screen readers what each section means. This helps SEO and accessibility — and makes your code easier to read.",
-      content_ar: "<code>&lt;div&gt;</code> لا يخبر شيئاً عن غرضه. الوسوم الدلالية مثل <code>&lt;header&gt;</code> و <code>&lt;nav&gt;</code> و <code>&lt;article&gt;</code> و <code>&lt;footer&gt;</code> تخبر المتصفح <em>وقارئات الشاشة</em> بمعنى كل قسم. هذا يساعد SEO وسهولة الوصول — ويجعل الكود أسهل قراءة.",
-      code: `<!-- ❌ Non-semantic: works, but means nothing -->
-<div class="top">
-  <div class="nav">...</div>
-</div>
-<div class="content">
-  <div class="post">...</div>
-</div>
+      title_en:"Semantic vs non-semantic tags", title_ar:"الوسوم الدلالية وغير الدلالية",
+      content_en:`<p>A <code>&lt;div&gt;</code> is a meaningless box. It works, but it tells the browser nothing about its purpose. <strong>Semantic tags</strong> — <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;main&gt;</code>, <code>&lt;article&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;aside&gt;</code>, <code>&lt;footer&gt;</code> — describe their content.</p>
+<p>Why does this matter? Three reasons: <strong>accessibility</strong> (screen readers announce landmarks to blind users), <strong>SEO</strong> (Google understands your page structure), and <strong>maintainability</strong> (your code reads like a document outline).</p>
+<p>A good rule: reach for a semantic tag first; only use <code>&lt;div&gt;</code> when no semantic tag fits.</p>`,
+      content_ar:`<p><code>&lt;div&gt;</code> صندوق بلا معنى. يعمل، لكنه لا يخبر المتصفح بشيء عن غرضه. <strong>الوسوم الدلالية</strong> — <code>&lt;header&gt;</code>، <code>&lt;nav&gt;</code>، <code>&lt;main&gt;</code>، <code>&lt;article&gt;</code>، <code>&lt;section&gt;</code>، <code>&lt;aside&gt;</code>، <code>&lt;footer&gt;</code> — تصف محتواها.</p>
+<p>لماذا يهم هذا؟ ثلاثة أسباب: <strong>سهولة الوصول</strong> (قارئات الشاشة تُعلن المعالم للمكفوفين)، <strong>SEO</strong> (جوجل يفهم هيكل صفحتك)، و<strong>قابلية الصيانة</strong> (كودك يُقرأ كمخطط مستند).</p>
+<p>قاعدة جيدة: استخدم الوسم الدلالي أولاً؛ ولا تستخدم <code>&lt;div&gt;</code> إلا عندما لا يناسب أي وسم دلالي.</p>`,
+      code:`<!-- ❌ Non-semantic -->
+<div class="top"><div class="nav">...</div></div>
+<div class="content"><div class="post">...</div></div>
+<div class="bottom">...</div>
 
-<!-- ✅ Semantic: clear, accessible, SEO-friendly -->
-<header>
-  <nav>...</nav>
-</header>
+<!-- ✅ Semantic -->
+<header><nav>...</nav></header>
 <main>
   <article>...</article>
+  <aside>...</aside>
 </main>
 <footer>...</footer>`,
-      codeLang: "html"
+      codeLang:"html"
     },
     {
-      title_en: "Headings and text",
-      title_ar: "العناوين والنصوص",
-      content_en: "Use <code>&lt;h1&gt;</code> for the main page heading, <code>&lt;h2&gt;</code> for sections, <code>&lt;h3&gt;</code> for subsections — never skip levels. Use <code>&lt;p&gt;</code> for paragraphs, <code>&lt;strong&gt;</code> for important words, and <code>&lt;em&gt;</code> for emphasis.",
-      content_ar: "استخدم <code>&lt;h1&gt;</code> للعنوان الرئيسي للصفحة، و<code>&lt;h2&gt;</code> للأقسام، و<code>&lt;h3&gt;</code> للأقسام الفرعية — لا تتخطَّ المستويات. استخدم <code>&lt;p&gt;</code> للفقرات، و<code>&lt;strong&gt;</code> للكلمات المهمة، و<code>&lt;em&gt;</code> للتأكيد.",
-      code: `<h1>Learn Frontend</h1>
-<h2>Stage 1: Foundations</h2>
-<p>
-  This is a <strong>very important</strong> sentence.
-  Use <em>emphasis</em> sparingly.
-</p>
+      title_en:"Headings, text and lists", title_ar:"العناوين والنصوص والقوائم",
+      content_en:`<p>Use <code>&lt;h1&gt;</code> for the main page heading, <code>&lt;h2&gt;</code> for sections, <code>&lt;h3&gt;</code> for subsections. <strong>Never skip levels</strong> — going from h1 to h4 confuses screen readers and hurts SEO. Only one <code>&lt;h1&gt;</code> per page.</p>
+<p>For paragraphs use <code>&lt;p&gt;</code>. For important words use <code>&lt;strong&gt;</code> (bold), for emphasis use <code>&lt;em&gt;</code> (italic). For lists: <code>&lt;ul&gt;</code> for bullet points, <code>&lt;ol&gt;</code> for numbered, <code>&lt;li&gt;</code> for each item.</p>`,
+      content_ar:`<p>استخدم <code>&lt;h1&gt;</code> للعنوان الرئيسي، و<code>&lt;h2&gt;</code> للأقسام، و<code>&lt;h3&gt;</code> للأقسام الفرعية. <strong>لا تتخطَّ المستويات أبداً</strong> — الانتقال من h1 إلى h4 يربك قارئات الشاشة ويضر SEO. <code>&lt;h1&gt;</code> واحد فقط في كل صفحة.</p>
+<p>للفقرات استخدم <code>&lt;p&gt;</code>. للكلمات المهمة <code>&lt;strong&gt;</code> (غامق)، وللتأكيد <code>&lt;em&gt;</code> (مائل). للقوائم: <code>&lt;ul&gt;</code> للنقاط، <code>&lt;ol&gt;</code> للترقيم، <code>&lt;li&gt;</code> لكل عنصر.</p>`,
+      code:`<h1>تعلّم تطوير الواجهات</h1>
 
-<h2>Stage 2: Mastery</h2>
-<p>...</p>`,
-      codeLang: "html"
+<h2>المرحلة الأولى: التأسيس</h2>
+<p>هذه <strong>جملة مهمة جداً</strong>. استخدم <em>التأكيد</em> باعتدال.</p>
+
+<h3>ما ستتعلمه</h3>
+<ul>
+  <li>أساسيات الويب</li>
+  <li>HTML5 الدلالي</li>
+  <li>CSS3 الحديثة</li>
+</ul>
+
+<h2>المرحلة الثانية: التفاعل</h2>
+<ol>
+  <li>JavaScript الأساسية</li>
+  <li>JavaScript المتقدمة</li>
+</ol>`,
+      codeLang:"html"
     },
     {
-      title_en: "Links, images and accessibility",
-      title_ar: "الروابط والصور وسهولة الوصول",
-      content_en: "Every image needs an <code>alt</code> attribute describing it — it helps blind users and shows when an image fails to load. Links should describe their destination: <code>Read more</code> is worse than <code>Read our HTML guide</code>.",
-      content_ar: "كل صورة تحتاج خاصية <code>alt</code> تصفها — تساعد المكفوفين وتظهر عند فشل تحميل الصورة. يجب أن تصف الروابط وجهتها: <code>اقرأ المزيد</code> أسوأ من <code>اقرأ دليل HTML</code>.",
-      code: `<!-- ✅ Good: descriptive alt and link text -->
-<img src="cat.jpg" alt="A ginger cat sleeping on a keyboard">
-<a href="/html-guide">Read our HTML guide</a>
+      title_en:"Links, images and accessibility", title_ar:"الروابط والصور وسهولة الوصول",
+      content_en:`<p>Every image <strong>must</strong> have an <code>alt</code> attribute describing it. This is how blind users "see" your images via screen readers — and it displays as fallback text if the image fails to load. Decorative images (purely visual) get <code>alt=""</code>.</p>
+<p>Link text should describe the destination. "Read more" is useless out of context; "Read our HTML guide" tells users exactly where they'll go. Never use "click here."</p>
+<p>The <code>&lt;a&gt;</code> tag needs a <code>href</code>. External links should usually open in a new tab with <code>target="_blank" rel="noopener"</code>.</p>`,
+      content_ar:`<p>كل صورة <strong>يجب</strong> أن تحمل خاصية <code>alt</code> تصفها. هكذا «يرى» المكفوفون صورك عبر قارئات الشاشة — وتظهر كنص بديل إذا فشل تحميل الصورة. الصور الزخرفية (الجمالية فقط) تأخذ <code>alt=""</code>.</p>
+<p>نص الرابط يجب أن يصف وجهته. «اقرأ المزيد» عديم الفائدة خارج السياق؛ «اقرأ دليل HTML» يخبر المستخدم أين سيذهب بدقة. لا تستخدم «اضغط هنا» أبداً.</p>
+<p>وسم <code>&lt;a&gt;</code> يحتاج <code>href</code>. الروابط الخارجية عادة تُفتح في تبويب جديد بـ <code>target="_blank" rel="noopener"</code>.</p>`,
+      code:`<!-- ✅ Good -->
+<img src="cat.jpg" alt="قطة برتقالية نائمة على لوحة مفاتيح">
+<a href="/html-guide">اقرأ دليل HTML الكامل</a>
+<a href="https://example.com" target="_blank" rel="noopener">موقع خارجي</a>
 
-<!-- ❌ Bad: no alt, vague link -->
+<!-- ❌ Bad -->
 <img src="cat.jpg">
-<a href="/html-guide">Click here</a>`,
-      codeLang: "html"
+<a href="/html-guide">اضغط هنا</a>`,
+      codeLang:"html"
+    },
+    {
+      title_en:"Forms — collecting user input", title_ar:"النماذج — جمع مدخلات المستخدم",
+      content_en:`<p>Forms are how users give you data: search boxes, login screens, checkout pages, contact forms. Every input <strong>needs a <code>&lt;label&gt;</code></strong> linked via <code>for</code> and <code>id</code>. Screen readers read labels aloud; clicking a label focuses its input.</p>
+<p>Use the right <code>type</code> — <code>email</code> validates format, <code>password</code> hides characters, <code>number</code> shows numeric keyboard on mobile. Use <code>required</code> for mandatory fields and <code>placeholder</code> for hints.</p>`,
+      content_ar:`<p>النماذج هي طريقة إعطاء المستخدم بياناتك: مربعات بحث، شاشات دخول، صفحات دفع، نماذج تواصل. كل إدخال <strong>يحتاج <code>&lt;label&gt;</code></strong> مرتبطاً عبر <code>for</code> و<code>id</code>. قارئات الشاشة تقرأ التسميات بصوت عالٍ؛ النقر على التسمية يركّز على الإدخال.</p>
+<p>استخدم <code>type</code> الصحيح — <code>email</code> يتحقق من الصيغة، <code>password</code> يخفي الحروف، <code>number</code> يفتح لوحة أرقام على الموبايل. استخدم <code>required</code> للحقول الإلزامية و<code>placeholder</code> للتلميحات.</p>`,
+      code:`<form>
+  <label for="name">الاسم الكامل</label>
+  <input type="text" id="name" name="name" required placeholder="محمد أحمد">
+
+  <label for="email">البريد الإلكتروني</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="msg">رسالتك</label>
+  <textarea id="msg" name="msg" rows="4"></textarea>
+
+  <button type="submit">إرسال</button>
+</form>`,
+      codeLang:"html"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "HTML structure = head (metadata) + body (visible content)",
+    "Semantic tags improve accessibility, SEO and code readability",
+    "Every image needs alt; every link needs descriptive text",
+    "Every form input needs a properly linked &lt;label&gt;"
+  ],
+  takeaways_ar:[
+    "هيكل HTML = head (بيانات وصفية) + body (محتوى مرئي)",
+    "الوسوم الدلالية تحسن سهولة الوصول و SEO وقابلية القراءة",
+    "كل صورة تحتاج alt؛ وكل رابط يحتاج نصاً وصفياً",
+    "كل حقل نموذج يحتاج <code>&lt;label&gt;</code> مرتبطاً بشكل صحيح"
+  ],
+  mistakes_en:[
     "Using <code>&lt;div&gt;</code> for everything instead of semantic tags",
-    "Skipping heading levels (h1 directly to h4)",
-    "Forgetting alt text on images — breaks accessibility and SEO",
-    "Using <code>&lt;br&gt;</code> for spacing instead of CSS"
+    "Skipping heading levels (h1 → h4 directly)",
+    "Missing alt text on images — breaks accessibility and SEO",
+    "Using <code>&lt;br&gt;</code> for spacing instead of CSS margins"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "استخدام <code>&lt;div&gt;</code> لكل شيء بدلاً من الوسوم الدلالية",
-    "تخطي مستويات العناوين (h1 ثم h4 مباشرة)",
+    "تخطي مستويات العناوين (h1 → h4 مباشرة)",
     "نسيان نص alt للصور — يكسر سهولة الوصول و SEO",
-    "استخدام <code>&lt;br&gt;</code> للمسافات بدلاً من CSS"
+    "استخدام <code>&lt;br&gt;</code> للمسافات بدلاً من هوامش CSS"
   ],
-  exercises_en: [
+  exercises_en:[
     "Build a personal bio page using only semantic tags (no divs).",
-    "Create a contact form with name, email and message using proper <code>&lt;label&gt;</code> elements.",
+    "Create a contact form with name, email and message using proper labels.",
     "Add three images with meaningful alt text — one decorative (alt=\"\")."
   ],
-  exercises_ar: [
+  exercises_ar:[
     "ابنِ صفحة نبذة شخصية باستخدام الوسوم الدلالية فقط (بدون divs).",
-    "أنشئ نموذج تواصل بالاسم والبريد والرسالة مع استخدام عناصر <code>&lt;label&gt;</code> صحيحة.",
+    "أنشئ نموذج تواصل بالاسم والبريد والرسالة مع تسميات صحيحة.",
     "أضف ثلاث صور مع نص alt ذي معنى — واحدة زخرفية (alt=\"\")."
   ]
 },
 
 /* ---------- MODULE 3 ---------- */
 {
-  id: 3, level: 'beginner',
-  title_en: "CSS3 Essentials",
-  title_ar: "أساسيات CSS3",
-  short_en: "Turn plain HTML into a beautiful, modern interface with layout, color and typography.",
-  short_ar: "حوّل HTML البسيط إلى واجهة جميلة حديثة عبر التخطيط والألوان والخطوط.",
-  tags_en: ["Selectors","Box model","Flexbox","Grid"],
-  tags_ar: ["المحددات","نموذج الصندوق","Flexbox","Grid"],
-  objectives_en: [
-    "Connect CSS to HTML (external, internal, inline)",
-    "Master the box model and spacing",
+  id:3, level:'beginner',
+  title_en:"CSS3 Essentials", title_ar:"أساسيات CSS3",
+  short_en:"Turn plain HTML into a beautiful, modern interface with layout, color and typography.",
+  short_ar:"حوّل HTML البسيط إلى واجهة جميلة حديثة عبر التخطيط والألوان والخطوط.",
+  tags_en:["Selectors","Box model","Flexbox","Grid","Variables"],
+  tags_ar:["المحددات","نموذج الصندوق","Flexbox","Grid","المتغيرات"],
+  time_en:"10–12 hours", time_ar:"10–12 ساعة",
+  prereq_en:"Module 02", prereq_ar:"الوحدة 02",
+  objectives_en:[
+    "Connect CSS to HTML correctly",
+    "Master selectors and specificity",
+    "Understand the box model completely",
     "Build layouts with Flexbox and Grid",
-    "Use CSS variables for theming"
+    "Use CSS variables for themes"
   ],
-  objectives_ar: [
-    "ربط CSS بـ HTML (خارجي، داخلي، مضمّن)",
-    "إتقان نموذج الصندوق والمسافات",
+  objectives_ar:[
+    "ربط CSS بـ HTML بشكل صحيح",
+    "إتقان المحددات والأولوية",
+    "فهم نموذج الصندوق بالكامل",
     "بناء تخطيطات بـ Flexbox و Grid",
     "استخدام متغيرات CSS للثيمات"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "Connecting CSS to HTML",
-      title_ar: "ربط CSS بـ HTML",
-      content_en: "The best method is a separate <code>.css</code> file linked in the <code>&lt;head&gt;</code>. This keeps structure and style separate — exactly how professionals work.",
-      content_ar: "أفضل طريقة هي ملف <code>.css</code> منفصل مرتبط في <code>&lt;head&gt;</code>. هذا يبقي الهيكل والتنسيق منفصلين — تماماً كما يعمل المحترفون.",
-      code: `<!-- In your HTML <head> -->
+      title_en:"How CSS works", title_ar:"كيف يعمل CSS",
+      content_en:`<p>CSS (Cascading Style Sheets) controls how HTML <em>looks</em>. Three ways to add it: <strong>inline</strong> (on the element — avoid), <strong>internal</strong> (in a <code>&lt;style&gt;</code> tag — okay for demos), and <strong>external</strong> (in a separate <code>.css</code> file — the professional way).</p>
+<p>The word "cascading" means multiple rules can apply to the same element, and CSS decides which wins. This is controlled by <strong>specificity</strong> — the more specific selector wins.</p>`,
+      content_ar:`<p>CSS (أوراق الأنماط المتتالية) تتحكم في <em>مظهر</em> HTML. ثلاث طرق لإضافتها: <strong>مضمّن</strong> (على العنصر — تجنبه)، <strong>داخلي</strong> (في وسم <code>&lt;style&gt;</code> — مقبول للعروض)، و<strong>خارجي</strong> (في ملف <code>.css</code> منفصل — الطريقة الاحترافية).</p>
+<p>كلمة «متتالية» تعني أن عدة قواعد قد تنطبق على نفس العنصر، و CSS تقرر أيها يفوز. هذا يُتحكم به عبر <strong>الأولوية</strong> — المحدد الأكثر تحديداً يفوز.</p>`,
+      code:`<!-- In your HTML <head> -->
 <link rel="stylesheet" href="styles.css">`,
-      codeLang: "html"
+      codeLang:"html"
     },
     {
-      title_en: "Selectors and specificity",
-      title_ar: "المحددات والأولوية",
-      content_en: "You target elements with selectors. <code>p</code> targets all paragraphs; <code>.card</code> targets class \"card\"; <code>#main</code> targets id \"main\". IDs win over classes, classes win over tags. Avoid <code>!important</code> — it always wins and breaks maintainability.",
-      content_ar: "تستهدف العناصر بالمحددات. <code>p</code> يستهدف كل الفقرات؛ <code>.card</code> يستهدف صنف \"card\"؛ <code>#main</code> يستهدف المعرّف \"main\". المعرّفات تتغلب على الأصناف، والأصناف تتغلب على الوسوم. تجنّب <code>!important</code> — فهو يتغلب دائماً ويكسر قابلية الصيانة.",
-      code: `/* Tag selector — targets every <p> */
+      title_en:"Selectors and specificity", title_ar:"المحددات والأولوية",
+      content_en:`<p>You target elements with selectors. <code>p</code> targets all paragraphs; <code>.card</code> targets elements with class "card"; <code>#main</code> targets the element with id "main". IDs beat classes; classes beat tags.</p>
+<p><strong>Avoid <code>!important</code></strong> — it wins over everything and makes styles impossible to override later. If you find yourself needing it, your specificity is broken — refactor instead.</p>`,
+      content_ar:`<p>تستهدف العناصر بالمحددات. <code>p</code> يستهدف كل الفقرات؛ <code>.card</code> يستهدف العناصر بصنف "card"؛ <code>#main</code> يستهدف العنصر بمعرّف "main". المعرّفات تتغلب على الأصناف؛ والأصناف تتغلب على الوسوم.</p>
+<p><strong>تجنّب <code>!important</code></strong> — يتغلب على كل شيء ويجعل الأنماط مستحيلة التجاوز لاحقاً. إذا وجدت نفسك بحاجة إليه، فأولويتك مكسورة — أعد الهيكلة بدلاً.</p>`,
+      code:`/* Tag — targets every <p> */
 p { color: #333; }
 
-/* Class selector — reusable, most common */
+/* Class — reusable, most common */
 .card { padding: 20px; border-radius: 12px; }
 
-/* ID selector — unique, high priority */
+/* ID — unique, high priority */
 #main-header { background: #111; }
 
-/* Combining */
+/* Combined */
 .card .title { font-size: 1.2rem; }`,
-      codeLang: "css"
+      codeLang:"css"
     },
     {
-      title_en: "The box model",
-      title_ar: "نموذج الصندوق",
-      content_en: "Every element is a box: <strong>content</strong> surrounded by <strong>padding</strong>, then a <strong>border</strong>, then <strong>margin</strong>. Add <code>box-sizing: border-box</code> to every element (via the universal selector) so padding and border are included in the width — this is how everyone works in 2024.",
-      content_ar: "كل عنصر هو صندوق: <strong>محتوى</strong> محاط بـ <strong>padding</strong>، ثم <strong>border</strong>، ثم <strong>margin</strong>. أضف <code>box-sizing: border-box</code> لكل عنصر (عبر المحدد العام) حتى تُحسب الحدود والحشوة داخل العرض — هكذا يعمل الجميع في 2024.",
-      code: `*, *::before, *::after {
-  box-sizing: border-box;  /* the modern default */
+      title_en:"The box model", title_ar:"نموذج الصندوق",
+      content_en:`<p>Every element is a box: <strong>content</strong> surrounded by <strong>padding</strong>, then a <strong>border</strong>, then <strong>margin</strong>. Getting this right is 80% of layout work.</p>
+<p>The single most important line in modern CSS is <code>box-sizing: border-box</code>. Without it, adding padding makes elements wider (unexpected). With it, width includes padding and border — exactly what you'd expect. Set it globally.</p>`,
+      content_ar:`<p>كل عنصر هو صندوق: <strong>محتوى</strong> محاط بـ <strong>padding</strong>، ثم <strong>border</strong>، ثم <strong>margin</strong>. إتقان هذا هو 80% من عمل التخطيط.</p>
+<p>السطر الأهم في CSS الحديثة هو <code>box-sizing: border-box</code>. بدونه، إضافة padding تجعل العناصر أوسع (غير متوقع). معه، العرض يشمل الحشوة والحدود — بالضبط كما تتوقع. ضعه عالمياً.</p>`,
+      code:`*, *::before, *::after {
+  box-sizing: border-box;
 }
 
 .card {
   width: 320px;
-  padding: 20px;           /* inside the box */
-  border: 1px solid #333;  /* around the padding */
-  margin: 16px;            /* outside the box */
+  padding: 20px;          /* inside */
+  border: 1px solid #333; /* around padding */
+  margin: 16px;           /* outside */
   background: #1a1b2e;
 }`,
-      codeLang: "css"
+      codeLang:"css"
     },
     {
-      title_en: "Flexbox — one-dimensional layout",
-      title_ar: "Flexbox — تخطيط أحادي البعد",
-      content_en: "Flexbox arranges items in a row or column. Set <code>display: flex</code> on the parent; then use <code>justify-content</code> (main axis) and <code>align-items</code> (cross axis) to place children. It's the go-to tool for navbars, toolbars and centering.",
-      content_ar: "Flexbox يرتب العناصر في صف أو عمود. ضع <code>display: flex</code> على الأب؛ ثم استخدم <code>justify-content</code> (المحور الرئيسي) و<code>align-items</code> (المحور المتعامد) لتوزيع الأبناء. هو الأداة المفضلة لأشرطة التنقل وأشرطة الأدوات والتوسيط.",
-      code: `.nav {
+      title_en:"Flexbox — one-dimensional layout", title_ar:"Flexbox — تخطيط أحادي البعد",
+      content_en:`<p>Flexbox arranges items in a row or column. Set <code>display: flex</code> on the parent, then control the children with <code>justify-content</code> (main axis) and <code>align-items</code> (cross axis).</p>
+<p>Flexbox is perfect for: navbars, toolbars, button groups, vertical/horizontal centering, and any row of items that should distribute space evenly. Use <code>gap</code> for spacing between children — cleaner than margins.</p>`,
+      content_ar:`<p>Flexbox يرتب العناصر في صف أو عمود. ضع <code>display: flex</code> على الأب، ثم تحكم بالأبناء بـ <code>justify-content</code> (المحور الرئيسي) و<code>align-items</code> (المحور المتعامد).</p>
+<p>Flexbox مثالي لـ: أشرطة التنقل، أشرطة الأدوات، مجموعات الأزرار، التوسيط الأفقي والعمودي، وأي صف عناصر يجب أن يوزّع المساحات بالتساوي. استخدم <code>gap</code> للمسافات بين الأبناء — أنظف من الهوامش.</p>`,
+      code:`.nav {
   display: flex;
-  justify-content: space-between;  /* push items apart */
-  align-items: center;             /* vertically centered */
-  gap: 20px;                       /* space between items */
+  justify-content: space-between;  /* push apart */
+  align-items: center;             /* vertically center */
+  gap: 20px;
   padding: 16px 24px;
 }
 
-/* Perfect centering — the classic use case */
+/* Perfect centering — the classic */
 .center-me {
   display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
 }`,
-      codeLang: "css"
+      codeLang:"css"
     },
     {
-      title_en: "CSS Grid — two-dimensional layout",
-      title_ar: "CSS Grid — تخطيط ثنائي الأبعاد",
-      content_en: "Grid handles rows <em>and</em> columns together. Perfect for page-level layouts, dashboards and image galleries. Use <code>grid-template-columns</code> to define the columns.",
-      content_ar: "Grid يتعامل مع الصفوف <em>والأعمدة</em> معاً. مثالي لتخطيطات الصفحات ولوحات التحكم ومعارض الصور. استخدم <code>grid-template-columns</code> لتحديد الأعمدة.",
-      code: `.cards {
+      title_en:"CSS Grid — two-dimensional layout", title_ar:"CSS Grid — تخطيط ثنائي الأبعاد",
+      content_en:`<p>Grid handles rows <em>and</em> columns together. It's perfect for page-level layouts, dashboards, and image galleries. Use <code>grid-template-columns</code> to define columns and <code>gap</code> for spacing.</p>
+<p>A powerful modern pattern: <code>repeat(auto-fill, minmax(240px, 1fr))</code> creates as many columns as fit, each at least 240px wide. This makes responsive galleries in one line.</p>`,
+      content_ar:`<p>Grid يتعامل مع الصفوف <em>والأعمدة</em> معاً. مثالي لتخطيطات الصفحات ولوحات التحكم ومعارض الصور. استخدم <code>grid-template-columns</code> لتحديد الأعمدة و<code>gap</code> للمسافات.</p>
+<p>نمط حديث قوي: <code>repeat(auto-fill, minmax(240px, 1fr))</code> ينشئ أكبر عدد ممكن من الأعمدة، كل منها على الأقل 240px. هذا يصنع معارض متجاوبة بسطر واحد.</p>`,
+      code:`.cards {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);  /* 3 equal columns */
+  grid-template-columns: repeat(3, 1fr);
   gap: 20px;
 }
 
-/* Auto-responsive — as many columns as fit */
+/* Auto-responsive gallery */
 .gallery {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 16px;
 }`,
-      codeLang: "css"
+      codeLang:"css"
+    },
+    {
+      title_en:"CSS variables (custom properties)", title_ar:"متغيرات CSS (الخصائص المخصصة)",
+      content_en:`<p>Instead of repeating colors and sizes, define them once as variables on <code>:root</code>. Then use them anywhere with <code>var(--name)</code>. When you change one value, everything updates — this is how themes and dark mode are built.</p>`,
+      content_ar:`<p>بدلاً من تكرار الألوان والأحجام، عرّفها مرة واحدة كمتغيرات على <code>:root</code>. ثم استخدمها في أي مكان بـ <code>var(--name)</code>. عندما تغيّر قيمة واحدة، يتحدّث كل شيء — هكذا تُبنى الثيمات والوضع الداكن.</p>`,
+      code:`:root {
+  --primary: #6366f1;
+  --accent:  #a855f7;
+  --text:    #e8ecf4;
+  --radius:  12px;
+}
+
+.button {
+  background: var(--primary);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 12px 24px;
+}
+
+.button:hover {
+  background: var(--accent);
+}`,
+      codeLang:"css"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "box-sizing: border-box is your modern default — set it globally",
+    "Flexbox is for one direction; Grid is for rows AND columns",
+    "Use gap instead of margins between flex/grid children",
+    "CSS variables make themes, dark mode and design systems possible"
+  ],
+  takeaways_ar:[
+    "box-sizing: border-box هو افتراضيك الحديث — اضبطه عالمياً",
+    "Flexbox لاتجاه واحد؛ Grid للصفوف والأعمدة معاً",
+    "استخدم gap بدلاً من الهوامش بين أبناء flex/grid",
+    "متغيرات CSS تجعل الثيمات والوضع الداكن وأنظمة التصميم ممكنة"
+  ],
+  mistakes_en:[
     "Not using <code>box-sizing: border-box</code> — widths become unpredictable",
-    "Using <code>!important</code> to fix specificity issues instead of refactoring",
-    "Reaching for Flexbox for everything — Grid is better for full layouts",
+    "Using <code>!important</code> to fix specificity instead of refactoring",
+    "Reaching for Flexbox for full layouts — Grid is the right tool",
     "Hardcoding colors — use CSS variables instead"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "عدم استخدام <code>box-sizing: border-box</code> — تصبح العروض غير متوقعة",
-    "استخدام <code>!important</code> لحل مشاكل الأولوية بدلاً من إعادة الهيكلة",
-    "استخدام Flexbox لكل شيء — Grid أفضل للتخطيطات الكاملة",
+    "استخدام <code>!important</code> لحل الأولوية بدلاً من إعادة الهيكلة",
+    "استخدام Flexbox للتخطيطات الكاملة — Grid هو الأداة الصحيحة",
     "ترميز الألوان يدوياً — استخدم متغيرات CSS بدلاً"
   ],
-  exercises_en: [
+  exercises_en:[
     "Style a card component with padding, border-radius and a subtle shadow.",
     "Build a navbar using Flexbox with a logo on one side and links on the other.",
-    "Create a 3-column grid of cards that becomes 1 column on mobile."
+    "Create a 3-column grid of cards that becomes 1 column on mobile.",
+    "Refactor a hardcoded color palette to use CSS variables."
   ],
-  exercises_ar: [
-    "نسّق مكوّن بطاقة (card) بحشوة وزوايا مستديرة وظل خفيف.",
+  exercises_ar:[
+    "نسّق مكوّن بطاقة بحشوة وزوايا مستديرة وظل خفيف.",
     "ابنِ شريط تنقل بـ Flexbox مع شعار على جهة وروابط على الأخرى.",
-    "أنشئ شبكة من 3 أعمدة تصبح عموداً واحداً على الموبايل."
+    "أنشئ شبكة من 3 أعمدة تصبح عموداً واحداً على الموبايل.",
+    "أعد هيكلة لوحة ألوان مرمّزة يدوياً لتستخدم متغيرات CSS."
   ]
 },
 
 /* ---------- MODULE 4 ---------- */
 {
-  id: 4, level: 'beginner',
-  title_en: "Responsive Design",
-  title_ar: "التصميم المتجاوب",
-  short_en: "Make every layout look perfect on phones, tablets and desktops — mobile-first.",
-  short_ar: "اجعل كل تخطيط مثالياً على الهواتف والأجهزة اللوحية والحواسيب — الموبايل أولاً.",
-  tags_en: ["Media queries","Mobile-first","Fluid type","Images"],
-  tags_ar: ["استعلامات الوسائط","الموبايل أولاً","خطوط مرنة","الصور"],
-  objectives_en: [
+  id:4, level:'beginner',
+  title_en:"Responsive Design", title_ar:"التصميم المتجاوب",
+  short_en:"Make every layout look perfect on phones, tablets and desktops — mobile-first.",
+  short_ar:"اجعل كل تخطيط مثالياً على الهواتف والأجهزة اللوحية والحواسيب — الموبايل أولاً.",
+  tags_en:["Media queries","Mobile-first","Fluid type","Images"],
+  tags_ar:["استعلامات الوسائط","الموبايل أولاً","خطوط مرنة","الصور"],
+  time_en:"5–6 hours", time_ar:"5–6 ساعات",
+  prereq_en:"Module 03", prereq_ar:"الوحدة 03",
+  objectives_en:[
     "Design mobile-first and scale up",
     "Use media queries correctly",
     "Write fluid typography with clamp()",
-    "Serve responsive images"
+    "Serve responsive images",
+    "Test on real devices via DevTools"
   ],
-  objectives_ar: [
+  objectives_ar:[
     "التصميم للموبايل أولاً ثم التوسع",
     "استخدام استعلامات الوسائط بشكل صحيح",
-    "كتابة خطوط مرنة باستخدام clamp()",
-    "تقديم صور متجاوبة"
+    "كتابة خطوط مرنة بـ clamp()",
+    "تقديم صور متجاوبة",
+    "الاختبار على أجهزة حقيقية عبر DevTools"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "Mobile-first thinking",
-      title_ar: "تفكير الموبايل أولاً",
-      content_en: "Mobile-first means you design for the smallest screen first, then <em>add</em> complexity for larger screens using <code>min-width</code> media queries. This produces cleaner code and better performance on phones — where most users are.",
-      content_ar: "الموبايل أولاً يعني أن تصمم للشاشة الأصغر أولاً، ثم <em>تضيف</em> تعقيداً للشاشات الأكبر عبر استعلامات <code>min-width</code>. هذا ينتج كوداً أنظف وأداءً أفضل على الهواتف — حيث معظم المستخدمين.",
-      code: `/* Mobile first — start simple */
+      title_en:"Mobile-first — the correct order", title_ar:"الموبايل أولاً — الترتيب الصحيح",
+      content_en:`<p>Most users browse on phones. So design for the smallest screen first, then <em>add</em> complexity as screens grow. This is called mobile-first, and it produces cleaner, faster code.</p>
+<p>With mobile-first, your base CSS targets phones, and <code>min-width</code> media queries enhance it for larger screens. This is the opposite of the old (wrong) approach of designing for desktop then trying to squeeze down.</p>`,
+      content_ar:`<p>معظم المستخدمين يتصفحون على الهواتف. لذا صمّم للشاشة الأصغر أولاً، ثم <em>أضف</em> تعقيداً مع كبر الشاشات. هذا يسمى الموبايل أولاً، وينتج كوداً أنظف وأسرع.</p>
+<p>مع الموبايل أولاً، CSS الأساسية تستهدف الهواتف، واستعلامات <code>min-width</code> تُحسّنها للشاشات الأكبر. هذا عكس النهج القديم (الخاطئ) للتصميم للحاسوب ثم محاولة الضغط.</p>`,
+      code:`/* Mobile first — base styles */
 .container {
   padding: 16px;
   font-size: 16px;
@@ -918,321 +1188,431 @@ p { color: #333; }
 @media (min-width: 1200px) {
   .container { padding: 48px; max-width: 1240px; margin: 0 auto; }
 }`,
-      codeLang: "css"
+      codeLang:"css"
     },
     {
-      title_en: "Fluid typography with clamp()",
-      title_ar: "خطوط مرنة باستخدام clamp()",
-      content_en: "Instead of hardcoding font sizes at every breakpoint, <code>clamp(min, preferred, max)</code> lets text scale smoothly between limits. It's a one-line responsive solution.",
-      content_ar: "بدلاً من ترميز أحجام الخطوط عند كل نقطة توقف، تسمح <code>clamp(min, preferred, max)</code> للنص بالتحجيم السلس بين حدين. إنها حل متجاوب بسطر واحد.",
-      code: `h1 {
-  /* min 2rem, preferred 5vw, max 4rem */
+      title_en:"Fluid typography with clamp()", title_ar:"خطوط مرنة بـ clamp()",
+      content_en:`<p>Instead of hardcoding font sizes at every breakpoint, <code>clamp(min, preferred, max)</code> lets text scale smoothly between limits. One line replaces dozens of media queries.</p>
+<p>Example: <code>font-size: clamp(2rem, 5vw, 4rem)</code> — minimum 2rem, grows with viewport width, caps at 4rem. Readable on phones, bold on desktops.</p>`,
+      content_ar:`<p>بدلاً من ترميز أحجام الخطوط عند كل نقطة توقف، تسمح <code>clamp(min, preferred, max)</code> للنص بالتحجيم السلس بين حدين. سطر واحد يستبدل عشرات استعلامات الوسائط.</p>
+<p>مثال: <code>font-size: clamp(2rem, 5vw, 4rem)</code> — الحد الأدنى 2rem، ينمو مع عرض الشاشة، يقف عند 4rem. مقروء على الهواتف، بارز على الحواسيب.</p>`,
+      code:`h1 {
   font-size: clamp(2rem, 5vw, 4rem);
+}
+
+p {
+  font-size: clamp(1rem, 1.5vw, 1.15rem);
 }`,
-      codeLang: "css"
+      codeLang:"css"
     },
     {
-      title_en: "Responsive images",
-      title_ar: "الصور المتجاوبة",
-      content_en: "Large images slow down phones. Use the <code>&lt;picture&gt;</code> element or the <code>srcset</code> attribute to serve smaller images to smaller screens. Also always set <code>max-width: 100%</code> on images so they never overflow.",
-      content_ar: "الصور الكبيرة تبطئ الهواتف. استخدم عنصر <code>&lt;picture&gt;</code> أو خاصية <code>srcset</code> لتقديم صور أصغر للشاشات الأصغر. وضع أيضاً <code>max-width: 100%</code> على الصور دائماً حتى لا تتجاوز.",
-      code: `img {
+      title_en:"Responsive images", title_ar:"الصور المتجاوبة",
+      content_en:`<p>Large images slow down phones — the same 4 MB hero image on a phone and a 4K desktop is wasteful. Use <code>srcset</code> to serve smaller files to smaller screens.</p>
+<p>Always set <code>max-width: 100%</code> on images so they never overflow their container. Add <code>loading="lazy"</code> for images below the fold — the browser loads them only when needed.</p>`,
+      content_ar:`<p>الصور الكبيرة تبطئ الهواتف — نفس صورة 4 ميجابايت على هاتف وعلى حاسوب 4K إهدار. استخدم <code>srcset</code> لتقديم ملفات أصغر للشاشات الأصغر.</p>
+<p>ضع <code>max-width: 100%</code> على الصور دائماً حتى لا تتجاوز حاويتها. أضف <code>loading="lazy"</code> للصور أسفل الشاشة — يحمّلها المتصفح فقط عند الحاجة.</p>`,
+      code:`img {
   max-width: 100%;
   height: auto;
   display: block;
 }
 
-<!-- Serve a smaller file to smaller screens -->
 <img
   src="hero-large.jpg"
   srcset="hero-small.jpg 640w,
           hero-medium.jpg 1024w,
           hero-large.jpg 1600w"
   sizes="(max-width: 640px) 100vw, 1024px"
+  loading="lazy"
   alt="Hero image">`,
-      codeLang: "html"
+      codeLang:"html"
+    },
+    {
+      title_en:"Testing with DevTools", title_ar:"الاختبار بـ DevTools",
+      content_en:`<p>Chrome DevTools has a device toolbar (<code>Ctrl+Shift+M</code>) that simulates many screens. Test at the common breakpoints: <strong>375px</strong> (iPhone), <strong>768px</strong> (iPad), <strong>1440px</strong> (laptop).</p>
+<p>But simulation is not enough — always test on a real phone before shipping. Real devices reveal issues with touch targets, keyboard, and performance that emulators miss.</p>`,
+      content_ar:`<p>Chrome DevTools فيه شريط أجهزة (<code>Ctrl+Shift+M</code>) يحاكي شاشات كثيرة. اختبر عند نقاط التوقف الشائعة: <strong>375px</strong> (آيفون)، <strong>768px</strong> (آيباد)، <strong>1440px</strong> (لابتوب).</p>
+<p>لكن المحاكاة لا تكفي — اختبر على هاتف حقيقي قبل النشر دائماً. الأجهزة الحقيقية تكشف مشاكل أهداف اللمس ولوحة المفاتيح والأداء التي تفوت المحاكيات.</p>`,
+      code:`Common breakpoints:
+375px  → phones
+768px  → tablets
+1024px → small laptops
+1440px → desktops`,
+      codeLang:"text"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "Start with mobile, then enhance upward (min-width media queries)",
+    "clamp() replaces many media queries for font sizes",
+    "srcset serves the right image size to the right screen",
+    "Always test on real devices, not just DevTools simulation"
+  ],
+  takeaways_ar:[
+    "ابدأ بالموبايل، ثم حسّن صعوداً (استعلامات min-width)",
+    "clamp() يستبدل كثيراً من استعلامات الوسائط لأحجام الخطوط",
+    "srcset يقدّم الحجم المناسب من الصورة للشاشة المناسبة",
+    "اختبر دائماً على أجهزة حقيقية، لا محاكاة DevTools فقط"
+  ],
+  mistakes_en:[
     "Designing desktop-first then squeezing mobile",
     "Using <code>max-width</code> media queries instead of <code>min-width</code>",
     "Hardcoding px font sizes instead of using rem and clamp()",
     "Forgetting <code>max-width: 100%</code> on images"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "التصميم للحاسوب أولاً ثم ضغط الموبايل",
     "استخدام استعلامات <code>max-width</code> بدلاً من <code>min-width</code>",
     "ترميز أحجام الخطوط بـ px بدلاً من rem و clamp()",
     "نسيان <code>max-width: 100%</code> على الصور"
   ],
-  exercises_en: [
+  exercises_en:[
     "Take a desktop-only page and rewrite it mobile-first.",
     "Replace all your hardcoded font sizes with clamp().",
-    "Test your site using Chrome DevTools' device toolbar at 375px, 768px, 1440px."
+    "Add srcset to a hero image and verify it loads smaller files on a phone."
   ],
-  exercises_ar: [
+  exercises_ar:[
     "خذ صفحة مصممة للحاسوب وأعد كتابتها بمنهج الموبايل أولاً.",
     "استبدل كل أحجام الخطوط المرمّزة بـ clamp().",
-    "اختبر موقعك عبر شريط الأجهزة في Chrome DevTools عند 375px و 768px و 1440px."
+    "أضف srcset لصورة رئيسية وتحقق من تحميل ملفات أصغر على الهاتف."
   ]
 },
 
 /* ---------- MODULE 5 ---------- */
 {
-  id: 5, level: 'mid',
-  title_en: "JavaScript Basics",
-  title_ar: "أساسيات JavaScript",
-  short_en: "The language that makes pages interactive — variables, logic, functions and the DOM.",
-  short_ar: "اللغة التي تجعل الصفحات تفاعلية — المتغيرات والمنطق والدوال والـ DOM.",
-  tags_en: ["Variables","Functions","Arrays","DOM","Events"],
-  tags_ar: ["المتغيرات","الدوال","المصفوفات","DOM","الأحداث"],
-  objectives_en: [
+  id:5, level:'mid',
+  title_en:"JavaScript Basics", title_ar:"أساسيات JavaScript",
+  short_en:"The language that makes pages interactive — variables, logic, functions and the DOM.",
+  short_ar:"اللغة التي تجعل الصفحات تفاعلية — المتغيرات والمنطق والدوال والـ DOM.",
+  tags_en:["Variables","Functions","Arrays","DOM","Events"],
+  tags_ar:["المتغيرات","الدوال","المصفوفات","DOM","الأحداث"],
+  time_en:"15–20 hours", time_ar:"15–20 ساعة",
+  prereq_en:"Module 04", prereq_ar:"الوحدة 04",
+  objectives_en:[
     "Declare variables with let and const correctly",
     "Write functions and understand scope",
     "Manipulate arrays and objects",
     "Select and change DOM elements",
     "Respond to user events"
   ],
-  objectives_ar: [
+  objectives_ar:[
     "إعلان المتغيرات بـ let و const بشكل صحيح",
-    "كتابة الدوال وفهم النطاق (scope)",
+    "كتابة الدوال وفهم النطاق",
     "التعامل مع المصفوفات والكائنات",
     "اختيار وتعديل عناصر DOM",
     "الاستجابة لأحداث المستخدم"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "Variables: let, const and var",
-      title_ar: "المتغيرات: let و const و var",
-      content_en: "Use <code>const</code> by default — it can't be reassigned, so it's safer. Use <code>let</code> when you need to change the value later. Forget <code>var</code> — it has confusing scoping rules that cause bugs.",
-      content_ar: "استخدم <code>const</code> كافتراضي — لا يمكن إعادة إسناده، لذا هو أأمن. استخدم <code>let</code> عندما تحتاج تغيير القيمة لاحقاً. انسَ <code>var</code> — لديه قواعد نطاق مربكة تسبب أخطاء.",
-      code: `const name = "Sara";       // cannot be reassigned
-let age = 25;              // can be reassigned
-age = 26;                  // ✅ works
+      title_en:"Variables: let, const, var", title_ar:"المتغيرات: let و const و var",
+      content_en:`<p>Use <code>const</code> by default — it can't be reassigned, so it's safer. Use <code>let</code> when you need to change the value later. Forget <code>var</code> — it has confusing scoping rules that cause bugs.</p>
+<p>Note: <code>const</code> prevents <em>reassignment</em>, but objects and arrays declared with const can still have their <em>contents</em> changed. Use <code>Object.freeze()</code> to prevent that if needed.</p>`,
+      content_ar:`<p>استخدم <code>const</code> كافتراضي — لا يمكن إعادة إسناده، لذا هو أأمن. استخدم <code>let</code> عندما تحتاج تغيير القيمة لاحقاً. انسَ <code>var</code> — لديه قواعد نطاق مربكة تسبب أخطاء.</p>
+<p>ملاحظة: <code>const</code> يمنع <em>إعادة الإسناد</em>، لكن الكائنات والمصفوفات المعرّفة بـ const يمكن تعديل <em>محتواها</em>. استخدم <code>Object.freeze()</code> لمنع ذلك إذا احتجت.</p>`,
+      code:`const name = "سارة";      // cannot reassign
+let age = 25;               // can reassign
+age = 26;                   // ✅ works
 
-const PI = 3.14159;
-// PI = 3;                 // ❌ TypeError
+const user = { name: "سارة" };
+user.name = "ليلى";         // ✅ allowed (object mutated)
+// user = {};                // ❌ TypeError
 
-// var — avoid it
-var old = "don't use this";`,
-      codeLang: "javascript"
+const arr = [1, 2, 3];
+arr.push(4);                // ✅ works`,
+      codeLang:"javascript"
     },
     {
-      title_en: "Functions",
-      title_ar: "الدوال",
-      content_en: "A function is a reusable block of code. Modern JavaScript favors <strong>arrow functions</strong> for short operations. Functions can <code>return</code> a value, which the caller uses.",
-      content_ar: "الدالة هي كتلة كود قابلة لإعادة الاستخدام. JavaScript الحديثة تفضّل <strong>دوال السهم (arrow functions)</strong> للعمليات القصيرة. يمكن للدوال أن <code>return</code> قيمة يستخدمها المُنادي.",
-      code: `// Classic function
+      title_en:"Functions", title_ar:"الدوال",
+      content_en:`<p>A function is a reusable block of code. Modern JavaScript favors <strong>arrow functions</strong> for short operations. Functions can <code>return</code> a value, which the caller uses.</p>
+<p>Arrow functions differ from regular functions in one important way: they don't have their own <code>this</code>. This is usually what you want, but be aware of it when working with objects and event handlers.</p>`,
+      content_ar:`<p>الدالة كتلة كود قابلة لإعادة الاستخدام. JavaScript الحديثة تفضّل <strong>دوال السهم</strong> للعمليات القصيرة. يمكن للدوال أن <code>return</code> قيمة يستخدمها المُنادي.</p>
+<p>دوال السهم تختلف عن الدوال العادية في أمر مهم: ليس لها <code>this</code> خاص بها. هذا عادةً ما تريده، لكن كن واعياً عند العمل مع الكائنات ومعالجات الأحداث.</p>`,
+      code:`// Classic function
 function add(a, b) {
   return a + b;
 }
 
 // Arrow function — same thing, shorter
-const add = (a, b) => a + b;
+const add2 = (a, b) => a + b;
 
-// With a block (when you need multiple lines)
+// Multi-line arrow function
 const greet = (name) => {
-  const message = \`Hello, \${name}!\`;
+  const message = \`مرحباً، \${name}!\`;
   return message;
 };
 
-console.log(greet("Sara"));  // "Hello, Sara!"`,
-      codeLang: "javascript"
+console.log(greet("سارة"));  // "مرحباً، سارة!"`,
+      codeLang:"javascript"
     },
     {
-      title_en: "Arrays and objects",
-      title_ar: "المصفوفات والكائنات",
-      content_en: "Arrays store ordered lists; objects store named keys. Together they model almost all real data. Learn <code>map</code>, <code>filter</code> and <code>find</code> — you'll use them every day.",
-      content_ar: "المصفوفات تخزّن قوائم مرتبة؛ والكائنات تخزّن مفاتيح مسماة. معاً تمثّلان تقريباً كل البيانات الحقيقية. تعلّم <code>map</code> و <code>filter</code> و <code>find</code> — ستستخدمها كل يوم.",
-      code: `const users = [
-  { name: "Sara", age: 25 },
-  { name: "Omar", age: 31 },
-  { name: "Lina", age: 28 }
+      title_en:"Arrays and objects", title_ar:"المصفوفات والكائنات",
+      content_en:`<p>Arrays store ordered lists; objects store named keys. Together they model almost all real data. Learn <code>map</code>, <code>filter</code> and <code>find</code> — you'll use them every single day.</p>
+<p><code>map</code> transforms every item into something else. <code>filter</code> keeps only items matching a condition. <code>find</code> returns the first match. These methods <strong>do not modify</strong> the original array — they return new ones.</p>`,
+      content_ar:`<p>المصفوفات تخزّن قوائم مرتبة؛ والكائنات تخزّن مفاتيح مسماة. معاً تمثّلان تقريباً كل البيانات الحقيقية. تعلّم <code>map</code> و<code>filter</code> و<code>find</code> — ستستخدمها كل يوم.</p>
+<p><code>map</code> يحوّل كل عنصر إلى شيء آخر. <code>filter</code> يحتفظ فقط بالعناصر المطابقة لشرط. <code>find</code> يعيد أول تطابق. هذه الدوال <strong>لا تعدّل</strong> المصفوفة الأصلية — تعيد أخرى جديدة.</p>`,
+      code:`const users = [
+  { name: "سارة", age: 25 },
+  { name: "عمر", age: 31 },
+  { name: "لينا", age: 28 }
 ];
 
 // map — transform every item
 const names = users.map(u => u.name);
-// ["Sara", "Omar", "Lina"]
+// ["سارة", "عمر", "لينا"]
 
-// filter — keep only some items
+// filter — keep matching items
 const adults = users.filter(u => u.age >= 30);
-// [{ name: "Omar", age: 31 }]
+// [{ name: "عمر", age: 31 }]
 
-// find — get the first match
-const sara = users.find(u => u.name === "Sara");`,
-      codeLang: "javascript"
+// find — first match
+const sara = users.find(u => u.name === "سارة");`,
+      codeLang:"javascript"
     },
     {
-      title_en: "The DOM and events",
-      title_ar: "الـ DOM والأحداث",
-      content_en: "The <strong>DOM</strong> is the browser's representation of your HTML as a JavaScript object. You can select elements with <code>querySelector</code>, change their content or style, and react to clicks and input.",
-      content_ar: "<strong>DOM</strong> هو تمثيل المتصفح لـ HTML ككائن JavaScript. يمكنك اختيار العناصر بـ <code>querySelector</code>، وتغيير محتواها أو نمطها، والاستجابة للنقرات والمدخلات.",
-      code: `const btn = document.querySelector("#btn");
-const title = document.querySelector("h1");
+      title_en:"The DOM", title_ar:"الـ DOM",
+      content_en:`<p>The <strong>DOM (Document Object Model)</strong> is the browser's representation of your HTML as a JavaScript object. Every element becomes a node you can select, change or delete.</p>
+<p>Use <code>document.querySelector()</code> with any CSS selector — <code>#id</code>, <code>.class</code>, <code>tag</code>. It returns the first match. Use <code>querySelectorAll()</code> for all matches. Once selected, you can change <code>textContent</code>, <code>innerHTML</code>, <code>style</code>, or add classes.</p>`,
+      content_ar:`<p><strong>DOM</strong> هو تمثيل المتصفح لـ HTML ككائن JavaScript. كل عنصر يصبح عقدة يمكنك اختيارها أو تعديلها أو حذفها.</p>
+<p>استخدم <code>document.querySelector()</code> مع أي محدد CSS — <code>#id</code>، <code>.class</code>، <code>tag</code>. يعيد أول تطابق. استخدم <code>querySelectorAll()</code> لكل التطابقات. بعد الاختيار، يمكنك تغيير <code>textContent</code> أو <code>innerHTML</code> أو <code>style</code>، أو إضافة أصناف.</p>`,
+      code:`const title = document.querySelector("h1");
+const button = document.querySelector("#submit-btn");
+const cards = document.querySelectorAll(".card");
+
+// Change text
+title.textContent = "عنوان جديد";
+
+// Change style
+title.style.color = "#a855f7";
+
+// Add/remove a class
+title.classList.add("highlight");
+title.classList.remove("highlight");`,
+      codeLang:"javascript"
+    },
+    {
+      title_en:"Events", title_ar:"الأحداث",
+      content_en:`<p>Events are how users interact with your page: clicks, typing, scrolling, hovering, submitting forms. Use <code>addEventListener</code> to run code when an event happens.</p>
+<p>The event object (<code>e</code>) gives you details: <code>e.target</code> is the element that fired the event, <code>e.key</code> is which key was pressed, <code>e.preventDefault()</code> stops the default browser behaviour.</p>`,
+      content_ar:`<p>الأحداث هي طريقة تفاعل المستخدم مع صفحتك: نقرات، كتابة، تمرير، تحويم، إرسال نماذج. استخدم <code>addEventListener</code> لتشغيل الكود عند وقوع الحدث.</p>
+<p>كائن الحدث (<code>e</code>) يعطيك التفاصيل: <code>e.target</code> هو العنصر الذي أطلق الحدث، <code>e.key</code> هو المفتاح المضغوط، <code>e.preventDefault()</code> يمنع سلوك المتصفح الافتراضي.</p>`,
+      code:`const btn = document.querySelector("#btn");
 
 btn.addEventListener("click", () => {
-  title.textContent = "You clicked!";
-  title.style.color = "#a855f7";
+  console.log("تم النقر!");
 });
 
-// Reading input
-const input = document.querySelector("#name-input");
+// Reading input values
+const input = document.querySelector("#name");
 input.addEventListener("input", (e) => {
-  console.log("User typed:", e.target.value);
+  console.log("كتبت:", e.target.value);
+});
+
+// Preventing default form submit
+document.querySelector("form").addEventListener("submit", (e) => {
+  e.preventDefault();
+  // handle form data here
 });`,
-      codeLang: "javascript"
+      codeLang:"javascript"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "Use const by default, let when reassignment is needed, never var",
+    "map / filter / find do not mutate the original array",
+    "querySelector uses CSS selectors to find elements",
+    "addEventListener is the modern way to attach events"
+  ],
+  takeaways_ar:[
+    "استخدم const افتراضياً، let عند الحاجة لإعادة الإسناد، ولا var أبداً",
+    "map / filter / find لا تعدّل المصفوفة الأصلية",
+    "querySelector يستخدم محددات CSS للعثور على العناصر",
+    "addEventListener هو الطريقة الحديثة لربط الأحداث"
+  ],
+  mistakes_en:[
     "Using <code>var</code> instead of <code>const</code> / <code>let</code>",
-    "Trying to use <code>querySelector</code> before the DOM is ready",
+    "Running <code>querySelector</code> before the DOM is ready — wrap in DOMContentLoaded",
     "Mutating arrays with <code>push</code> when <code>map</code> would be cleaner",
     "Forgetting that <code>const</code> objects can still be mutated"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "استخدام <code>var</code> بدلاً من <code>const</code> / <code>let</code>",
-    "محاولة <code>querySelector</code> قبل جاهزية DOM",
+    "تشغيل <code>querySelector</code> قبل جاهزية DOM — غلّفه بـ DOMContentLoaded",
     "تعديل المصفوفات بـ <code>push</code> بينما <code>map</code> أنظف",
     "نسيان أن كائنات <code>const</code> يمكن تعديل محتواها"
   ],
-  exercises_en: [
+  exercises_en:[
     "Build a counter: a button increments a number shown on screen.",
-    "Given an array of numbers, use <code>filter</code> to keep only even numbers.",
-    "Create a button that toggles a dark mode class on the body."
+    "Given an array of numbers, use filter to keep only even numbers.",
+    "Create a button that toggles a dark-mode class on the body.",
+    "Build a form that logs the entered value on submit."
   ],
-  exercises_ar: [
+  exercises_ar:[
     "ابنِ عدّاداً: زر يزيد رقماً معروضاً على الشاشة.",
-    "بالنظر لمصفوفة أرقام، استخدم <code>filter</code> للاحتفاظ بالأرقام الزوجية فقط.",
-    "أنشئ زراً يبدّل صنف الوضع الداكن على body."
+    "بالنظر لمصفوفة أرقام، استخدم filter للاحتفاظ بالأرقام الزوجية فقط.",
+    "أنشئ زراً يبدّل صنف الوضع الداكن على body.",
+    "ابنِ نموذجاً يطبع القيمة المُدخلة عند الإرسال."
   ]
 },
 
 /* ---------- MODULE 6 ---------- */
 {
-  id: 6, level: 'mid',
-  title_en: "Advanced JavaScript",
-  title_ar: "JavaScript المتقدمة",
-  short_en: "Async programming, Fetch API, real data — the tools that separate beginners from pros.",
-  short_ar: "البرمجة غير المتزامنة و Fetch API والبيانات الحقيقية — أدوات تميّز المبتدئين عن المحترفين.",
-  tags_en: ["Promises","async/await","Fetch","Closures"],
-  tags_ar: ["Promises","async/await","Fetch","Closures"],
-  objectives_en: [
+  id:6, level:'mid',
+  title_en:"Advanced JavaScript", title_ar:"JavaScript المتقدمة",
+  short_en:"Async programming, Fetch API, real data — the tools that separate beginners from pros.",
+  short_ar:"البرمجة غير المتزامنة و Fetch API والبيانات الحقيقية — أدوات تميّز المبتدئين عن المحترفين.",
+  tags_en:["ES6+","Promises","async/await","Fetch","Errors"],
+  tags_ar:["ES6+","Promises","async/await","Fetch","الأخطاء"],
+  time_en:"12–15 hours", time_ar:"12–15 ساعة",
+  prereq_en:"Module 05", prereq_ar:"الوحدة 05",
+  objectives_en:[
+    "Use ES6+ features (destructuring, spread, modules)",
     "Understand and use Promises",
     "Write async functions with await",
     "Fetch real data from public APIs",
     "Handle errors gracefully"
   ],
-  objectives_ar: [
+  objectives_ar:[
+    "استخدام ميزات ES6+ (التفكيك، الفرد، الوحدات)",
     "فهم واستخدام Promises",
     "كتابة دوال async مع await",
     "جلب بيانات حقيقية من APIs عامة",
     "التعامل مع الأخطاء بأناقة"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "Why async?",
-      title_ar: "لماذا البرمجة غير المتزامنة؟",
-      content_en: "Some operations take time — fetching data from a server, reading a file. If JavaScript <em>waited</em> for them, the whole page would freeze. Async code lets the page stay responsive while waiting.",
-      content_ar: "بعض العمليات تحتاج وقتاً — جلب بيانات من خادم، قراءة ملف. إذا <em>انتظرت</em> JavaScript، ستتجمّد الصفحة كلها. الكود غير المتزامن يحافظ على استجابة الصفحة أثناء الانتظار.",
-      code: `// Blocking — bad
-const data = fetchDataSlowly();  // page freezes
+      title_en:"ES6+ features you'll use daily", title_ar:"ميزات ES6+ التي ستستخدمها يومياً",
+      content_en:`<p>Modern JavaScript adds powerful syntax that makes code shorter and clearer. Learn these three: <strong>destructuring</strong> (unpack values from objects and arrays), <strong>spread</strong> (<code>...</code> to copy or merge), and <strong>template literals</strong> (backtick strings with \${} interpolation).</p>
+<p>These aren't just conveniences — they let you write functional-style code that's easier to test and reason about.</p>`,
+      content_ar:`<p>JavaScript الحديثة تضيف نحويات قوية تجعل الكود أقصر وأوضح. تعلّم هذه الثلاثة: <strong>التفكيك (destructuring)</strong> (استخراج القيم من الكائنات والمصفوفات)، و<strong>الفرد (spread)</strong> (<code>...</code> للنسخ أو الدمج)، و<strong>القوالب النصية</strong> (سلاسل backtick مع \${}).</p>
+<p>هذه ليست مجرد رفاهية — تتيح لك كتابة كود بأسلوب وظيفي أسهل اختباراً واستدلالاً.</p>`,
+      code:`// Destructuring
+const { name, age } = user;
+const [first, second] = array;
 
-// Non-blocking — good
-fetchDataSlowly().then(data => {
-  console.log(data);  // runs when ready
-});`,
-      codeLang: "javascript"
+// Spread
+const newArr = [...oldArr, 4, 5];
+const newObj = { ...oldObj, role: "admin" };
+
+// Template literals
+const msg = \`مرحباً \${name}، عمرك \${age}\`;`,
+      codeLang:"javascript"
     },
     {
-      title_en: "async / await",
-      title_ar: "async / await",
-      content_en: "The modern way to write async code. Mark a function <code>async</code>, and use <code>await</code> before any Promise. The code reads like synchronous code — but stays non-blocking.",
-      content_ar: "الطريقة الحديثة لكتابة الكود غير المتزامن. ضع <code>async</code> أمام الدالة، واستخدم <code>await</code> قبل أي Promise. يُقرأ الكود كأنه متزامن — لكنه غير متزامن.",
-      code: `async function getUser(id) {
+      title_en:"Promises — async made manageable", title_ar:"Promises — البرمجة غير المتزامنة المنظمة",
+      content_en:`<p>Some operations take time: fetching from a server, reading a file, waiting for a timer. If JavaScript waited for them, the page would freeze. A <strong>Promise</strong> is a placeholder for a value that will exist in the future.</p>
+<p>A Promise has three states: <em>pending</em>, <em>fulfilled</em>, or <em>rejected</em>. You attach <code>.then()</code> for success and <code>.catch()</code> for errors. This is the foundation of all async code.</p>`,
+      content_ar:`<p>بعض العمليات تحتاج وقتاً: جلب من خادم، قراءة ملف، انتظار مؤقت. إذا انتظرت JavaScript، ستتجمّد الصفحة. <strong>Promise</strong> هو وعد بقيمة ستوجد في المستقبل.</p>
+<p>لـ Promise ثلاث حالات: <em>pending</em> (معلّق)، <em>fulfilled</em> (نجح)، <em>rejected</em> (فشل). تُرفق <code>.then()</code> للنجاح و<code>.catch()</code> للأخطاء. هذا أساس كل الكود غير المتزامن.</p>`,
+      code:`fetch("https://api.example.com/users")
+  .then(response => response.json())
+  .then(data => console.log(data))
+  .catch(error => console.error(error));`,
+      codeLang:"javascript"
+    },
+    {
+      title_en:"async / await", title_ar:"async / await",
+      content_en:`<p>The modern way to write async code. Mark a function <code>async</code>, and use <code>await</code> before any Promise. The code reads like synchronous code — but stays non-blocking.</p>
+<p>Wrap your awaits in <code>try...catch</code> to handle errors. This is the most important pattern you'll write every day as a frontend developer.</p>`,
+      content_ar:`<p>الطريقة الحديثة لكتابة الكود غير المتزامن. ضع <code>async</code> أمام الدالة، واستخدم <code>await</code> قبل أي Promise. يُقرأ الكود كأنه متزامن — لكنه غير متزامن.</p>
+<p>غلّف awaits في <code>try...catch</code> لمعالجة الأخطاء. هذا أهم نمط ستكتبه كل يوم كمطور واجهات.</p>`,
+      code:`async function getUser(id) {
   try {
     const res = await fetch(\`https://api.example.com/users/\${id}\`);
-    if (!res.ok) throw new Error("User not found");
+    if (!res.ok) throw new Error("المستخدم غير موجود");
     const data = await res.json();
     return data;
   } catch (err) {
-    console.error("Failed:", err.message);
+    console.error("فشل:", err.message);
     return null;
   }
 }`,
-      codeLang: "javascript"
+      codeLang:"javascript"
     },
     {
-      title_en: "Fetching real data",
-      title_ar: "جلب بيانات حقيقية",
-      content_en: "The <code>fetch</code> function requests data from a URL and returns a Promise. Use it with real public APIs — weather, images, country data — to practice. Always check <code>res.ok</code> and wrap in try/catch.",
-      content_ar: "دالة <code>fetch</code> تطلب بيانات من رابط وتعيد Promise. استخدمها مع APIs عامة حقيقية — طقس، صور، بيانات دول — للتدريب. افحص <code>res.ok</code> دائماً وغلّف بـ try/catch.",
-      code: `async function getWeather(city) {
+      title_en:"Fetching real data", title_ar:"جلب بيانات حقيقية",
+      content_en:`<p>The <code>fetch</code> function requests data from a URL and returns a Promise. Use it with real public APIs — weather, images, country data — to practice.</p>
+<p>Always check <code>res.ok</code> — a 404 or 500 still resolves the Promise (it only rejects on network failure). If <code>res.ok</code> is false, throw an error so your catch block runs.</p>`,
+      content_ar:`<p>دالة <code>fetch</code> تطلب بيانات من رابط وتعيد Promise. استخدمها مع APIs عامة حقيقية — طقس، صور، بيانات دول — للتدريب.</p>
+<p>افحص <code>res.ok</code> دائماً — استجابة 404 أو 500 تُنفّذ Promise (يُرفض فقط عند فشل الشبكة). إذا كان <code>res.ok</code> خطأ، ارمِ خطأً حتى يعمل catch.</p>`,
+      code:`async function getCountries() {
   try {
-    const res = await fetch(
-      \`https://api.weatherapi.com/v1/current.json?key=YOUR_KEY&q=\${city}\`
-    );
-    if (!res.ok) throw new Error("Weather not available");
+    const res = await fetch("https://restcountries.com/v3.1/all");
+    if (!res.ok) throw new Error("فشل التحميل");
     const data = await res.json();
-    return data.current.temp_c;
+    return data;
   } catch (err) {
     console.error(err);
   }
 }`,
-      codeLang: "javascript"
+      codeLang:"javascript"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "Destructuring, spread, and template literals are your daily tools",
+    "Promises model future values; async/await makes them readable",
+    "Always try/catch around await — networks fail",
+    "fetch only rejects on network errors — check res.ok yourself"
+  ],
+  takeaways_ar:[
+    "التفكيك والفرد والقوالب النصية أدواتك اليومية",
+    "Promises تمثّل قيماً مستقبلية؛ async/await يجعلها مقروءة",
+    "استخدم try/catch حول await دائماً — الشبكات تفشل",
+    "fetch يُرفض فقط عند أخطاء الشبكة — افحص res.ok بنفسك"
+  ],
+  mistakes_en:[
     "Forgetting <code>await</code> and getting a Promise instead of data",
     "Not handling errors — one network hiccup breaks the app",
-    "Forgetting to check <code>res.ok</code> — a 404 still returns a Promise",
+    "Forgetting to check <code>res.ok</code> — a 404 still resolves",
     "Writing async code without try/catch"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "نسيان <code>await</code> والحصول على Promise بدلاً من بيانات",
     "عدم معالجة الأخطاء — خطأ شبكة واحد يكسر التطبيق",
-    "نسيان فحص <code>res.ok</code> — استجابة 404 تعيد Promise",
+    "نسيان فحص <code>res.ok</code> — استجابة 404 تُنفّذ Promise",
     "كتابة كود async بدون try/catch"
   ],
-  exercises_en: [
-    "Fetch a random user from <code>https://randomuser.me/api/</code> and display their name.",
-    "Build a search box that fetches country data from <code>restcountries.com</code>.",
-    "Add loading and error states to your UI."
+  exercises_en:[
+    "Fetch a random user from randomuser.me and display their name.",
+    "Build a search box that fetches country data from restcountries.com.",
+    "Add loading and error states to your UI while fetching."
   ],
-  exercises_ar: [
-    "اجلب مستخدماً عشوائياً من <code>https://randomuser.me/api/</code> واعرض اسمه.",
-    "ابنِ مربع بحث يجلب بيانات دولة من <code>restcountries.com</code>.",
-    "أضف حالات تحميل وخطأ في واجهتك."
+  exercises_ar:[
+    "اجلب مستخدماً عشوائياً من randomuser.me واعرض اسمه.",
+    "ابنِ مربع بحث يجلب بيانات دولة من restcountries.com.",
+    "أضف حالات تحميل وخطأ في واجهتك أثناء الجلب."
   ]
 },
 
 /* ---------- MODULE 7 ---------- */
 {
-  id: 7, level: 'mid',
-  title_en: "Git & Developer Tools",
-  title_ar: "Git وأدوات المطور",
-  short_en: "Work like a professional team: version control, packages, and modern tooling.",
-  short_ar: "اعمل كفريق احترافي: إدارة النسخ والحزم والأدوات الحديثة.",
-  tags_en: ["Git","GitHub","npm","Vite","ESLint"],
-  tags_ar: ["Git","GitHub","npm","Vite","ESLint"],
-  objectives_en: [
+  id:7, level:'mid',
+  title_en:"Git & Developer Tools", title_ar:"Git وأدوات المطور",
+  short_en:"Work like a professional team: version control, packages, and modern tooling.",
+  short_ar:"اعمل كفريق احترافي: إدارة النسخ والحزم والأدوات الحديثة.",
+  tags_en:["Git","GitHub","npm","Vite","ESLint"],
+  tags_ar:["Git","GitHub","npm","Vite","ESLint"],
+  time_en:"6–8 hours", time_ar:"6–8 ساعات",
+  prereq_en:"Module 06", prereq_ar:"الوحدة 06",
+  objectives_en:[
     "Track changes with Git",
     "Push to GitHub and open a PR",
     "Use npm to install packages",
-    "Scaffold a project with Vite"
+    "Scaffold a project with Vite",
+    "Format code with ESLint and Prettier"
   ],
-  objectives_ar: [
+  objectives_ar:[
     "تتبّع التغييرات بـ Git",
     "الرفع إلى GitHub وفتح PR",
     "استخدام npm لتثبيت الحزم",
-    "إنشاء مشروع بـ Vite"
+    "إنشاء مشروع بـ Vite",
+    "تنسيق الكود بـ ESLint و Prettier"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "Git basics",
-      title_ar: "أساسيات Git",
-      content_en: "Git saves snapshots (commits) of your code. You <strong>init</strong> a repo, <strong>add</strong> files, <strong>commit</strong> with a message, then <strong>push</strong> to GitHub. This is the loop you'll run hundreds of times.",
-      content_ar: "Git يحفظ لقطات (commits) لكودك. تُنشئ مستودعاً بـ <strong>init</strong>، ثم <strong>add</strong> للملفات، ثم <strong>commit</strong> برسالة، ثم <strong>push</strong> إلى GitHub. هذه الحلقة ستكررها مئات المرات.",
-      code: `git init
+      title_en:"Git basics", title_ar:"أساسيات Git",
+      content_en:`<p>Git saves snapshots (<em>commits</em>) of your code. You <strong>init</strong> a repo, <strong>add</strong> files, <strong>commit</strong> with a message, then <strong>push</strong> to GitHub. This is the loop you'll run hundreds of times.</p>
+<p>Commit messages should describe <em>why</em> you changed something, not just what. "Fix navbar spacing" is good; "update" is useless when you look back in 3 months.</p>`,
+      content_ar:`<p>Git يحفظ لقطات (<em>commits</em>) لكودك. تُنشئ مستودعاً بـ <strong>init</strong>، ثم <strong>add</strong> للملفات، ثم <strong>commit</strong> برسالة، ثم <strong>push</strong> إلى GitHub. هذه الحلقة ستكررها مئات المرات.</p>
+<p>رسائل الـ commit يجب أن تصف <em>لماذا</em> غيّرت شيئاً، لا فقط ماذا. «Fix navbar spacing» جيدة؛ «update» عديمة الفائدة بعد 3 أشهر.</p>`,
+      code:`git init
 git add .
 git commit -m "Add hero section"
 git push origin main
@@ -1242,133 +1622,175 @@ git status            # what changed?
 git add file.html     # stage a specific file
 git commit -m "Fix navbar spacing"
 git push`,
-      codeLang: "bash"
+      codeLang:"bash"
     },
     {
-      title_en: "npm and packages",
-      title_ar: "npm والحزم",
-      content_en: "<code>npm</code> is the package manager for JavaScript. You install libraries (like React) with <code>npm install</code>. They live in <code>node_modules/</code> — never commit that folder.",
-      content_ar: "<code>npm</code> هو مدير حزم JavaScript. تثبّت المكتبات (مثل React) بـ <code>npm install</code>. تسكن في <code>node_modules/</code> — لا ترفع هذا المجلد أبداً.",
-      code: `npm init -y
+      title_en:"GitHub and pull requests", title_ar:"GitHub وطلبات الدمج",
+      content_en:`<p>GitHub is where teams collaborate. You create a repo, push your code, and others clone it. For changes, you open a <strong>Pull Request (PR)</strong> — a request to merge your branch into <code>main</code>.</p>
+<p>Professional teams never commit directly to <code>main</code>. They work on <em>feature branches</em> (e.g. <code>feature/navbar</code>), open PRs, and merge after review. Learning this workflow is essential.</p>`,
+      content_ar:`<p>GitHub هو مكان تعاون الفرق. تُنشئ مستودعاً، ترفع كودك، وآخرون ينسخونه. للتغييرات، تفتح <strong>Pull Request</strong> — طلب دمج فرعك في <code>main</code>.</p>
+<p>الفرق الاحترافية لا ترفع مباشرة إلى <code>main</code>. تعمل على <em>فروع ميزات</em> (مثل <code>feature/navbar</code>)، وتفتح PRs، وتدمج بعد المراجعة. تعلّم هذا العمل ضروري.</p>`,
+      code:`git checkout -b feature/navbar
+# ... make changes ...
+git add .
+git commit -m "Add responsive navbar"
+git push origin feature/navbar
+# → open Pull Request on GitHub`,
+      codeLang:"bash"
+    },
+    {
+      title_en:"npm and modern tooling", title_ar:"npm والأدوات الحديثة",
+      content_en:`<p><code>npm</code> is the package manager for JavaScript. You install libraries (like React) with <code>npm install</code>. They live in <code>node_modules/</code> — never commit that folder (use <code>.gitignore</code>).</p>
+<p><strong>Vite</strong> is the modern replacement for older build tools. It starts a dev server in milliseconds and produces production builds. This is what most professional teams use today.</p>`,
+      content_ar:`<p><code>npm</code> هو مدير حزم JavaScript. تثبّت المكتبات (مثل React) بـ <code>npm install</code>. تسكن في <code>node_modules/</code> — لا ترفع هذا المجلد أبداً (استخدم <code>.gitignore</code>).</p>
+<p><strong>Vite</strong> هو البديل الحديث لأدوات البناء القديمة. يشغّل خادم تطوير في أجزاء من الثانية وينتج بناء إنتاج. هذه الأداة تستخدمها معظم الفرق الاحترافية اليوم.</p>`,
+      code:`npm init -y
 npm install react react-dom
 npm install -D vite
-npm run dev`,
-      codeLang: "bash"
-    },
-    {
-      title_en: "Start a Vite project",
-      title_ar: "ابدأ مشروع Vite",
-      content_en: "Vite is the modern replacement for older tools. It starts a dev server in milliseconds and bundles production builds. This is what most professional teams use in 2024.",
-      content_ar: "Vite هو البديل الحديث للأدوات القديمة. يشغّل خادم تطوير في أجزاء من الثانية ويحزم بناء الإنتاج. هذه هي الأداة التي تستخدمها معظم الفرق الاحترافية في 2024.",
-      code: `npm create vite@latest my-app
+npm run dev
+
+# Scaffold a full app
+npm create vite@latest my-app
 cd my-app
 npm install
-npm run dev
-# Open http://localhost:5173`,
-      codeLang: "bash"
+npm run dev`,
+      codeLang:"bash"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "Git tracks snapshots; commits tell the story of your project",
+    "Never commit directly to main — use feature branches and PRs",
+    "node_modules never goes in Git — use .gitignore",
+    "Vite is the modern default for new JS projects"
+  ],
+  takeaways_ar:[
+    "Git يتتبّع اللقطات؛ الـ commits تحكي قصة مشروعك",
+    "لا ترفع مباشرة إلى main — استخدم فروع ميزات و PRs",
+    "node_modules لا يُرفع إلى Git أبداً — استخدم .gitignore",
+    "Vite هو الافتراضي الحديث لمشاريع JavaScript الجديدة"
+  ],
+  mistakes_en:[
     "Committing <code>node_modules/</code> — always use a <code>.gitignore</code>",
     "Writing vague commit messages like \"update\" or \"fix\"",
     "Working on <code>main</code> directly instead of feature branches",
     "Committing secrets (.env files, API keys)"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "رفع <code>node_modules/</code> — استخدم <code>.gitignore</code> دائماً",
-    "كتابة رسائل كوميت غامضة مثل \"update\" أو \"fix\"",
+    "كتابة رسائل commit غامضة مثل \"update\" أو \"fix\"",
     "العمل على <code>main</code> مباشرة بدلاً من فروع الميزات",
     "رفع الأسرار (ملفات .env، مفاتيح API)"
   ],
-  exercises_en: [
+  exercises_en:[
     "Create a GitHub repo and push your first HTML project.",
     "Install Vite and scaffold a fresh project.",
-    "Add a <code>.gitignore</code> that excludes node_modules."
+    "Add a .gitignore that excludes node_modules and .env."
   ],
-  exercises_ar: [
+  exercises_ar:[
     "أنشئ مستودع GitHub وارفع مشروع HTML الأول.",
     "ثبّت Vite وأنشئ مشروعاً جديداً.",
-    "أضف <code>.gitignore</code> يستثني node_modules."
+    "أضف .gitignore يستثني node_modules و .env."
   ]
 },
 
 /* ---------- MODULE 8 ---------- */
 {
-  id: 8, level: 'adv',
-  title_en: "React Fundamentals",
-  title_ar: "أساسيات React",
-  short_en: "Build modern apps with components, state, hooks and routing.",
-  short_ar: "ابنِ تطبيقات حديثة بمكونات وحالة وhooks وتوجيه.",
-  tags_en: ["Components","Props","useState","useEffect","Router"],
-  tags_ar: ["المكونات","Props","useState","useEffect","Router"],
-  objectives_en: [
+  id:8, level:'adv',
+  title_en:"React Fundamentals", title_ar:"أساسيات React",
+  short_en:"Build modern apps with components, state, hooks and routing.",
+  short_ar:"ابنِ تطبيقات حديثة بمكونات وحالة وhooks وتوجيه.",
+  tags_en:["Components","Props","useState","useEffect","Router"],
+  tags_ar:["المكونات","Props","useState","useEffect","Router"],
+  time_en:"20–25 hours", time_ar:"20–25 ساعة",
+  prereq_en:"Module 07", prereq_ar:"الوحدة 07",
+  objectives_en:[
     "Create reusable components",
     "Pass data with props",
     "Manage state with useState",
-    "Fetch data in useEffect"
+    "Fetch data in useEffect",
+    "Navigate with React Router"
   ],
-  objectives_ar: [
+  objectives_ar:[
     "إنشاء مكونات قابلة لإعادة الاستخدام",
     "تمرير البيانات عبر props",
     "إدارة الحالة بـ useState",
-    "جلب البيانات في useEffect"
+    "جلب البيانات في useEffect",
+    "التنقل بـ React Router"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "Components",
-      title_ar: "المكونات",
-      content_en: "A component is a JavaScript function that returns JSX (HTML-like syntax). Think of it as a reusable custom HTML tag. Build small components and compose them.",
-      content_ar: "المكوّن هو دالة JavaScript تعيد JSX (نحو شبيه بـ HTML). فكّر فيه كوسم HTML مخصص قابل لإعادة الاستخدام. ابنِ مكونات صغيرة وركّبها.",
-      code: `function Button({ label, onClick }) {
+      title_en:"Why React?", title_ar:"لماذا React؟",
+      content_en:`<p>React is a library for building user interfaces from small, reusable <strong>components</strong>. Instead of writing one giant HTML file and manipulating it with JavaScript, you break the UI into pieces that manage their own state.</p>
+<p>When state changes, React updates only the affected parts of the DOM — this is why React apps feel fast even when complex. React is used by Facebook, Netflix, Airbnb, and thousands of companies worldwide.</p>`,
+      content_ar:`<p>React مكتبة لبناء واجهات المستخدم من <strong>مكونات</strong> صغيرة قابلة لإعادة الاستخدام. بدلاً من كتابة ملف HTML عملاق والتعامل معه بـ JavaScript، تُقسّم الواجهة إلى أجزاء تدير حالتها بنفسها.</p>
+<p>عندما تتغير الحالة، يحدّث React الأجزاء المتأثرة فقط من DOM — لهذا تبدو تطبيقات React سريعة حتى مع التعقيد. React تستخدمها فيسبوك ونتفليكس وإير بي إن بي وآلاف الشركات حول العالم.</p>`,
+      code:`// A React component is just a function
+function Welcome() {
+  return <h1>مرحباً بالعالم!</h1>;
+}`,
+      codeLang:"jsx"
+    },
+    {
+      title_en:"Components and props", title_ar:"المكونات والـ props",
+      content_en:`<p>Props are how you pass data <em>into</em> a component. They're read-only from the child's perspective — the parent owns them. Think of components as custom HTML tags with configurable attributes.</p>
+<p>A good rule: keep components small (under ~100 lines). If a component does too much, split it. This makes code easier to test, reuse and reason about.</p>`,
+      content_ar:`<p>الـ props طريقة تمرير البيانات <em>إلى داخل</em> المكوّن. هي للقراءة فقط من منظور الابن — الأب يملكها. فكّر في المكونات كوسوم HTML مخصصة بخصائص قابلة للتكوين.</p>
+<p>قاعدة جيدة: أبقِ المكونات صغيرة (أقل من ~100 سطر). إذا كان المكوّن يفعل أكثر من اللازم، فكّكه. هذا يجعل الكود أسهل اختباراً وإعادة استخدام.</p>`,
+      code:`function Button({ label, onClick, variant = "primary" }) {
   return (
-    <button className="btn" onClick={onClick}>
+    <button className={\`btn btn-\${variant}\`} onClick={onClick}>
       {label}
     </button>
   );
 }
 
 // Use it anywhere — even multiple times
-<Button label="Start" onClick={handleStart} />
-<Button label="Cancel" onClick={handleCancel} />`,
-      codeLang: "jsx"
+<Button label="ابدأ" onClick={handleStart} />
+<Button label="إلغاء" variant="ghost" onClick={handleCancel} />`,
+      codeLang:"jsx"
     },
     {
-      title_en: "State with useState",
-      title_ar: "الحالة بـ useState",
-      content_en: "<strong>State</strong> is data that changes over time. When state updates, React re-renders the component. Use <code>useState</code> for anything the user can modify: input values, toggles, counts.",
-      content_ar: "<strong>الحالة</strong> هي بيانات تتغير مع الوقت. عندما تتحدث الحالة، يعيد React عرض المكون. استخدم <code>useState</code> لكل ما يمكن للمستخدم تعديله: قيم الإدخال، المفاتيح، العدادات.",
-      code: `import { useState } from "react";
+      title_en:"State with useState", title_ar:"الحالة بـ useState",
+      content_en:`<p><strong>State</strong> is data that changes over time. When state updates, React re-renders the component. Use <code>useState</code> for anything the user can modify: input values, toggles, counters, fetched data.</p>
+<p>Never mutate state directly. Always use the setter function returned by <code>useState</code>. For objects and arrays, spread them to create new references — React uses reference equality to detect changes.</p>`,
+      content_ar:`<p><strong>الحالة</strong> بيانات تتغير مع الوقت. عندما تتحدث، يعيد React عرض المكون. استخدم <code>useState</code> لكل ما يمكن للمستخدم تعديله: قيم الإدخال، المفاتيح، العدادات، البيانات المجلوبة.</p>
+<p>لا تعدّل الحالة مباشرة أبداً. استخدم دالة التحديث التي يعيدها <code>useState</code>. للكائنات والمصفوفات، افردها لإنشاء مراجع جديدة — React يستخدم مساواة المراجع لاكتشاف التغييرات.</p>`,
+      code:`import { useState } from "react";
 
 function Counter() {
   const [count, setCount] = useState(0);
 
   return (
     <div>
-      <p>Count: {count}</p>
-      <button onClick={() => setCount(count + 1)}>
-        Increment
-      </button>
+      <p>العدد: {count}</p>
+      <button onClick={() => setCount(count + 1)}>+1</button>
+      <button onClick={() => setCount(count - 1)}>-1</button>
     </div>
   );
 }`,
-      codeLang: "jsx"
+      codeLang:"jsx"
     },
     {
-      title_en: "Effects and data fetching",
-      title_ar: "التأثيرات وجلب البيانات",
-      content_en: "Use <code>useEffect</code> to run code after render — fetching data, subscribing to events, setting timers. Pass a dependency array to control when it re-runs.",
-      content_ar: "استخدم <code>useEffect</code> لتشغيل الكود بعد العرض — جلب البيانات، الاشتراك في الأحداث، إعداد المؤقتات. مرّر مصفوفة تبعيات للتحكم بمتى يُعاد التشغيل.",
-      code: `function Users() {
+      title_en:"Effects and data fetching", title_ar:"التأثيرات وجلب البيانات",
+      content_en:`<p>Use <code>useEffect</code> to run code after render — fetching data, subscribing to events, setting timers. Pass a dependency array to control when it re-runs.</p>
+<p>Empty array <code>[]</code> = run once on mount. <code>[id]</code> = run when id changes. No array = run after every render (rarely what you want). Forgetting the array causes infinite loops.</p>`,
+      content_ar:`<p>استخدم <code>useEffect</code> لتشغيل الكود بعد العرض — جلب البيانات، الاشتراك في الأحداث، إعداد المؤقتات. مرّر مصفوفة تبعيات للتحكم بمتى يُعاد التشغيل.</p>
+<p>مصفوفة فارغة <code>[]</code> = تشغيل مرة عند التركيب. <code>[id]</code> = تشغيل عند تغيّر id. بدون مصفوفة = تشغيل بعد كل عرض (نادراً ما تريد هذا). نسيان المصفوفة يسبب حلقات لا نهائية.</p>`,
+      code:`function Users() {
   const [users, setUsers] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       const res = await fetch("https://jsonplaceholder.typicode.com/users");
       const data = await res.json();
       setUsers(data);
+      setLoading(false);
     }
     load();
-  }, []);  // empty array = run once on mount
+  }, []);  // empty = run once
+
+  if (loading) return <p>جاري التحميل...</p>;
 
   return (
     <ul>
@@ -1376,197 +1798,259 @@ function Counter() {
     </ul>
   );
 }`,
-      codeLang: "jsx"
+      codeLang:"jsx"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "Components are functions returning JSX — small and reusable",
+    "Props flow down; never modify props inside a component",
+    "State updates trigger re-renders; never mutate state directly",
+    "useEffect with [] runs once; with [dep] runs when dep changes"
+  ],
+  takeaways_ar:[
+    "المكونات دوال تعيد JSX — صغيرة وقابلة لإعادة الاستخدام",
+    "الـ props تنتقل للأسفل؛ لا تعدّلها داخل المكوّن",
+    "تحديثات الحالة تسبب إعادة العرض؛ لا تعدّل الحالة مباشرة",
+    "useEffect مع [] يعمل مرة؛ مع [dep] يعمل عند تغيّر dep"
+  ],
+  mistakes_en:[
     "Forgetting the <code>key</code> prop in lists — causes subtle bugs",
     "Mutating state directly instead of using the setter",
     "Missing dependency arrays in <code>useEffect</code> — infinite loops",
     "Building huge components instead of small reusable ones"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "نسيان <code>key</code> في القوائم — يسبب أخطاء خفية",
     "تعديل الحالة مباشرة بدلاً من استخدام المُحدِّث",
     "نسيان مصفوفة التبعيات في <code>useEffect</code> — حلقات لا نهائية",
     "بناء مكونات ضخمة بدلاً من مكونات صغيرة قابلة لإعادة الاستخدام"
   ],
-  exercises_en: [
+  exercises_en:[
     "Build a counter app with increment, decrement and reset buttons.",
     "Fetch users from JSONPlaceholder and render them in a list.",
-    "Create a reusable <code>Card</code> component used three times."
+    "Create a reusable Card component used three times.",
+    "Add a loading state to your data fetch."
   ],
-  exercises_ar: [
+  exercises_ar:[
     "ابنِ تطبيق عدّاد بأزرار زيادة ونقصان وإعادة تعيين.",
     "اجلب مستخدمين من JSONPlaceholder واعرضهم في قائمة.",
-    "أنشئ مكوّن <code>Card</code> قابلاً لإعادة الاستخدام واستخدمه ثلاث مرات."
+    "أنشئ مكوّن Card قابلاً لإعادة الاستخدام واستخدمه ثلاث مرات.",
+    "أضف حالة تحميل لجلب البيانات."
   ]
 },
 
 /* ---------- MODULE 9 ---------- */
 {
-  id: 9, level: 'adv',
-  title_en: "Advanced Styling Systems",
-  title_ar: "أنظمة التنسيق المتقدمة",
-  short_en: "Tailwind, SASS, theming, dark mode and motion design.",
-  short_ar: "Tailwind و SASS والثيمات والوضع الداكن وتصميم الحركة.",
-  tags_en: ["Tailwind","SASS","Theming","Dark mode","Animations"],
-  tags_ar: ["Tailwind","SASS","الثيمات","الوضع الداكن","الحركات"],
-  objectives_en: [
+  id:9, level:'adv',
+  title_en:"Advanced Styling Systems", title_ar:"أنظمة التنسيق المتقدمة",
+  short_en:"Tailwind, SASS, theming, dark mode and motion design.",
+  short_ar:"Tailwind و SASS والثيمات والوضع الداكن وتصميم الحركة.",
+  tags_en:["Tailwind","SASS","Theming","Dark mode","Animations"],
+  tags_ar:["Tailwind","SASS","الثيمات","الوضع الداكن","الحركات"],
+  time_en:"10–12 hours", time_ar:"10–12 ساعة",
+  prereq_en:"Module 08", prereq_ar:"الوحدة 08",
+  objectives_en:[
     "Style apps quickly with Tailwind",
     "Structure CSS with SASS",
     "Implement dark mode with CSS variables",
     "Add tasteful animations"
   ],
-  objectives_ar: [
+  objectives_ar:[
     "تنسيق التطبيقات بسرعة بـ Tailwind",
     "هيكلة CSS بـ SASS",
     "تنفيذ الوضع الداكن بمتغيرات CSS",
     "إضافة حركات أنيقة"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "Utility-first with Tailwind",
-      title_ar: "المنفعة أولاً مع Tailwind",
-      content_en: "Tailwind provides tiny utility classes (<code>p-4</code>, <code>text-lg</code>, <code>flex</code>) that compose into any design. It eliminates naming headaches and keeps styles next to structure.",
-      content_ar: "يوفّر Tailwind أصناف منفعة صغيرة (<code>p-4</code>، <code>text-lg</code>، <code>flex</code>) تتكوّن لتشكّل أي تصميم. يقضي على صداع التسمية ويُبقي الأنماط قريبة من الهيكل.",
-      code: `<div class="p-6 rounded-xl bg-slate-900 text-white
+      title_en:"Utility-first with Tailwind", title_ar:"المنفعة أولاً مع Tailwind",
+      content_en:`<p>Tailwind provides tiny utility classes (<code>p-4</code>, <code>text-lg</code>, <code>flex</code>) that compose into any design. It eliminates naming headaches and keeps styles next to structure.</p>
+<p>Critics say "it looks like inline CSS" — but Tailwind enforces a consistent design scale and makes responsive variants trivial (<code>md:p-8</code>). In large projects, it speeds up development significantly.</p>`,
+      content_ar:`<p>يوفّر Tailwind أصناف منفعة صغيرة (<code>p-4</code>، <code>text-lg</code>، <code>flex</code>) تتكوّن لتشكّل أي تصميم. يقضي على صداع التسمية ويُبقي الأنماط قريبة من الهيكل.</p>
+<p>المنتقدون يقولون «يبدو كـ CSS مضمّن» — لكن Tailwind يفرض سلّم تصميم متسق ويجعل المتغيرات المتجاوبة سهلة (<code>md:p-8</code>). في المشاريع الكبيرة يسرّع التطوير بشكل كبير.</p>`,
+      code:`<div class="p-6 rounded-xl bg-slate-900 text-white
             flex items-center justify-between">
-  <h2 class="text-xl font-bold">Dashboard</h2>
+  <h2 class="text-xl font-bold md:text-2xl">لوحة التحكم</h2>
   <button class="px-4 py-2 rounded-lg bg-indigo-500
                  hover:bg-indigo-400 transition">
-    New
+    جديد
   </button>
 </div>`,
-      codeLang: "html"
+      codeLang:"html"
     },
     {
-      title_en: "Dark mode with CSS variables",
-      title_ar: "الوضع الداكن بمتغيرات CSS",
-      content_en: "Define colors as variables, then swap them on a <code>data-theme</code> attribute. One toggle switches the whole site — no duplicated styles.",
-      content_ar: "عرّف الألوان كمتغيرات، ثم بدّلها عبر خاصية <code>data-theme</code>. مفتاح واحد يبدّل الموقع كله — دون تكرار الأنماط.",
-      code: `:root {
+      title_en:"Dark mode with CSS variables", title_ar:"الوضع الداكن بمتغيرات CSS",
+      content_en:`<p>Define colors as variables, then swap them on a <code>data-theme</code> attribute. One toggle switches the whole site — no duplicated styles.</p>
+<p>Respect the user's system preference with <code>prefers-color-scheme</code>, but also let them override via a manual toggle. Store their choice in <code>localStorage</code>.</p>`,
+      content_ar:`<p>عرّف الألوان كمتغيرات، ثم بدّلها عبر خاصية <code>data-theme</code>. مفتاح واحد يبدّل الموقع كله — دون تكرار الأنماط.</p>
+<p>احترم تفضيل النظام بـ <code>prefers-color-scheme</code>، لكن اسمح للمستخدم بالتجاوز عبر مفتاح يدوي. خزّن اختياره في <code>localStorage</code>.</p>`,
+      code:`:root {
   --bg: #ffffff;
   --text: #0f172a;
-  --accent: #6366f1;
 }
 [data-theme="dark"] {
   --bg: #05060f;
   --text: #e8ecf4;
-  --accent: #a855f7;
 }
 body {
   background: var(--bg);
   color: var(--text);
+  transition: background .3s, color .3s;
 }
 
-// JS toggles: document.documentElement.dataset.theme = "dark"`,
-      codeLang: "css"
+// JS toggle:
+document.documentElement.dataset.theme = "dark";`,
+      codeLang:"css"
+    },
+    {
+      title_en:"Animations that feel right", title_ar:"حركات تبدو صحيحة",
+      content_en:`<p>Animate <code>transform</code> and <code>opacity</code> — these are GPU-accelerated and smooth. Avoid animating <code>width</code>, <code>height</code> or <code>top/left</code> — they cause layout recalculation and stutter.</p>
+<p>Keep animations short (200–400ms). Ease-out feels natural for entrances. Respect <code>prefers-reduced-motion</code> for accessibility.</p>`,
+      content_ar:`<p>حرّك <code>transform</code> و<code>opacity</code> — هما مسرّعان بـ GPU وسلسان. تجنّب تحريك <code>width</code> أو <code>height</code> أو <code>top/left</code> — تسبب إعادة حساب تخطيط وتقطيعاً.</p>
+<p>أبقِ الحركات قصيرة (200–400ms). Ease-out يبدو طبيعياً للدخول. احترم <code>prefers-reduced-motion</code> لسهولة الوصول.</p>`,
+      code:`.card {
+  transition: transform .3s ease, box-shadow .3s ease;
+}
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 40px -10px rgba(0,0,0,.3);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition: none !important; animation: none !important; }
+}`,
+      codeLang:"css"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "Tailwind speeds up styling with consistent utility classes",
+    "CSS variables + data-theme = instant dark mode",
+    "Animate transform and opacity for smooth 60fps motion",
+    "Always respect prefers-reduced-motion"
+  ],
+  takeaways_ar:[
+    "Tailwind يسرّع التنسيق بأصناف منفعة متسقة",
+    "متغيرات CSS + data-theme = وضع داكن فوري",
+    "حرّك transform و opacity لحركة سلسة 60fps",
+    "احترم prefers-reduced-motion دائماً"
+  ],
+  mistakes_en:[
     "Fighting Tailwind instead of learning its scale",
     "Overusing global CSS when utilities would do",
-    "Animating properties that cause layout thrash (use transform/opacity)",
+    "Animating properties that cause layout thrash",
     "Hardcoding dark-mode colors instead of using variables"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "محاربة Tailwind بدلاً من تعلّم سلّمه",
     "الإفراط في CSS العام بينما تكفي المنافع",
-    "تحريك خصائص تسبب إعادة تخطيط (استخدم transform/opacity)",
+    "تحريك خصائص تسبب إعادة تخطيط",
     "ترميز ألوان الوضع الداكن يدوياً بدلاً من المتغيرات"
   ],
-  exercises_en: [
+  exercises_en:[
     "Rebuild one of your CSS pages using Tailwind classes.",
-    "Add a dark-mode toggle that persists across reloads with localStorage.",
+    "Add a dark-mode toggle that persists via localStorage.",
     "Add a hover animation to a card using transform and transition."
   ],
-  exercises_ar: [
+  exercises_ar:[
     "أعد بناء إحدى صفحات CSS الخاصة بك باستخدام أصناف Tailwind.",
-    "أضف مفتاح وضع داكن يحتفظ بالحالة عبر إعادة التحميل بـ localStorage.",
+    "أضف مفتاح وضع داكن يحتفظ بالحالة عبر localStorage.",
     "أضف حركة hover لبطاقة باستخدام transform و transition."
   ]
 },
 
 /* ---------- MODULE 10 ---------- */
 {
-  id: 10, level: 'adv',
-  title_en: "Performance & Deployment",
-  title_ar: "الأداء والنشر",
-  short_en: "Ship fast, tested, deployed apps that score green on Lighthouse.",
-  short_ar: "أطلق تطبيقات سريعة ومختبرة ومنشورة بدرجات خضراء في Lighthouse.",
-  tags_en: ["Lighthouse","Core Web Vitals","Testing","CI/CD","Vercel"],
-  tags_ar: ["Lighthouse","Core Web Vitals","الاختبار","CI/CD","Vercel"],
-  objectives_en: [
+  id:10, level:'adv',
+  title_en:"Performance & Deployment", title_ar:"الأداء والنشر",
+  short_en:"Ship fast, tested, deployed apps that score green on Lighthouse.",
+  short_ar:"أطلق تطبيقات سريعة ومختبرة ومنشورة بدرجات خضراء في Lighthouse.",
+  tags_en:["Lighthouse","Core Web Vitals","Testing","CI/CD","Vercel"],
+  tags_ar:["Lighthouse","Core Web Vitals","الاختبار","CI/CD","Vercel"],
+  time_en:"8–10 hours", time_ar:"8–10 ساعات",
+  prereq_en:"Module 09", prereq_ar:"الوحدة 09",
+  objectives_en:[
     "Measure performance with Lighthouse",
     "Optimize for Core Web Vitals",
     "Write basic tests",
     "Deploy via GitHub to Vercel"
   ],
-  objectives_ar: [
+  objectives_ar:[
     "قياس الأداء بـ Lighthouse",
     "تحسين Core Web Vitals",
     "كتابة اختبارات أساسية",
     "النشر عبر GitHub إلى Vercel"
   ],
-  lessons: [
+  lessons:[
     {
-      title_en: "What Core Web Vitals measure",
-      title_ar: "ماذا تقيس Core Web Vitals",
-      content_en: "<strong>LCP</strong> (Largest Contentful Paint) measures how fast the main content loads. <strong>INP</strong> (Interaction to Next Paint) measures responsiveness. <strong>CLS</strong> (Cumulative Layout Shift) measures visual stability. Aim for green scores on all three.",
-      content_ar: "<strong>LCP</strong> يقيس سرعة تحميل المحتوى الرئيسي. <strong>INP</strong> يقيس الاستجابة. <strong>CLS</strong> يقيس استقرار التصميم. استهدف درجات خضراء في الثلاثة.",
-      code: `LCP  →  under 2.5s   (main content visible)
-INP  →  under 200ms  (responds to clicks fast)
-CLS  →  under 0.1    (no jumpy layout)`,
-      codeLang: "text"
+      title_en:"Core Web Vitals", title_ar:"Core Web Vitals",
+      content_en:`<p>Google uses three metrics to score user experience: <strong>LCP</strong> (how fast the main content appears), <strong>INP</strong> (how fast the page responds to clicks), and <strong>CLS</strong> (how much the layout jumps while loading).</p>
+<p>Aim for green: LCP under 2.5s, INP under 200ms, CLS under 0.1. These numbers affect your Google search ranking — a real SEO factor.</p>`,
+      content_ar:`<p>جوجل يستخدم ثلاثة مقاييس لتقييم تجربة المستخدم: <strong>LCP</strong> (سرعة ظهور المحتوى الرئيسي)، <strong>INP</strong> (سرعة استجابة الصفحة للنقرات)، و<strong>CLS</strong> (مقدار قفز التخطيط أثناء التحميل).</p>
+<p>استهدف الأخضر: LCP أقل من 2.5 ثانية، INP أقل من 200ms، CLS أقل من 0.1. هذه الأرقام تؤثر في ترتيبك في بحث جوجل — عامل SEO حقيقي.</p>`,
+      code:`LCP  →  under 2.5s   (main content visible)
+INP  →  under 200ms  (responds fast)
+CLS  →  under 0.1    (no layout jump)`,
+      codeLang:"text"
     },
     {
-      title_en: "Quick performance wins",
-      title_ar: "انتصارات أداء سريعة",
-      content_en: "Compress images, lazy-load below-the-fold content, defer non-critical scripts, and set explicit width/height on images to prevent layout shift. These four changes often double your score.",
-      content_ar: "اضغط الصور، حمّل الكسول ما هو خارج الشاشة، أجّل السكربتات غير الحرجة، وضع عرضاً وارتفاعاً صريحين للصور لمنع إزاحة التخطيط. هذه التغييرات الأربعة غالباً تضاعف درجتك.",
-      code: `<!-- Lazy load below the fold -->
+      title_en:"Quick performance wins", title_ar:"انتصارات أداء سريعة",
+      content_en:`<p>Four changes that consistently double Lighthouse scores: <strong>compress images</strong>, <strong>lazy-load</strong> below-the-fold content, <strong>defer</strong> non-critical scripts, and set <strong>explicit width/height</strong> on images to prevent layout shift.</p>`,
+      content_ar:`<p>أربعة تغييرات تضاعف درجات Lighthouse باستمرار: <strong>اضغط الصور</strong>، <strong>حمّل الكسول</strong> ما هو خارج الشاشة، <strong>أجّل</strong> السكربتات غير الحرجة، وضع <strong>عرضاً وارتفاعاً صريحين</strong> للصور لمنع إزاحة التخطيط.</p>`,
+      code:`<!-- Lazy load -->
 <img src="hero.jpg" alt="..." loading="lazy" width="800" height="500">
 
-<!-- Defer non-critical JS -->
+<!-- Defer JS -->
 <script src="analytics.js" defer></script>
 
-<!-- Preconnect to APIs -->
+<!-- Preconnect -->
 <link rel="preconnect" href="https://api.example.com">`,
-      codeLang: "html"
+      codeLang:"html"
     },
     {
-      title_en: "Deploy with Vercel",
-      title_ar: "النشر عبر Vercel",
-      content_en: "Push your project to GitHub. Connect the repo to Vercel. Every push automatically rebuilds and deploys — with a preview URL for every pull request. This is modern CI/CD in action.",
-      content_ar: "ارفع مشروعك إلى GitHub. اربط المستودع بـ Vercel. كل push يعيد البناء والنشر تلقائياً — مع رابط معاينة لكل pull request. هذا هو CI/CD الحديث عملياً.",
-      code: `1. Push code to GitHub
-2. Go to vercel.com → Import Project
+      title_en:"Deploy with Vercel", title_ar:"النشر عبر Vercel",
+      content_en:`<p>Push your project to GitHub. Connect the repo to Vercel. Every push automatically rebuilds and deploys — with a preview URL for every pull request. This is modern CI/CD in action.</p>
+<p>You get a free <code>*.vercel.app</code> URL, HTTPS automatically, and unlimited bandwidth on the free tier for personal projects.</p>`,
+      content_ar:`<p>ارفع مشروعك إلى GitHub. اربط المستودع بـ Vercel. كل push يعيد البناء والنشر تلقائياً — مع رابط معاينة لكل pull request. هذا هو CI/CD الحديث عملياً.</p>
+<p>تحصل على رابط <code>*.vercel.app</code> مجاني، HTTPS تلقائي، وعرض نطاق غير محدود في الطبقة المجانية للمشاريع الشخصية.</p>`,
+      code:`1. Push code to GitHub
+2. vercel.com → Import Project
 3. Select your repo → Deploy
 4. Every push to main is live in ~30s`,
-      codeLang: "text"
+      codeLang:"text"
     }
   ],
-  mistakes_en: [
+  takeaways_en:[
+    "LCP, INP and CLS are the metrics Google cares about",
+    "Image compression + lazy loading = biggest perf wins",
+    "Deploy via Vercel = push to main and it's live",
+    "Always test performance on mobile, not just desktop"
+  ],
+  takeaways_ar:[
+    "LCP و INP و CLS هي المقاييس التي تهتم بها جوجل",
+    "ضغط الصور + التحميل الكسول = أكبر انتصارات الأداء",
+    "النشر عبر Vercel = ارفع إلى main فيصبح حياً",
+    "اختبر الأداء على الموبايل دائماً، لا الحاسوب فقط"
+  ],
+  mistakes_en:[
     "Shipping uncompressed images — the #1 perf killer",
-    "Loading every script synchronously in the <head>",
+    "Loading every script synchronously in the &lt;head&gt;",
     "Skipping explicit image dimensions — causes layout shift",
     "Deploying without testing on a real phone"
   ],
-  mistakes_ar: [
+  mistakes_ar:[
     "نشر صور غير مضغوطة — القاتل الأول للأداء",
-    "تحميل كل السكربتات بشكل متزامن في <code>&lt;head&gt;</code>",
+    "تحميل كل السكربتات بشكل متزامن في &lt;head&gt;",
     "تجاهل الأبعاد الصريحة للصور — يسبب إزاحة التخطيط",
     "النشر دون اختبار على هاتف حقيقي"
   ],
-  exercises_en: [
+  exercises_en:[
     "Run Lighthouse on your portfolio and fix the top 3 issues.",
-    "Add <code>loading=\"lazy\"</code> and explicit dimensions to all images.",
+    "Add loading=\"lazy\" and explicit dimensions to all images.",
     "Deploy your final project to Vercel and share the link."
   ],
-  exercises_ar: [
+  exercises_ar:[
     "شغّل Lighthouse على معرض أعمالك وأصلح أعلى 3 مشاكل.",
-    "أضف <code>loading=\"lazy\"</code> وأبعاداً صريحة لكل الصور.",
+    "أضف loading=\"lazy\" وأبعاداً صريحة لكل الصور.",
     "انشر مشروعك النهائي على Vercel وشارك الرابط."
   ]
 }
@@ -1574,11 +2058,15 @@ CLS  →  under 0.1    (no jumpy layout)`,
 ];
 
 /* ============================================================
-   LANGUAGE SYSTEM
+   STATE
    ============================================================ */
 let currentLang = localStorage.getItem('fm-lang') || 'ar';
 let currentModule = null;
+let completed = new Set(JSON.parse(localStorage.getItem('fm-completed') || '[]'));
 
+/* ============================================================
+   LANGUAGE
+   ============================================================ */
 function setLang(lang){
   currentLang = lang;
   document.documentElement.lang = lang;
@@ -1591,12 +2079,43 @@ function setLang(lang){
   document.getElementById('langLabel').textContent = (lang === 'ar') ? 'EN' : 'AR';
   localStorage.setItem('fm-lang', lang);
   renderModules();
+  updateProgressUI();
   if (currentModule !== null) openLesson(currentModule);
 }
-
 document.getElementById('langBtn').addEventListener('click', () => {
   setLang(currentLang === 'ar' ? 'en' : 'ar');
 });
+
+/* ============================================================
+   PROGRESS
+   ============================================================ */
+function saveProgress(){
+  localStorage.setItem('fm-completed', JSON.stringify([...completed]));
+}
+function toggleComplete(id){
+  if (completed.has(id)) completed.delete(id);
+  else completed.add(id);
+  saveProgress();
+  updateProgressUI();
+  renderModules();
+  if (currentModule === id) openLesson(id);
+}
+function updateProgressUI(){
+  const total = curriculum.length;
+  const done = completed.size;
+  const pct = Math.round((done / total) * 100);
+  document.getElementById('progressCount').textContent = `${done} / ${total}`;
+  document.getElementById('ringPct').textContent = `${pct}%`;
+  const ring = document.querySelector('.ring-fill');
+  const circumference = 2 * Math.PI * 18;
+  ring.style.strokeDasharray = circumference;
+  ring.style.strokeDashoffset = circumference * (1 - done/total);
+  // map
+  document.querySelectorAll('.phase-mod').forEach(pm => {
+    const id = parseInt(pm.dataset.mod);
+    pm.classList.toggle('done', completed.has(id));
+  });
+}
 
 /* ============================================================
    RENDER MODULE CARDS
@@ -1605,21 +2124,22 @@ function renderModules(){
   const grid = document.getElementById('modulesGrid');
   const L = currentLang;
   grid.innerHTML = curriculum.map(m => {
-    const levelLabel = {
-      beginner: L==='ar'?'مبتدئ':'Beginner',
-      mid: L==='ar'?'متوسط':'Intermediate',
-      adv: L==='ar'?'متقدم':'Advanced'
-    }[m.level];
+    const levelLabel = {beginner:L==='ar'?'مبتدئ':'Beginner', mid:L==='ar'?'متوسط':'Intermediate', adv:L==='ar'?'متقدم':'Advanced'}[m.level];
     const levelClass = m.level === 'mid' ? 'mid' : m.level === 'adv' ? 'adv' : '';
     const tags = L==='ar' ? m.tags_ar : m.tags_en;
+    const isDone = completed.has(m.id);
     return `
-      <article class="module reveal" data-id="${m.id}">
+      <article class="module ${isDone?'done':''}" data-id="${m.id}">
         <div class="module-top">
           <div class="module-num">${String(m.id).padStart(2,'0')}</div>
           <span class="module-level ${levelClass}">${levelLabel}</span>
         </div>
         <h3>${L==='ar'?m.title_ar:m.title_en}</h3>
         <p>${L==='ar'?m.short_ar:m.short_en}</p>
+        <div class="module-meta">
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>${L==='ar'?m.time_ar:m.time_en}</span>
+          <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>${m.lessons.length} ${L==='ar'?'دروس':'lessons'}</span>
+        </div>
         <ul class="topics">${tags.map(t=>`<li>${t}</li>`).join('')}</ul>
         <div class="module-cta">
           <span>${L==='ar'?'افتح الدرس كاملاً':'Open full lesson'}</span>
@@ -1640,36 +2160,26 @@ function renderModules(){
 }
 
 /* ============================================================
-   CODE HIGHLIGHTER (simple, safe)
+   CODE HIGHLIGHT
    ============================================================ */
 function highlightCode(code, lang){
   const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
   let h = esc(code);
-
   if (lang === 'html' || lang === 'jsx'){
-    // comments
     h = h.replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="tok-comment">$1</span>');
-    // strings
-    h = h.replace(/(&quot;[^&]*?&quot;|&#39;[^&]*?&#39;|'[^'\n]*'|"[^"\n]*")/g, '<span class="tok-str">$1</span>');
-    // tags
+    h = h.replace(/(&quot;[^&]*?&quot;|&#39;[^&]*?&#39;|'[^'\n]*'|"[^"\n]*"|`[^`]*`)/g, '<span class="tok-str">$1</span>');
     h = h.replace(/(&lt;\/?)([a-zA-Z][\w-]*)/g, '$1<span class="tok-tag">$2</span>');
-    // attributes
     h = h.replace(/(\s)([a-zA-Z-]+)(=)/g, '$1<span class="tok-attr">$2</span>$3');
     return h;
   }
-
   if (lang === 'css'){
     h = h.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="tok-comment">$1</span>');
     h = h.replace(/(&quot;[^&]*?&quot;|'[^'\n]*')/g, '<span class="tok-str">$1</span>');
-    // selectors before {
     h = h.replace(/(^|\n)([^\n{}]+?)(\s*\{)/g, (m,p1,p2,p3)=>p1+'<span class="tok-sel">'+p2+'</span>'+p3);
-    // properties
     h = h.replace(/([\w-]+)(\s*:)/g, '<span class="tok-prop">$1</span>$2');
-    // values
     h = h.replace(/(:\s*)([^;\n]+)/g, (m,p1,p2)=>p1+'<span class="tok-val">'+p2+'</span>');
     return h;
   }
-
   if (lang === 'javascript'){
     h = h.replace(/(\/\/[^\n]*)/g, '<span class="tok-comment">$1</span>');
     h = h.replace(/(&quot;[^&]*?&quot;|'[^'\n]*'|`[^`]*`)/g, '<span class="tok-str">$1</span>');
@@ -1679,13 +2189,11 @@ function highlightCode(code, lang){
     h = h.replace(/(\b[a-zA-Z_$][\w$]*)(\s*\()/g, '<span class="tok-fn">$1</span>$2');
     return h;
   }
-
   if (lang === 'bash'){
     h = h.replace(/(#[^\n]*)/g, '<span class="tok-comment">$1</span>');
-    h = h.replace(/\b(git|npm|cd|mkdir|ls|echo|node|yarn|pnpm)\b/g, '<span class="tok-kw">$1</span>');
+    h = h.replace(/\b(git|npm|cd|mkdir|ls|echo|node|yarn|pnpm|vercel)\b/g, '<span class="tok-kw">$1</span>');
     return h;
   }
-
   return h;
 }
 
@@ -1700,21 +2208,13 @@ function openLesson(id){
   const overlay = document.getElementById('lessonOverlay');
   const modal = document.getElementById('lessonModal');
 
-  const levelLabel = {
-    beginner: L==='ar'?'مبتدئ':'Beginner',
-    mid: L==='ar'?'متوسط':'Intermediate',
-    adv: L==='ar'?'متقدم':'Advanced'
-  }[m.level];
-
-  const levelClass = m.level === 'mid' ? 'mid' : m.level === 'adv' ? 'adv' : '';
-
-  const objectives = (L==='ar'?m.objectives_ar:m.objectives_en)
-    .map(o => `<li>${o}</li>`).join('');
+  const levelLabel = {beginner:L==='ar'?'مبتدئ':'Beginner', mid:L==='ar'?'متوسط':'Intermediate', adv:L==='ar'?'متقدم':'Advanced'}[m.level];
+  const objectives = (L==='ar'?m.objectives_ar:m.objectives_en).map(o => `<li>${o}</li>`).join('');
 
   const lessonsHTML = m.lessons.map((lesson, idx) => `
     <div class="lesson-section">
       <h3><span class="lnum">${idx+1}</span>${L==='ar'?lesson.title_ar:lesson.title_en}</h3>
-      <p>${L==='ar'?lesson.content_ar:lesson.content_en}</p>
+      <div class="lesson-body-text">${L==='ar'?lesson.content_ar:lesson.content_en}</div>
       ${lesson.code ? `
         <div class="code-block">
           <div class="code-head">
@@ -1729,17 +2229,17 @@ function openLesson(id){
     </div>
   `).join('');
 
-  const mistakes = (L==='ar'?m.mistakes_ar:m.mistakes_en).map(x => `<li>${x}</li>`).join('');
-  const exercises = (L==='ar'?m.exercises_ar:m.exercises_en).map(x => `<li>${x}</li>`).join('');
-
+  const takeaways = (L==='ar'?m.takeaways_ar:m.takeaways_en).map(x=>`<li>${x}</li>`).join('');
+  const mistakes = (L==='ar'?m.mistakes_ar:m.mistakes_en).map(x=>`<li>${x}</li>`).join('');
+  const exercises = (L==='ar'?m.exercises_ar:m.exercises_en).map(x=>`<li>${x}</li>`).join('');
   const total = curriculum.length;
-  const hasPrev = id > 1;
-  const hasNext = id < total;
+  const hasPrev = id > 1, hasNext = id < total;
+  const isDone = completed.has(id);
 
   modal.innerHTML = `
     <div class="lesson-head">
       <div class="lesson-head-left">
-        <div class="lesson-kicker">${L==='ar'?'الوحدة':'Module'} ${String(m.id).padStart(2,'0')} · ${levelLabel}</div>
+        <div class="lesson-kicker">${L==='ar'?'الوحدة':'Module'} ${String(m.id).padStart(2,'0')} · ${levelLabel} · ${L==='ar'?m.time_ar:m.time_en}</div>
         <h2>${L==='ar'?m.title_ar:m.title_en}</h2>
         <p>${L==='ar'?m.short_ar:m.short_en}</p>
       </div>
@@ -1748,29 +2248,35 @@ function openLesson(id){
       </button>
     </div>
     <div class="lesson-body">
+
+      <button class="complete-btn ${isDone?'done':''}" id="completeBtn">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        ${isDone?(L==='ar'?'مكتملة — إزالة العلامة':'Completed — mark incomplete'):(L==='ar'?'ضع علامة مكتمل':'Mark as complete')}
+      </button>
+
       <div class="objectives">
-        <h4>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
-          ${L==='ar'?'ماذا ستتعلم في هذه الوحدة':'What you will learn'}
-        </h4>
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          ${L==='ar'?'ماذا ستتعلم في هذه الوحدة':'What you will learn'}</h4>
         <ul>${objectives}</ul>
       </div>
 
       ${lessonsHTML}
 
+      <div class="key-takeaways">
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+          ${L==='ar'?'الخلاصات الرئيسية':'Key takeaways'}</h4>
+        <ul>${takeaways}</ul>
+      </div>
+
       <div class="mistakes">
-        <h4>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
-          ${L==='ar'?'أخطاء شائعة يجب تجنّبها':'Common mistakes to avoid'}
-        </h4>
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          ${L==='ar'?'أخطاء شائعة يجب تجنّبها':'Common mistakes to avoid'}</h4>
         <ul>${mistakes}</ul>
       </div>
 
       <div class="exercises">
-        <h4>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
-          ${L==='ar'?'تمارين عملية':'Practice exercises'}
-        </h4>
+        <h4><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          ${L==='ar'?'تمارين عملية':'Practice exercises'}</h4>
         <ol>${exercises}</ol>
       </div>
 
@@ -1788,12 +2294,11 @@ function openLesson(id){
     </div>
   `;
 
-  // bind close
   document.getElementById('lessonClose').addEventListener('click', closeLesson);
+  document.getElementById('completeBtn').addEventListener('click', () => toggleComplete(id));
   if (hasPrev) document.getElementById('prevLesson').addEventListener('click', () => openLesson(id - 1));
   if (hasNext) document.getElementById('nextLesson').addEventListener('click', () => openLesson(id + 1));
 
-  // bind copy buttons
   modal.querySelectorAll('.code-copy').forEach(btn => {
     btn.addEventListener('click', () => {
       const idx = parseInt(btn.dataset.copy);
@@ -1819,12 +2324,10 @@ function closeLesson(){
 document.getElementById('lessonOverlay').addEventListener('click', e => {
   if (e.target.id === 'lessonOverlay') closeLesson();
 });
-
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && currentModule !== null) closeLesson();
 });
 
-/* Toast */
 let toastTimer;
 function showToast(msg){
   const t = document.getElementById('toast');
@@ -1839,7 +2342,18 @@ function showToast(msg){
    ============================================================ */
 setLang(currentLang);
 
-/* Scroll progress + nav */
+// Roadmap module buttons
+document.querySelectorAll('.phase-mod').forEach(pm => {
+  pm.addEventListener('click', () => openLesson(parseInt(pm.dataset.mod)));
+});
+
+// Floating progress widget
+document.getElementById('progressWidget').addEventListener('click', () => {
+  document.getElementById('roadmap').scrollIntoView({ behavior:'smooth', block:'start' });
+});
+setTimeout(() => document.getElementById('progressWidget').classList.add('visible'), 600);
+
+// Scroll progress + nav
 const nav = document.getElementById('nav');
 const progress = document.getElementById('scrollProgress');
 function onScroll(){
@@ -1851,7 +2365,7 @@ function onScroll(){
 window.addEventListener('scroll', onScroll, { passive:true });
 onScroll();
 
-/* Reveal observer */
+// Reveal
 const revealIO = new IntersectionObserver((entries) => {
   entries.forEach(entry => {
     if (entry.isIntersecting){
@@ -1864,11 +2378,10 @@ const revealIO = new IntersectionObserver((entries) => {
     }
   });
 }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
 function observeReveal(el){ revealIO.observe(el); }
 document.querySelectorAll('.reveal').forEach(observeReveal);
 
-/* Smooth anchors */
+// Smooth anchors
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
     const id = link.getAttribute('href');
@@ -1882,7 +2395,7 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 });
 
 /* ============================================================
-   THREE.JS BACKGROUND
+   THREE.JS
    ============================================================ */
 (function init3D(){
   if (typeof THREE === 'undefined') return;
@@ -1940,7 +2453,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     mouse.x = (e.clientX/window.innerWidth)*2-1;
     mouse.y = (e.clientY/window.innerHeight)*2-1;
   });
-
   window.addEventListener('resize', () => {
     camera.aspect = window.innerWidth/window.innerHeight;
     camera.updateProjectionMatrix();
@@ -1950,7 +2462,6 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
 
   const clock = new THREE.Clock();
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
   function animate(){
     requestAnimationFrame(animate);
     const t = clock.getElapsedTime();
