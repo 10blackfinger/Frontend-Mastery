@@ -8,433 +8,270 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
-/* ============ RESET & TOKENS ============ */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 :root{
-  --bg:#05060f;
-  --bg-2:#0a0b1e;
-  --surface:rgba(255,255,255,.035);
-  --surface-2:rgba(255,255,255,.06);
-  --border:rgba(255,255,255,.08);
-  --border-hi:rgba(139,92,246,.35);
-  --primary:#6366f1;
-  --secondary:#06b6d4;
-  --accent:#a855f7;
-  --text:#e8ecf4;
-  --muted:#94a3b8;
-  --dim:#64748b;
-  --radius:18px;
-  --radius-sm:12px;
+  --bg:#05060f;--bg-2:#0a0b1e;
+  --surface:rgba(255,255,255,.035);--surface-2:rgba(255,255,255,.06);
+  --border:rgba(255,255,255,.08);--border-hi:rgba(139,92,246,.35);
+  --primary:#6366f1;--secondary:#06b6d4;--accent:#a855f7;
+  --text:#e8ecf4;--muted:#94a3b8;--dim:#64748b;
+  --green:#10b981;--red:#f43f5e;--yellow:#f59e0b;
+  --radius:18px;--radius-sm:12px;
   --font-ar:'Cairo',system-ui,sans-serif;
   --font-en:'Poppins',system-ui,sans-serif;
   --font-mono:'JetBrains Mono',monospace;
   --ease:cubic-bezier(.22,1,.36,1);
 }
 html{scroll-behavior:smooth}
-body{
-  background:var(--bg);
-  color:var(--text);
-  font-family:var(--font-ar);
-  line-height:1.7;
-  overflow-x:hidden;
-  -webkit-font-smoothing:antialiased;
-  position:relative;
-}
-body.lang-en{font-family:var(--font-en)}
-body.lang-en{direction:ltr}
+body{background:var(--bg);color:var(--text);font-family:var(--font-ar);line-height:1.7;overflow-x:hidden;-webkit-font-smoothing:antialiased;position:relative}
+body.lang-en{font-family:var(--font-en);direction:ltr}
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 ul{list-style:none}
 ::selection{background:rgba(168,85,247,.35);color:#fff}
 
-/* ============ BACKGROUND LAYERS ============ */
+/* BG */
 #bg3d{position:fixed;inset:0;z-index:0;pointer-events:none}
 #bg3d canvas{display:block}
-.bg-glow{
-  position:fixed;inset:0;z-index:0;pointer-events:none;
+.bg-glow{position:fixed;inset:0;z-index:0;pointer-events:none;
   background:
     radial-gradient(ellipse 60% 50% at 50% -10%, rgba(99,102,241,.18), transparent 60%),
     radial-gradient(ellipse 50% 40% at 90% 60%, rgba(168,85,247,.12), transparent 60%),
-    radial-gradient(ellipse 50% 40% at 5% 90%, rgba(6,182,212,.10), transparent 60%);
-}
-.bg-grid{
-  position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
-  background-image:
-    linear-gradient(rgba(255,255,255,.025) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255,255,255,.025) 1px, transparent 1px);
+    radial-gradient(ellipse 50% 40% at 5% 90%, rgba(6,182,212,.10), transparent 60%)}
+.bg-grid{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35;
+  background-image:linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
   background-size:64px 64px;
-  mask-image:radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 80%);
-  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%, #000 20%, transparent 80%);
-}
+  mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 20%,transparent 80%);
+  -webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 20%,transparent 80%)}
 
-/* ============ SCROLL PROGRESS ============ */
-.scroll-progress{
-  position:fixed;top:0;inset-inline-start:0;height:3px;width:0%;
-  background:linear-gradient(90deg,var(--primary),var(--accent),var(--secondary));
-  z-index:1000;box-shadow:0 0 14px rgba(168,85,247,.6);
-  transition:width .1s linear;
-}
+.scroll-progress{position:fixed;top:0;inset-inline-start:0;height:3px;width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--accent),var(--secondary));z-index:1000;
+  box-shadow:0 0 14px rgba(168,85,247,.6);transition:width .1s linear}
 
-/* ============ NAVBAR ============ */
-.nav{
-  position:fixed;top:0;inset-inline:0;z-index:900;
-  padding:18px 0;
-  transition:all .4s var(--ease);
-}
-.nav.scrolled{
-  padding:10px 0;
-  background:rgba(5,6,15,.72);
-  backdrop-filter:blur(20px) saturate(140%);
-  -webkit-backdrop-filter:blur(20px) saturate(140%);
-  border-bottom:1px solid var(--border);
-}
-.nav-inner{
-  max-width:1240px;margin:0 auto;padding:0 24px;
-  display:flex;align-items:center;justify-content:space-between;gap:20px;
-}
+/* NAV */
+.nav{position:fixed;top:0;inset-inline:0;z-index:900;padding:18px 0;transition:all .4s var(--ease)}
+.nav.scrolled{padding:10px 0;background:rgba(5,6,15,.72);backdrop-filter:blur(20px) saturate(140%);
+  -webkit-backdrop-filter:blur(20px) saturate(140%);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1240px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;gap:20px}
 .logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:1.15rem;letter-spacing:-.02em}
-.logo-mark{
-  width:38px;height:38px;border-radius:11px;position:relative;
-  background:linear-gradient(135deg,var(--primary),var(--accent));
-  display:grid;place-items:center;
-  box-shadow:0 6px 24px rgba(99,102,241,.45);
-  flex-shrink:0;
-}
-.logo-mark::after{
-  content:"";position:absolute;inset:2px;border-radius:9px;
-  background:var(--bg);opacity:.9;
-}
-.logo-mark span{
-  position:relative;z-index:1;font-family:var(--font-mono);font-weight:600;
-  font-size:.95rem;background:linear-gradient(135deg,#a5b4fc,#c084fc);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
+.logo-mark{width:38px;height:38px;border-radius:11px;position:relative;background:linear-gradient(135deg,var(--primary),var(--accent));display:grid;place-items:center;box-shadow:0 6px 24px rgba(99,102,241,.45);flex-shrink:0}
+.logo-mark::after{content:"";position:absolute;inset:2px;border-radius:9px;background:var(--bg);opacity:.9}
+.logo-mark span{position:relative;z-index:1;font-family:var(--font-mono);font-weight:600;font-size:.95rem;background:linear-gradient(135deg,#a5b4fc,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
 .logo-text .t1{display:block;line-height:1.1}
 .logo-text .t2{display:block;font-size:.62rem;color:var(--muted);font-weight:500;letter-spacing:.12em;text-transform:uppercase}
-
 .nav-links{display:flex;align-items:center;gap:6px}
-.nav-links a{
-  padding:8px 15px;border-radius:10px;font-size:.9rem;font-weight:500;
-  color:var(--muted);transition:all .25s var(--ease);position:relative;
-}
+.nav-links a{padding:8px 15px;border-radius:10px;font-size:.9rem;font-weight:500;color:var(--muted);transition:all .25s var(--ease)}
 .nav-links a:hover{color:var(--text);background:var(--surface-2)}
-
-.lang-btn{
-  display:flex;align-items:center;gap:8px;
-  padding:9px 16px;border-radius:11px;
-  background:var(--surface-2);border:1px solid var(--border);
-  font-size:.82rem;font-weight:600;letter-spacing:.04em;
-  transition:all .3s var(--ease);color:var(--text);
-}
-.lang-btn:hover{
-  border-color:var(--border-hi);
-  background:rgba(139,92,246,.12);
-  box-shadow:0 0 0 3px rgba(139,92,246,.08);
-}
+.lang-btn{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border);font-size:.82rem;font-weight:600;letter-spacing:.04em;transition:all .3s var(--ease);color:var(--text)}
+.lang-btn:hover{border-color:var(--border-hi);background:rgba(139,92,246,.12);box-shadow:0 0 0 3px rgba(139,92,246,.08)}
 .lang-btn svg{width:15px;height:15px;opacity:.85}
 
-/* ============ BUTTONS ============ */
-.btn{
-  display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  padding:14px 28px;border-radius:13px;font-weight:700;font-size:.95rem;
-  transition:all .35s var(--ease);position:relative;overflow:hidden;
-  white-space:nowrap;
-}
-.btn-primary{
-  background:linear-gradient(135deg,var(--primary),var(--accent));
-  color:#fff;box-shadow:0 10px 30px -8px rgba(99,102,241,.55);
-}
-.btn-primary:hover{
-  transform:translateY(-2px);
-  box-shadow:0 18px 42px -8px rgba(139,92,246,.7);
-}
-.btn-primary::before{
-  content:"";position:absolute;inset:0;
-  background:linear-gradient(135deg,var(--accent),var(--secondary));
-  opacity:0;transition:opacity .35s var(--ease);
-}
-.btn-primary:hover::before{opacity:1}
-.btn-primary span{position:relative;z-index:1}
-.btn-ghost{
-  background:var(--surface);border:1px solid var(--border);color:var(--text);
-  backdrop-filter:blur(10px);
-}
-.btn-ghost:hover{
-  border-color:var(--border-hi);background:rgba(139,92,246,.08);
-  transform:translateY(-2px);
-}
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;padding:14px 28px;border-radius:13px;font-weight:700;font-size:.95rem;transition:all .35s var(--ease);position:relative;overflow:hidden;white-space:nowrap}
+.btn-primary{background:linear-gradient(135deg,var(--primary),var(--accent));color:#fff;box-shadow:0 10px 30px -8px rgba(99,102,241,.55)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 18px 42px -8px rgba(139,92,246,.7)}
+.btn-ghost{background:var(--surface);border:1px solid var(--border);color:var(--text);backdrop-filter:blur(10px)}
+.btn-ghost:hover{border-color:var(--border-hi);background:rgba(139,92,246,.08);transform:translateY(-2px)}
 .btn svg{width:17px;height:17px;transition:transform .3s var(--ease)}
-.btn:hover svg{transform:translateX(-4px)}
-body.lang-en .btn:hover svg{transform:translateX(4px)}
 [dir="rtl"] .btn .arrow{transform:rotate(180deg)}
 
-/* ============ LAYOUT ============ */
+/* LAYOUT */
 main{position:relative;z-index:1}
 .container{max-width:1240px;margin:0 auto;padding:0 24px}
 section{padding:110px 0;position:relative}
 
-/* ============ HERO ============ */
-.hero{
-  min-height:100vh;display:flex;align-items:center;
-  padding:140px 0 90px;position:relative;
-}
-.hero-inner{max-width:900px;margin:0 auto;text-align:center;padding:0 24px}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:9px;
-  padding:8px 18px;border-radius:100px;
-  background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25);
-  font-size:.82rem;font-weight:600;color:#c4b5fd;
-  margin-bottom:32px;
-  animation:fadeUp .9s var(--ease) both;
-}
-.hero-badge .dot{
-  width:7px;height:7px;border-radius:50%;background:var(--secondary);
-  box-shadow:0 0 10px var(--secondary);
-  animation:pulse 2s infinite;
-}
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding:140px 0 90px;position:relative}
+.hero-inner{max-width:920px;margin:0 auto;text-align:center;padding:0 24px}
+.hero-badge{display:inline-flex;align-items:center;gap:9px;padding:8px 18px;border-radius:100px;background:rgba(139,92,246,.08);border:1px solid rgba(139,92,246,.25);font-size:.82rem;font-weight:600;color:#c4b5fd;margin-bottom:32px;animation:fadeUp .9s var(--ease) both}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:var(--secondary);box-shadow:0 0 10px var(--secondary);animation:pulse 2s infinite}
 @keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.5;transform:scale(.85)}}
-
-.hero h1{
-  font-size:clamp(2.4rem,6.2vw,4.6rem);
-  font-weight:900;line-height:1.1;letter-spacing:-.03em;
-  margin-bottom:26px;
-  animation:fadeUp .9s .1s var(--ease) both;
-}
-.hero h1 .grad{
-  background:linear-gradient(120deg,#818cf8 0%,#c084fc 45%,#22d3ee 100%);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  display:inline-block;
-}
-.hero p.lead{
-  font-size:clamp(1.02rem,1.8vw,1.22rem);
-  color:var(--muted);max-width:640px;margin:0 auto 42px;
-  animation:fadeUp .9s .2s var(--ease) both;
-}
-.hero-actions{
-  display:flex;gap:14px;justify-content:center;flex-wrap:wrap;
-  animation:fadeUp .9s .3s var(--ease) both;
-}
-
-/* Stats */
-.stats{
-  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
-  max-width:820px;margin:78px auto 0;
-  background:var(--border);border:1px solid var(--border);
-  border-radius:var(--radius);overflow:hidden;
-  animation:fadeUp .9s .45s var(--ease) both;
-}
-.stat{
-  background:var(--bg);padding:26px 14px;text-align:center;
-  transition:background .3s;
-}
+.hero h1{font-size:clamp(2.4rem,6.2vw,4.6rem);font-weight:900;line-height:1.1;letter-spacing:-.03em;margin-bottom:26px;animation:fadeUp .9s .1s var(--ease) both}
+.hero h1 .grad{background:linear-gradient(120deg,#818cf8 0%,#c084fc 45%,#22d3ee 100%);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block}
+.hero p.lead{font-size:clamp(1.02rem,1.8vw,1.22rem);color:var(--muted);max-width:680px;margin:0 auto 42px;animation:fadeUp .9s .2s var(--ease) both}
+.hero-actions{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:fadeUp .9s .3s var(--ease) both}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;max-width:820px;margin:78px auto 0;background:var(--border);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;animation:fadeUp .9s .45s var(--ease) both}
+.stat{background:var(--bg);padding:26px 14px;text-align:center;transition:background .3s}
 .stat:hover{background:rgba(139,92,246,.05)}
-.stat .num{
-  font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;line-height:1;
-  background:linear-gradient(135deg,#a5b4fc,#c084fc);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-  margin-bottom:7px;
-}
+.stat .num{font-size:clamp(1.5rem,3vw,2.1rem);font-weight:800;line-height:1;background:linear-gradient(135deg,#a5b4fc,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent;margin-bottom:7px}
 .stat .lbl{font-size:.75rem;color:var(--dim);font-weight:600;letter-spacing:.04em}
-
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:none}}
-
-/* Scroll hint */
-.scroll-hint{
-  position:absolute;bottom:34px;left:50%;transform:translateX(-50%);
-  display:flex;flex-direction:column;align-items:center;gap:9px;
-  color:var(--dim);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;
-  animation:fadeUp 1s 1s both;
-}
-.scroll-hint .mouse{
-  width:22px;height:36px;border:1.5px solid rgba(255,255,255,.25);
-  border-radius:12px;position:relative;
-}
-.scroll-hint .mouse::after{
-  content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);
-  width:3px;height:7px;border-radius:2px;background:var(--secondary);
-  animation:scrollDot 1.8s infinite;
-}
+.scroll-hint{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:9px;color:var(--dim);font-size:.72rem;letter-spacing:.2em;text-transform:uppercase;animation:fadeUp 1s 1s both}
+.scroll-hint .mouse{width:22px;height:36px;border:1.5px solid rgba(255,255,255,.25);border-radius:12px;position:relative}
+.scroll-hint .mouse::after{content:"";position:absolute;top:7px;left:50%;transform:translateX(-50%);width:3px;height:7px;border-radius:2px;background:var(--secondary);animation:scrollDot 1.8s infinite}
 @keyframes scrollDot{0%{opacity:0;transform:translate(-50%,0)}30%{opacity:1}100%{opacity:0;transform:translate(-50%,12px)}}
 
-/* ============ SECTION HEADERS ============ */
-.sec-head{text-align:center;max-width:720px;margin:0 auto 64px}
-.sec-eyebrow{
-  display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;color:#a5b4fc;margin-bottom:16px;
-  padding:6px 16px;border-radius:100px;
-  background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.18);
-}
-.sec-head h2{
-  font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800;
-  letter-spacing:-.025em;line-height:1.18;margin-bottom:16px;
-}
+/* SEC HEAD */
+.sec-head{text-align:center;max-width:740px;margin:0 auto 64px}
+.sec-eyebrow{display:inline-block;font-size:.78rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:#a5b4fc;margin-bottom:16px;padding:6px 16px;border-radius:100px;background:rgba(99,102,241,.08);border:1px solid rgba(99,102,241,.18)}
+.sec-head h2{font-size:clamp(1.9rem,4vw,2.9rem);font-weight:800;letter-spacing:-.025em;line-height:1.18;margin-bottom:16px}
 .sec-head p{color:var(--muted);font-size:1.02rem}
 
-/* ============ REVEAL ============ */
+/* REVEAL */
 .reveal{opacity:0;transform:translateY(34px);transition:opacity .85s var(--ease),transform .85s var(--ease)}
 .reveal.visible{opacity:1;transform:none}
 
-/* ============ STAGES (ROADMAP) ============ */
-.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;position:relative}
-.stage{
-  position:relative;padding:36px 28px;border-radius:var(--radius);
-  background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015));
-  border:1px solid var(--border);
-  backdrop-filter:blur(14px);
-  transition:all .45s var(--ease);overflow:hidden;
-}
-.stage::before{
-  content:"";position:absolute;inset:0;border-radius:inherit;
-  background:linear-gradient(160deg,rgba(99,102,241,.14),transparent 55%);
-  opacity:0;transition:opacity .45s var(--ease);
-}
+/* STAGES */
+.stages{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.stage{position:relative;padding:36px 28px;border-radius:var(--radius);background:linear-gradient(160deg,rgba(255,255,255,.05),rgba(255,255,255,.015));border:1px solid var(--border);backdrop-filter:blur(14px);transition:all .45s var(--ease);overflow:hidden}
+.stage::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(160deg,rgba(99,102,241,.14),transparent 55%);opacity:0;transition:opacity .45s var(--ease)}
 .stage:hover{transform:translateY(-7px);border-color:var(--border-hi);box-shadow:0 24px 60px -22px rgba(99,102,241,.45)}
 .stage:hover::before{opacity:1}
-.stage > *{position:relative;z-index:1}
-.stage-icon{
-  width:54px;height:54px;border-radius:15px;display:grid;place-items:center;
-  font-size:1.5rem;margin-bottom:22px;
-  background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(168,85,247,.15));
-  border:1px solid rgba(139,92,246,.28);
-}
-.stage-tag{
-  font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;
-  color:var(--secondary);margin-bottom:9px;
-}
+.stage>*{position:relative;z-index:1}
+.stage-icon{width:54px;height:54px;border-radius:15px;display:grid;place-items:center;font-size:1.5rem;margin-bottom:22px;background:linear-gradient(135deg,rgba(99,102,241,.2),rgba(168,85,247,.15));border:1px solid rgba(139,92,246,.28)}
+.stage-tag{font-size:.72rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--secondary);margin-bottom:9px}
 .stage h3{font-size:1.3rem;font-weight:800;margin-bottom:12px;letter-spacing:-.01em}
 .stage p{color:var(--muted);font-size:.92rem;line-height:1.75;margin-bottom:20px}
 .stage-list{display:flex;flex-direction:column;gap:9px}
-.stage-list li{
-  display:flex;align-items:center;gap:10px;font-size:.86rem;color:#cbd5e1;
-}
-.stage-list li::before{
-  content:"";width:6px;height:6px;border-radius:50%;flex-shrink:0;
-  background:linear-gradient(135deg,var(--primary),var(--accent));
-  box-shadow:0 0 8px rgba(139,92,246,.6);
-}
+.stage-list li{display:flex;align-items:center;gap:10px;font-size:.86rem;color:#cbd5e1}
+.stage-list li::before{content:"";width:6px;height:6px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--primary),var(--accent));box-shadow:0 0 8px rgba(139,92,246,.6)}
 
-/* ============ MODULES ============ */
-.modules-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px;
-}
-.module{
-  position:relative;padding:30px 28px;border-radius:var(--radius);
-  background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.012));
-  border:1px solid var(--border);
-  backdrop-filter:blur(14px);
-  transition:all .45s var(--ease);overflow:hidden;
-}
-.module::after{
-  content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.13),transparent 55%);
-  opacity:0;transition:opacity .4s var(--ease);
-}
+/* MODULES GRID */
+.modules-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:20px}
+.module{position:relative;padding:30px 28px;border-radius:var(--radius);background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.012));border:1px solid var(--border);backdrop-filter:blur(14px);transition:all .45s var(--ease);overflow:hidden;cursor:pointer}
+.module::after{content:"";position:absolute;inset:0;border-radius:inherit;pointer-events:none;background:radial-gradient(420px circle at var(--mx,50%) var(--my,50%),rgba(139,92,246,.13),transparent 55%);opacity:0;transition:opacity .4s var(--ease)}
 .module:hover::after{opacity:1}
-.module:hover{
-  transform:translateY(-6px);
-  border-color:var(--border-hi);
-  box-shadow:0 26px 64px -26px rgba(99,102,241,.5);
-}
+.module:hover{transform:translateY(-6px);border-color:var(--border-hi);box-shadow:0 26px 64px -26px rgba(99,102,241,.5)}
 .module-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
-.module-num{
-  font-family:var(--font-mono);font-size:1.6rem;font-weight:600;line-height:1;
-  background:linear-gradient(135deg,#818cf8,#c084fc);
-  -webkit-background-clip:text;background-clip:text;color:transparent;
-}
-.module-level{
-  font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
-  padding:5px 11px;border-radius:100px;
-  background:rgba(6,182,212,.1);color:#67e8f9;
-  border:1px solid rgba(6,182,212,.22);
-}
+.module-num{font-family:var(--font-mono);font-size:1.6rem;font-weight:600;line-height:1;background:linear-gradient(135deg,#818cf8,#c084fc);-webkit-background-clip:text;background-clip:text;color:transparent}
+.module-level{font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:100px;background:rgba(6,182,212,.1);color:#67e8f9;border:1px solid rgba(6,182,212,.22)}
 .module-level.mid{background:rgba(168,85,247,.1);color:#d8b4fe;border-color:rgba(168,85,247,.25)}
 .module-level.adv{background:rgba(244,63,94,.1);color:#fda4af;border-color:rgba(244,63,94,.22)}
 .module h3{font-size:1.15rem;font-weight:800;margin-bottom:8px;letter-spacing:-.01em}
 .module > p{color:var(--muted);font-size:.87rem;line-height:1.7;margin-bottom:18px}
-.topics{display:flex;flex-wrap:wrap;gap:7px}
-.topics li{
-  font-size:.76rem;font-weight:500;padding:5px 11px;border-radius:8px;
-  background:var(--surface-2);border:1px solid var(--border);
-  color:#cbd5e1;transition:all .25s var(--ease);
-}
+.topics{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:18px}
+.topics li{font-size:.76rem;font-weight:500;padding:5px 11px;border-radius:8px;background:var(--surface-2);border:1px solid var(--border);color:#cbd5e1;transition:all .25s var(--ease)}
 .module:hover .topics li{border-color:rgba(139,92,246,.22);background:rgba(139,92,246,.07)}
+.module-cta{display:flex;align-items:center;justify-content:space-between;padding-top:16px;border-top:1px solid var(--border);color:#a5b4fc;font-size:.85rem;font-weight:600}
+.module-cta svg{width:16px;height:16px;transition:transform .3s var(--ease)}
+.module:hover .module-cta svg{transform:translateX(-4px)}
+body.lang-en .module:hover .module-cta svg{transform:translateX(4px)}
 
-/* ============ PROJECTS ============ */
+/* ============================================================
+   LESSON MODAL — full learning experience
+   ============================================================ */
+.lesson-overlay{position:fixed;inset:0;z-index:2000;background:rgba(3,4,10,.85);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);opacity:0;pointer-events:none;transition:opacity .35s var(--ease);overflow-y:auto;padding:40px 20px}
+.lesson-overlay.open{opacity:1;pointer-events:auto}
+.lesson-modal{max-width:960px;margin:0 auto;background:linear-gradient(165deg,#0c0d20,#080918);border:1px solid var(--border-hi);border-radius:22px;box-shadow:0 40px 120px -20px rgba(0,0,0,.8);transform:translateY(30px) scale(.98);transition:transform .45s var(--ease);overflow:hidden}
+.lesson-overlay.open .lesson-modal{transform:none}
+.lesson-head{position:sticky;top:0;z-index:10;padding:26px 32px 22px;background:linear-gradient(180deg,rgba(12,13,32,.98),rgba(12,13,32,.88));backdrop-filter:blur(20px);border-bottom:1px solid var(--border);display:flex;align-items:flex-start;justify-content:space-between;gap:20px}
+.lesson-head-left{flex:1}
+.lesson-kicker{font-size:.72rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:#a5b4fc;margin-bottom:8px}
+.lesson-head h2{font-size:clamp(1.4rem,3vw,1.9rem);font-weight:800;letter-spacing:-.02em;line-height:1.25;margin-bottom:6px}
+.lesson-head p{color:var(--muted);font-size:.92rem}
+.lesson-close{width:42px;height:42px;border-radius:12px;background:var(--surface-2);border:1px solid var(--border);display:grid;place-items:center;transition:all .25s;flex-shrink:0}
+.lesson-close:hover{background:rgba(244,63,94,.15);border-color:rgba(244,63,94,.4);color:#fda4af}
+.lesson-close svg{width:18px;height:18px}
+
+.lesson-body{padding:32px}
+
+/* Learning objectives box */
+.objectives{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(6,182,212,.08),rgba(99,102,241,.05));border:1px solid rgba(6,182,212,.22);margin-bottom:32px}
+.objectives h4{font-size:.95rem;font-weight:800;margin-bottom:14px;color:#67e8f9;display:flex;align-items:center;gap:9px}
+.objectives h4 svg{width:18px;height:18px}
+.objectives ul{display:flex;flex-direction:column;gap:8px}
+.objectives li{display:flex;align-items:flex-start;gap:10px;font-size:.9rem;color:#cbd5e1;line-height:1.65}
+.objectives li::before{content:"✓";color:var(--green);font-weight:800;flex-shrink:0;margin-top:1px}
+
+/* Lesson section */
+.lesson-section{margin-bottom:36px}
+.lesson-section h3{font-size:1.18rem;font-weight:800;margin-bottom:14px;letter-spacing:-.01em;display:flex;align-items:center;gap:11px}
+.lesson-section h3 .lnum{display:inline-grid;place-items:center;width:30px;height:30px;border-radius:9px;background:linear-gradient(135deg,var(--primary),var(--accent));font-size:.85rem;font-family:var(--font-mono);font-weight:600;flex-shrink:0}
+.lesson-section p{color:#cbd5e1;font-size:.95rem;line-height:1.85;margin-bottom:14px}
+.lesson-section p strong{color:#e0e7ff;font-weight:700}
+.lesson-section p code{font-family:var(--font-mono);font-size:.85em;padding:2px 7px;border-radius:6px;background:rgba(99,102,241,.13);color:#c7d2fe;border:1px solid rgba(99,102,241,.2)}
+.lesson-section ul.bullets{display:flex;flex-direction:column;gap:9px;margin:14px 0 18px}
+.lesson-section ul.bullets li{display:flex;align-items:flex-start;gap:11px;font-size:.92rem;color:#cbd5e1;line-height:1.7}
+.lesson-section ul.bullets li::before{content:"";width:7px;height:7px;border-radius:50%;flex-shrink:0;margin-top:9px;background:linear-gradient(135deg,var(--primary),var(--accent))}
+
+/* Code block */
+.code-block{margin:18px 0;border-radius:13px;overflow:hidden;border:1px solid var(--border);background:#0a0c18}
+.code-head{display:flex;align-items:center;justify-content:space-between;padding:11px 16px;background:rgba(255,255,255,.03);border-bottom:1px solid var(--border)}
+.code-lang{font-family:var(--font-mono);font-size:.72rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:#a5b4fc;display:flex;align-items:center;gap:8px}
+.code-lang::before{content:"";width:8px;height:8px;border-radius:50%;background:var(--secondary);box-shadow:0 0 8px var(--secondary)}
+.code-copy{font-size:.72rem;font-weight:600;color:var(--muted);padding:4px 10px;border-radius:6px;transition:all .2s;display:flex;align-items:center;gap:5px}
+.code-copy:hover{color:var(--text);background:var(--surface-2)}
+.code-copy svg{width:12px;height:12px}
+.code-block pre{padding:18px 20px;overflow-x:auto;font-family:var(--font-mono);font-size:.83rem;line-height:1.75;color:#e0e7ff;direction:ltr;text-align:left;white-space:pre;tab-size:2}
+.code-block pre::-webkit-scrollbar{height:8px}
+.code-block pre::-webkit-scrollbar-thumb{background:rgba(139,92,246,.3);border-radius:4px}
+/* Syntax tokens */
+.tok-tag{color:#f472b6}
+.tok-attr{color:#a5b4fc}
+.tok-str{color:#86efac}
+.tok-comment{color:#64748b;font-style:italic}
+.tok-kw{color:#c084fc;font-weight:600}
+.tok-fn{color:#67e8f9}
+.tok-num{color:#fbbf24}
+.tok-prop{color:#93c5fd}
+.tok-punc{color:#94a3b8}
+.tok-sel{color:#f472b6}
+.tok-dec{color:#c084fc}
+.tok-val{color:#86efac}
+
+/* Mistakes box */
+.mistakes{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(244,63,94,.07),rgba(245,158,11,.04));border:1px solid rgba(244,63,94,.22);margin-bottom:32px}
+.mistakes h4{font-size:.95rem;font-weight:800;margin-bottom:14px;color:#fda4af;display:flex;align-items:center;gap:9px}
+.mistakes h4 svg{width:18px;height:18px}
+.mistakes ul{display:flex;flex-direction:column;gap:11px}
+.mistakes li{font-size:.89rem;color:#cbd5e1;line-height:1.7;padding-inline-start:22px;position:relative}
+.mistakes li::before{content:"✗";position:absolute;inset-inline-start:0;color:var(--red);font-weight:800}
+
+/* Exercises */
+.exercises{padding:22px 24px;border-radius:14px;background:linear-gradient(135deg,rgba(16,185,129,.07),rgba(6,182,212,.04));border:1px solid rgba(16,185,129,.22)}
+.exercises h4{font-size:.95rem;font-weight:800;margin-bottom:14px;color:#6ee7b7;display:flex;align-items:center;gap:9px}
+.exercises h4 svg{width:18px;height:18px}
+.exercises ol{display:flex;flex-direction:column;gap:11px;counter-reset:ex}
+.exercises li{font-size:.89rem;color:#cbd5e1;line-height:1.7;padding-inline-start:30px;position:relative;counter-increment:ex}
+.exercises li::before{content:counter(ex);position:absolute;inset-inline-start:0;top:0;width:21px;height:21px;border-radius:6px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.35);color:#6ee7b7;font-size:.72rem;font-weight:800;display:grid;place-items:center;font-family:var(--font-mono)}
+
+/* Lesson nav footer */
+.lesson-nav{display:flex;align-items:center;justify-content:space-between;gap:14px;padding-top:28px;margin-top:14px;border-top:1px solid var(--border)}
+.lesson-nav button{display:flex;align-items:center;gap:9px;padding:11px 18px;border-radius:11px;background:var(--surface-2);border:1px solid var(--border);font-size:.85rem;font-weight:600;color:var(--text);transition:all .25s}
+.lesson-nav button:hover:not(:disabled){border-color:var(--border-hi);background:rgba(139,92,246,.1)}
+.lesson-nav button:disabled{opacity:.35;cursor:not-allowed}
+.lesson-nav svg{width:15px;height:15px}
+.lesson-nav .mid-info{font-size:.78rem;color:var(--dim);font-family:var(--font-mono)}
+
+/* PROJECTS */
 .projects-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:20px}
-.project{
-  position:relative;border-radius:var(--radius);overflow:hidden;
-  background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.012));
-  border:1px solid var(--border);
-  transition:all .45s var(--ease);
-}
+.project{position:relative;border-radius:var(--radius);overflow:hidden;background:linear-gradient(165deg,rgba(255,255,255,.05),rgba(255,255,255,.012));border:1px solid var(--border);transition:all .45s var(--ease)}
 .project:hover{transform:translateY(-6px);border-color:var(--border-hi);box-shadow:0 26px 64px -26px rgba(99,102,241,.5)}
-.project-visual{
-  height:150px;position:relative;overflow:hidden;
-  display:grid;place-items:center;
-  background:linear-gradient(135deg,rgba(99,102,241,.16),rgba(168,85,247,.1));
-  border-bottom:1px solid var(--border);
-}
-.project-visual::before{
-  content:"";position:absolute;inset:0;
-  background-image:radial-gradient(rgba(255,255,255,.1) 1px,transparent 1px);
-  background-size:18px 18px;opacity:.55;
-}
+.project-visual{height:150px;position:relative;overflow:hidden;display:grid;place-items:center;background:linear-gradient(135deg,rgba(99,102,241,.16),rgba(168,85,247,.1));border-bottom:1px solid var(--border)}
+.project-visual::before{content:"";position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.1) 1px,transparent 1px);background-size:18px 18px;opacity:.55}
 .project-visual .emoji{font-size:2.6rem;position:relative;z-index:1;filter:drop-shadow(0 8px 20px rgba(0,0,0,.4))}
 .project-body{padding:24px 24px 26px}
-.project-lvl{
-  display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.1em;
-  text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:12px;
-  background:rgba(6,182,212,.1);color:#67e8f9;border:1px solid rgba(6,182,212,.22);
-}
+.project-lvl{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:100px;margin-bottom:12px;background:rgba(6,182,212,.1);color:#67e8f9;border:1px solid rgba(6,182,212,.22)}
 .project-lvl.mid{background:rgba(168,85,247,.1);color:#d8b4fe;border-color:rgba(168,85,247,.25)}
 .project-lvl.adv{background:rgba(244,63,94,.1);color:#fda4af;border-color:rgba(244,63,94,.22)}
 .project h4{font-size:1.06rem;font-weight:800;margin-bottom:9px}
 .project p{color:var(--muted);font-size:.86rem;line-height:1.7}
 .project-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
-.project-stack span{
-  font-size:.72rem;font-family:var(--font-mono);font-weight:500;
-  padding:4px 9px;border-radius:6px;
-  background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.18);
-}
+.project-stack span{font-size:.72rem;font-family:var(--font-mono);font-weight:500;padding:4px 9px;border-radius:6px;background:rgba(99,102,241,.1);color:#a5b4fc;border:1px solid rgba(99,102,241,.18)}
 
-/* ============ CTA ============ */
-.cta{
-  position:relative;border-radius:28px;padding:72px 40px;text-align:center;
-  background:linear-gradient(135deg,rgba(99,102,241,.16),rgba(168,85,247,.1),rgba(6,182,212,.1));
-  border:1px solid rgba(139,92,246,.28);
-  overflow:hidden;
-}
-.cta::before{
-  content:"";position:absolute;inset:0;
-  background:radial-gradient(circle at 30% 20%,rgba(139,92,246,.22),transparent 55%),
-             radial-gradient(circle at 75% 80%,rgba(6,182,212,.16),transparent 55%);
-}
-.cta > *{position:relative;z-index:1}
+/* CTA */
+.cta{position:relative;border-radius:28px;padding:72px 40px;text-align:center;background:linear-gradient(135deg,rgba(99,102,241,.16),rgba(168,85,247,.1),rgba(6,182,212,.1));border:1px solid rgba(139,92,246,.28);overflow:hidden}
+.cta::before{content:"";position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(139,92,246,.22),transparent 55%),radial-gradient(circle at 75% 80%,rgba(6,182,212,.16),transparent 55%)}
+.cta>*{position:relative;z-index:1}
 .cta h2{font-size:clamp(1.7rem,3.6vw,2.6rem);font-weight:800;letter-spacing:-.025em;margin-bottom:16px}
 .cta p{color:#cbd5e1;max-width:560px;margin:0 auto 34px;font-size:1.02rem}
 
-/* ============ FOOTER ============ */
-footer{
-  position:relative;z-index:1;
-  border-top:1px solid var(--border);
-  padding:56px 0 40px;margin-top:60px;
-}
-.footer-inner{
-  display:flex;align-items:center;justify-content:space-between;
-  flex-wrap:wrap;gap:24px;
-}
+/* FOOTER */
+footer{position:relative;z-index:1;border-top:1px solid var(--border);padding:56px 0 40px;margin-top:60px}
+.footer-inner{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:24px}
 .footer-inner .logo{font-size:1rem}
 .footer-links{display:flex;gap:26px;flex-wrap:wrap}
 .footer-links a{font-size:.86rem;color:var(--muted);transition:color .25s}
 .footer-links a:hover{color:var(--text)}
 .footer-copy{font-size:.8rem;color:var(--dim);text-align:center;width:100%;margin-top:34px;padding-top:26px;border-top:1px solid var(--border)}
 
-/* ============ RESPONSIVE ============ */
-@media(max-width:1024px){
-  .stages{grid-template-columns:1fr;max-width:560px;margin:0 auto}
-  .stats{grid-template-columns:repeat(2,1fr)}
-}
+/* TOAST */
+.toast{position:fixed;bottom:28px;inset-inline-start:50%;transform:translateX(-50%) translateY(20px);padding:12px 22px;border-radius:11px;background:rgba(16,185,129,.15);border:1px solid rgba(16,185,129,.4);color:#6ee7b7;font-size:.85rem;font-weight:600;opacity:0;pointer-events:none;transition:all .35s var(--ease);z-index:3000;backdrop-filter:blur(10px)}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.stages{grid-template-columns:1fr;max-width:560px;margin:0 auto}.stats{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:768px){
   section{padding:80px 0}
   .nav-links{display:none}
@@ -446,31 +283,27 @@ footer{
   .cta{padding:52px 24px}
   .footer-inner{flex-direction:column;text-align:center}
   .footer-links{justify-content:center}
-}
-@media(max-width:480px){
-  .stats{grid-template-columns:1fr 1fr}
-  .stat{padding:20px 8px}
+  .lesson-overlay{padding:0}
+  .lesson-modal{border-radius:0;min-height:100vh}
+  .lesson-head{padding:20px;position:static}
+  .lesson-body{padding:22px 20px}
+  .lesson-nav{flex-direction:column}
+  .lesson-nav button{width:100%;justify-content:center}
 }
 </style>
 </head>
 <body class="lang-ar">
 
 <div class="scroll-progress" id="scrollProgress"></div>
-
-<!-- 3D BACKGROUND -->
 <div id="bg3d"></div>
 <div class="bg-glow"></div>
 <div class="bg-grid"></div>
 
-<!-- NAVBAR -->
 <nav class="nav" id="nav">
   <div class="nav-inner">
     <a href="#" class="logo">
       <div class="logo-mark"><span>&lt;/&gt;</span></div>
-      <div class="logo-text">
-        <span class="t1">Frontend</span>
-        <span class="t2">Mastery</span>
-      </div>
+      <div class="logo-text"><span class="t1">Frontend</span><span class="t2">Mastery</span></div>
     </a>
     <div class="nav-links">
       <a href="#stages" data-en="Roadmap" data-ar="المسار">المسار</a>
@@ -478,7 +311,7 @@ footer{
       <a href="#projects" data-en="Projects" data-ar="المشاريع">المشاريع</a>
       <a href="#cta" data-en="Start Now" data-ar="ابدأ الآن">ابدأ الآن</a>
     </div>
-    <button class="lang-btn" id="langBtn" aria-label="Toggle language">
+    <button class="lang-btn" id="langBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
       <span id="langLabel">EN</span>
     </button>
@@ -487,360 +320,168 @@ footer{
 
 <main>
 
-<!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-inner">
     <div class="hero-badge">
       <span class="dot"></span>
-      <span data-en="Your complete path to professional frontend" data-ar="مسارك الكامل لاحتراف تطوير الواجهات">مسارك الكامل لاحتراف تطوير الواجهات</span>
+      <span data-en="Complete bilingual curriculum — from zero to job-ready" data-ar="منهج ثنائي اللغة كامل — من الصفر إلى جاهز للعمل">منهج ثنائي اللغة كامل — من الصفر إلى جاهز للعمل</span>
     </div>
     <h1>
       <span data-en="Master Frontend<br>From Zero to" data-ar="احترف تطوير الويب<br>من الصفر إلى">احترف تطوير الويب<br>من الصفر إلى</span>
       <span class="grad" data-en="Professional" data-ar="الاحتراف">الاحتراف</span>
     </h1>
-    <p class="lead" data-en="A structured, bilingual curriculum that takes you step by step through HTML, CSS, JavaScript, frameworks, performance and deployment — until you can build real, powerful websites." data-ar="منهج منظم ثنائي اللغة يأخذك خطوة بخطوة عبر HTML و CSS و JavaScript وأطر العمل والأداء والنشر — حتى تبني مواقع حقيقية قوية باحترافية.">منهج منظم ثنائي اللغة يأخذك خطوة بخطوة عبر HTML و CSS و JavaScript وأطر العمل والأداء والنشر — حتى تبني مواقع حقيقية قوية باحترافية.</p>
+    <p class="lead" data-en="Ten detailed modules, real code examples, common mistakes to avoid, and hands-on exercises. Click any module to open the full lesson — explained in Arabic and English." data-ar="عشر وحدات مفصّلة، أمثلة كود حقيقية، أخطاء شائعة يجب تجنّبها، وتمارين عملية. اضغط أي وحدة لفتح الدرس الكامل — بشرح عربي وإنجليزي.">عشر وحدات مفصّلة، أمثلة كود حقيقية، أخطاء شائعة يجب تجنّبها، وتمارين عملية. اضغط أي وحدة لفتح الدرس الكامل — بشرح عربي وإنجليزي.</p>
     <div class="hero-actions">
       <a href="#modules" class="btn btn-primary">
-        <span data-en="Start Learning" data-ar="ابدأ التعلم">ابدأ التعلم</span>
+        <span data-en="Open Curriculum" data-ar="افتح المنهج">افتح المنهج</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
       <a href="#stages" class="btn btn-ghost">
         <span data-en="View Roadmap" data-ar="استعرض المسار">استعرض المسار</span>
       </a>
     </div>
-
     <div class="stats">
       <div class="stat"><div class="num">10</div><div class="lbl" data-en="Modules" data-ar="وحدات">وحدات</div></div>
-      <div class="stat"><div class="num">60+</div><div class="lbl" data-en="Topics" data-ar="موضوع">موضوع</div></div>
-      <div class="stat"><div class="num">15+</div><div class="lbl" data-en="Projects" data-ar="مشروع">مشروع</div></div>
+      <div class="stat"><div class="num">60+</div><div class="lbl" data-en="Lessons" data-ar="دروس">دروس</div></div>
+      <div class="stat"><div class="num">15+</div><div class="lbl" data-en="Projects" data-ar="مشاريع">مشاريع</div></div>
       <div class="stat"><div class="num">100%</div><div class="lbl" data-en="Free" data-ar="مجاني">مجاني</div></div>
     </div>
   </div>
-  <div class="scroll-hint">
-    <div class="mouse"></div>
-  </div>
+  <div class="scroll-hint"><div class="mouse"></div></div>
 </section>
 
-<!-- STAGES / ROADMAP -->
 <section id="stages">
   <div class="container">
     <div class="sec-head reveal">
       <span class="sec-eyebrow" data-en="Learning Path" data-ar="مسار التعلم">مسار التعلم</span>
       <h2 data-en="Three stages. One clear destination." data-ar="ثلاث مراحل. هدف واحد واضح.">ثلاث مراحل. هدف واحد واضح.</h2>
-      <p data-en="Follow the path in order — each stage builds on the previous one until you're job-ready." data-ar="اتبع المسار بالترتيب — كل مرحلة تبني على ما قبلها حتى تصبح جاهزاً لسوق العمل.">اتبع المسار بالترتيب — كل مرحلة تبني على ما قبلها حتى تصبح جاهزاً لسوق العمل.</p>
+      <p data-en="Each stage builds on the previous — follow them in order and you'll cover everything needed for a real frontend role." data-ar="كل مرحلة تبني على ما قبلها — اتبعها بالترتيب وستغطي كل ما تحتاجه لدور تطوير واجهات حقيقي.">كل مرحلة تبني على ما قبلها — اتبعها بالترتيب وستغطي كل ما تحتاجه لدور تطوير واجهات حقيقي.</p>
     </div>
-
     <div class="stages">
       <article class="stage reveal">
         <div class="stage-icon">🌱</div>
-        <div class="stage-tag" data-en="Stage 01" data-ar="المرحلة 01">المرحلة 01</div>
+        <div class="stage-tag" data-en="Stage 01 · Modules 1–4" data-ar="المرحلة 01 · الوحدات 1–4">المرحلة 01 · الوحدات 1–4</div>
         <h3 data-en="Foundations" data-ar="التأسيس">التأسيس</h3>
-        <p data-en="Understand how the web works, then build solid HTML and CSS skills with real layouts and responsive design." data-ar="افهم كيف يعمل الويب، ثم ابنِ مهارات HTML و CSS قوية مع تصميمات واقعية وتصميم متجاوب.">افهم كيف يعمل الويب، ثم ابنِ مهارات HTML و CSS قوية مع تصميمات واقعية وتصميم متجاوب.</p>
+        <p data-en="Learn how the web actually works, then master HTML and CSS — the two languages every frontend developer uses every single day." data-ar="تعلّم كيف يعمل الويب فعلياً، ثم أتقن HTML و CSS — اللغتين التي يستخدمها كل مطور واجهات كل يوم.">تعلّم كيف يعمل الويب فعلياً، ثم أتقن HTML و CSS — اللغتين التي يستخدمها كل مطور واجهات كل يوم.</p>
         <ul class="stage-list">
-          <li data-en="Web fundamentals & browser DevTools" data-ar="أساسيات الويب وأدوات المتصفح">أساسيات الويب وأدوات المتصفح</li>
-          <li data-en="Semantic HTML5 & accessibility" data-ar="HTML5 الدلالي وإمكانية الوصول">HTML5 الدلالي وإمكانية الوصول</li>
-          <li data-en="CSS layout: Flexbox & Grid" data-ar="تخطيط CSS: Flexbox و Grid">تخطيط CSS: Flexbox و Grid</li>
-          <li data-en="Responsive & mobile-first design" data-ar="التصميم المتجاوب والموبايل أولاً">التصميم المتجاوب والموبايل أولاً</li>
+          <li data-en="How browsers, servers, DNS and HTTP work together" data-ar="كيف يتعامل المتصفح والخادم و DNS و HTTP معاً">كيف يتعامل المتصفح والخادم و DNS و HTTP معاً</li>
+          <li data-en="Semantic, accessible HTML5 structure" data-ar="هيكل HTML5 الدلالي وسهل الوصول">هيكل HTML5 الدلالي وسهل الوصول</li>
+          <li data-en="CSS fundamentals, Flexbox and Grid layouts" data-ar="أساسيات CSS وتخطيطات Flexbox و Grid">أساسيات CSS وتخطيطات Flexbox و Grid</li>
+          <li data-en="Mobile-first responsive design" data-ar="التصميم المتجاوب للموبايل أولاً">التصميم المتجاوب للموبايل أولاً</li>
         </ul>
       </article>
-
       <article class="stage reveal">
         <div class="stage-icon">⚡</div>
-        <div class="stage-tag" data-en="Stage 02" data-ar="المرحلة 02">المرحلة 02</div>
+        <div class="stage-tag" data-en="Stage 02 · Modules 5–7" data-ar="المرحلة 02 · الوحدات 5–7">المرحلة 02 · الوحدات 5–7</div>
         <h3 data-en="Mastery" data-ar="الإتقان">الإتقان</h3>
-        <p data-en="Level up with modern JavaScript, async programming, APIs, and the professional tools used in real teams." data-ar="ارتقِ بمستواك مع JavaScript الحديثة والبرمجة غير المتزامنة وواجهات API والأدوات الاحترافية المستخدمة في الفرق الحقيقية.">ارتقِ بمستواك مع JavaScript الحديثة والبرمجة غير المتزامنة وواجهات API والأدوات الاحترافية المستخدمة في الفرق الحقيقية.</p>
+        <p data-en="Add real interactivity with modern JavaScript, work with APIs and async code, and use the same tooling professional teams rely on." data-ar="أضف تفاعلاً حقيقياً مع JavaScript الحديثة، وتعامَل مع APIs والكود غير المتزامن، واستخدم نفس الأدوات التي تعتمد عليها الفرق الاحترافية.">أضف تفاعلاً حقيقياً مع JavaScript الحديثة، وتعامَل مع APIs والكود غير المتزامن، واستخدم نفس الأدوات التي تعتمد عليها الفرق الاحترافية.</p>
         <ul class="stage-list">
-          <li data-en="Modern JavaScript (ES6+)" data-ar="JavaScript الحديثة (ES6+)">JavaScript الحديثة (ES6+)</li>
-          <li data-en="DOM, events & async / await" data-ar="DOM والأحداث و async / await">DOM والأحداث و async / await</li>
-          <li data-en="Fetch API, JSON & error handling" data-ar="Fetch API و JSON ومعالجة الأخطاء">Fetch API و JSON ومعالجة الأخطاء</li>
-          <li data-en="Git, GitHub & package managers" data-ar="Git و GitHub ومديري الحزم">Git و GitHub ومديري الحزم</li>
+          <li data-en="Modern JavaScript ES6+ (variables, functions, arrays, objects)" data-ar="JavaScript الحديثة ES6+ (متغيرات، دوال، مصفوفات، كائنات)">JavaScript الحديثة ES6+ (متغيرات، دوال، مصفوفات، كائنات)</li>
+          <li data-en="DOM manipulation, events and async / await" data-ar="التعامل مع DOM والأحداث و async / await">التعامل مع DOM والأحداث و async / await</li>
+          <li data-en="Fetching real data from APIs" data-ar="جلب بيانات حقيقية من APIs">جلب بيانات حقيقية من APIs</li>
+          <li data-en="Git, GitHub, npm and Vite" data-ar="Git و GitHub و npm و Vite">Git و GitHub و npm و Vite</li>
         </ul>
       </article>
-
       <article class="stage reveal">
         <div class="stage-icon">🚀</div>
-        <div class="stage-tag" data-en="Stage 03" data-ar="المرحلة 03">المرحلة 03</div>
+        <div class="stage-tag" data-en="Stage 03 · Modules 8–10" data-ar="المرحلة 03 · الوحدات 8–10">المرحلة 03 · الوحدات 8–10</div>
         <h3 data-en="Professional" data-ar="الاحتراف">الاحتراف</h3>
-        <p data-en="Build production-grade apps with frameworks, design systems, testing, optimization, and deployment pipelines." data-ar="ابنِ تطبيقات بمستوى الإنتاج باستخدام أطر العمل وأنظمة التصميم والاختبار والتحسين وخطوط النشر.">ابنِ تطبيقات بمستوى الإنتاج باستخدام أطر العمل وأنظمة التصميم والاختبار والتحسين وخطوط النشر.</p>
+        <p data-en="Build production apps with React, professional styling systems, performance optimization and automated deployment." data-ar="ابنِ تطبيقات بمستوى الإنتاج باستخدام React وأنظمة تصميم احترافية وتحسين الأداء والنشر التلقائي.">ابنِ تطبيقات بمستوى الإنتاج باستخدام React وأنظمة تصميم احترافية وتحسين الأداء والنشر التلقائي.</p>
         <ul class="stage-list">
-          <li data-en="React / Vue component architecture" data-ar="معمارية المكونات في React / Vue">معمارية المكونات في React / Vue</li>
-          <li data-en="Tailwind, SASS & design systems" data-ar="Tailwind و SASS وأنظمة التصميم">Tailwind و SASS وأنظمة التصميم</li>
-          <li data-en="Performance & Core Web Vitals" data-ar="الأداء و Core Web Vitals">الأداء و Core Web Vitals</li>
-          <li data-en="Testing, CI/CD & deployment" data-ar="الاختبار و CI/CD والنشر">الاختبار و CI/CD والنشر</li>
+          <li data-en="React components, state, hooks and routing" data-ar="مكونات React والحالة والـ hooks والتوجيه">مكونات React والحالة والـ hooks والتوجيه</li>
+          <li data-en="Tailwind, SASS and design systems" data-ar="Tailwind و SASS وأنظمة التصميم">Tailwind و SASS وأنظمة التصميم</li>
+          <li data-en="Performance: Core Web Vitals & Lighthouse" data-ar="الأداء: Core Web Vitals و Lighthouse">الأداء: Core Web Vitals و Lighthouse</li>
+          <li data-en="Testing, CI/CD and deploying to Vercel" data-ar="الاختبار و CI/CD والنشر على Vercel">الاختبار و CI/CD والنشر على Vercel</li>
         </ul>
       </article>
     </div>
   </div>
 </section>
 
-<!-- MODULES -->
 <section id="modules">
   <div class="container">
     <div class="sec-head reveal">
       <span class="sec-eyebrow" data-en="Full Curriculum" data-ar="المنهج الكامل">المنهج الكامل</span>
-      <h2 data-en="Everything you need, in order." data-ar="كل ما تحتاجه، بالترتيب.">كل ما تحتاجه، بالترتيب.</h2>
-      <p data-en="Ten modules covering the complete frontend stack — from your first line of HTML to deploying a production app." data-ar="عشر وحدات تغطي كامل تقنيات الواجهات الأمامية — من أول سطر HTML إلى نشر تطبيق جاهز للإنتاج.">عشر وحدات تغطي كامل تقنيات الواجهات الأمامية — من أول سطر HTML إلى نشر تطبيق جاهز للإنتاج.</p>
+      <h2 data-en="Ten detailed modules. Click any one to start learning." data-ar="عشر وحدات مفصّلة. اضغط أي واحدة لبدء التعلّم.">عشر وحدات مفصّلة. اضغط أي واحدة لبدء التعلّم.</h2>
+      <p data-en="Every module includes objectives, step-by-step explanations, real code examples, common mistakes and practice exercises." data-ar="كل وحدة تحتوي على أهداف، شرح خطوة بخطوة، أمثلة كود حقيقية، أخطاء شائعة، وتمارين عملية.">كل وحدة تحتوي على أهداف، شرح خطوة بخطوة، أمثلة كود حقيقية، أخطاء شائعة، وتمارين عملية.</p>
     </div>
-
-    <div class="modules-grid">
-
-      <!-- 01 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">01</div>
-          <span class="module-level" data-en="Beginner" data-ar="مبتدئ">مبتدئ</span>
-        </div>
-        <h3 data-en="Web Fundamentals" data-ar="أساسيات الويب">أساسيات الويب</h3>
-        <p data-en="Understand the internet before you code: how browsers, servers, DNS and HTTP actually work together." data-ar="افهم الإنترنت قبل أن تبرمج: كيف يتعاون المتصفح والخادم و DNS و HTTP معاً في الواقع.">افهم الإنترنت قبل أن تبرمج: كيف يتعاون المتصفح والخادم و DNS و HTTP معاً في الواقع.</p>
-        <ul class="topics">
-          <li data-en="How the web works" data-ar="كيف يعمل الويب">كيف يعمل الويب</li>
-          <li data-en="HTTP & DNS" data-ar="HTTP و DNS">HTTP و DNS</li>
-          <li data-en="VS Code setup" data-ar="إعداد VS Code">إعداد VS Code</li>
-          <li data-en="DevTools" data-ar="أدوات المطور">أدوات المطور</li>
-          <li data-en="File structure" data-ar="هيكل الملفات">هيكل الملفات</li>
-        </ul>
-      </article>
-
-      <!-- 02 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">02</div>
-          <span class="module-level" data-en="Beginner" data-ar="مبتدئ">مبتدئ</span>
-        </div>
-        <h3 data-en="HTML5 Essentials" data-ar="أساسيات HTML5">أساسيات HTML5</h3>
-        <p data-en="Build clean, semantic, accessible structure that search engines and screen readers both love." data-ar="ابنِ هيكلاً نظيفاً ودلالياً وسهل الوصول يحبه محركو البحث وقارئات الشاشة.">ابنِ هيكلاً نظيفاً ودلالياً وسهل الوصول يحبه محركو البحث وقارئات الشاشة.</p>
-        <ul class="topics">
-          <li data-en="Semantic tags" data-ar="الوسوم الدلالية">الوسوم الدلالية</li>
-          <li data-en="Forms & inputs" data-ar="النماذج والمدخلات">النماذج والمدخلات</li>
-          <li data-en="Media" data-ar="الوسائط">الوسائط</li>
-          <li data-en="Accessibility" data-ar="إمكانية الوصول">إمكانية الوصول</li>
-          <li data-en="SEO meta" data-ar="وسوم SEO">وسوم SEO</li>
-        </ul>
-      </article>
-
-      <!-- 03 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">03</div>
-          <span class="module-level" data-en="Beginner" data-ar="مبتدئ">مبتدئ</span>
-        </div>
-        <h3 data-en="CSS3 Essentials" data-ar="أساسيات CSS3">أساسيات CSS3</h3>
-        <p data-en="Style like a designer: typography, colors, spacing, and modern layout with Flexbox and Grid." data-ar="صمّم كالمحترفين: الخطوط والألوان والمسافات والتخطيط الحديث عبر Flexbox و Grid.">صمّم كالمحترفين: الخطوط والألوان والمسافات والتخطيط الحديث عبر Flexbox و Grid.</p>
-        <ul class="topics">
-          <li data-en="Selectors & specificity" data-ar="المحددات والأولوية">المحددات والأولوية</li>
-          <li data-en="Box model" data-ar="نموذج الصندوق">نموذج الصندوق</li>
-          <li data-en="Flexbox" data-ar="Flexbox">Flexbox</li>
-          <li data-en="CSS Grid" data-ar="CSS Grid">CSS Grid</li>
-          <li data-en="Transitions" data-ar="الانتقالات">الانتقالات</li>
-        </ul>
-      </article>
-
-      <!-- 04 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">04</div>
-          <span class="module-level" data-en="Beginner" data-ar="مبتدئ">مبتدئ</span>
-        </div>
-        <h3 data-en="Responsive Design" data-ar="التصميم المتجاوب">التصميم المتجاوب</h3>
-        <p data-en="Make every layout look perfect on phones, tablets, and desktops — with fluid, modern techniques." data-ar="اجعل كل تصميم يظهر مثالياً على الهواتف والأجهزة اللوحية والحواسيب — بتقنيات حديثة ومرنة.">اجعل كل تصميم يظهر مثالياً على الهواتف والأجهزة اللوحية والحواسيب — بتقنيات حديثة ومرنة.</p>
-        <ul class="topics">
-          <li data-en="Media queries" data-ar="استعلامات الوسائط">استعلامات الوسائط</li>
-          <li data-en="Mobile-first" data-ar="الموبايل أولاً">الموبايل أولاً</li>
-          <li data-en="clamp() typography" data-ar="الخطوط عبر clamp()">الخطوط عبر clamp()</li>
-          <li data-en="Responsive images" data-ar="الصور المتجاوبة">الصور المتجاوبة</li>
-          <li data-en="Container queries" data-ar="استعلامات الحاوية">استعلامات الحاوية</li>
-        </ul>
-      </article>
-
-      <!-- 05 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">05</div>
-          <span class="module-level mid" data-en="Intermediate" data-ar="متوسط">متوسط</span>
-        </div>
-        <h3 data-en="JavaScript Basics" data-ar="أساسيات JavaScript">أساسيات JavaScript</h3>
-        <p data-en="The language of the web: variables, logic, functions, and controlling the page through the DOM." data-ar="لغة الويب: المتغيرات والمنطق والدوال والتحكم بالصفحة عبر الـ DOM.">لغة الويب: المتغيرات والمنطق والدوال والتحكم بالصفحة عبر الـ DOM.</p>
-        <ul class="topics">
-          <li data-en="Variables & types" data-ar="المتغيرات والأنواع">المتغيرات والأنواع</li>
-          <li data-en="Functions & scope" data-ar="الدوال والنطاق">الدوال والنطاق</li>
-          <li data-en="Arrays & objects" data-ar="المصفوفات والكائنات">المصفوفات والكائنات</li>
-          <li data-en="DOM manipulation" data-ar="التعامل مع DOM">التعامل مع DOM</li>
-          <li data-en="Events" data-ar="الأحداث">الأحداث</li>
-        </ul>
-      </article>
-
-      <!-- 06 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">06</div>
-          <span class="module-level mid" data-en="Intermediate" data-ar="متوسط">متوسط</span>
-        </div>
-        <h3 data-en="Advanced JavaScript" data-ar="JavaScript المتقدمة">JavaScript المتقدمة</h3>
-        <p data-en="ES6+, async programming, working with real APIs, and writing reliable, error-safe code." data-ar="ES6+ والبرمجة غير المتزامنة والتعامل مع واجهات API الحقيقية وكتابة كود موثوق وآمن من الأخطاء.">ES6+ والبرمجة غير المتزامنة والتعامل مع واجهات API الحقيقية وكتابة كود موثوق وآمن من الأخطاء.</p>
-        <ul class="topics">
-          <li data-en="ES6+ features" data-ar="ميزات ES6+">ميزات ES6+</li>
-          <li data-en="Promises" data-ar="Promises">Promises</li>
-          <li data-en="async / await" data-ar="async / await">async / await</li>
-          <li data-en="Fetch API" data-ar="Fetch API">Fetch API</li>
-          <li data-en="Closures" data-ar="Closures">Closures</li>
-        </ul>
-      </article>
-
-      <!-- 07 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">07</div>
-          <span class="module-level mid" data-en="Intermediate" data-ar="متوسط">متوسط</span>
-        </div>
-        <h3 data-en="Git & Developer Tools" data-ar="Git وأدوات المطور">Git وأدوات المطور</h3>
-        <p data-en="Work like a professional team: version control, branching, packages, bundlers and clean code tooling." data-ar="اعمل كفريق احترافي: إدارة النسخ والتفرعات والحزم والمجمّعات وأدوات الكود النظيف.">اعمل كفريق احترافي: إدارة النسخ والتفرعات والحزم والمجمّعات وأدوات الكود النظيف.</p>
-        <ul class="topics">
-          <li data-en="Git basics" data-ar="أساسيات Git">أساسيات Git</li>
-          <li data-en="Branches & PRs" data-ar="التفرعات والـ PRs">التفرعات والـ PRs</li>
-          <li data-en="npm" data-ar="npm">npm</li>
-          <li data-en="Vite" data-ar="Vite">Vite</li>
-          <li data-en="ESLint & Prettier" data-ar="ESLint و Prettier">ESLint و Prettier</li>
-        </ul>
-      </article>
-
-      <!-- 08 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">08</div>
-          <span class="module-level adv" data-en="Advanced" data-ar="متقدم">متقدم</span>
-        </div>
-        <h3 data-en="Frontend Frameworks" data-ar="أطر الواجهات الأمامية">أطر الواجهات الأمامية</h3>
-        <p data-en="Build real applications with components, state, routing, and API integration using React or Vue." data-ar="ابنِ تطبيقات حقيقية بمكونات وحالة وتوجيه وتكامل مع APIs باستخدام React أو Vue.">ابنِ تطبيقات حقيقية بمكونات وحالة وتوجيه وتكامل مع APIs باستخدام React أو Vue.</p>
-        <ul class="topics">
-          <li data-en="Components & props" data-ar="المكونات و props">المكونات و props</li>
-          <li data-en="State & hooks" data-ar="الحالة و hooks">الحالة و hooks</li>
-          <li data-en="Routing" data-ar="التوجيه">التوجيه</li>
-          <li data-en="API integration" data-ar="تكامل API">تكامل API</li>
-          <li data-en="Forms & validation" data-ar="النماذج والتحقق">النماذج والتحقق</li>
-        </ul>
-      </article>
-
-      <!-- 09 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">09</div>
-          <span class="module-level adv" data-en="Advanced" data-ar="متقدم">متقدم</span>
-        </div>
-        <h3 data-en="Advanced Styling" data-ar="التنسيق المتقدم">التنسيق المتقدم</h3>
-        <p data-en="Craft polished interfaces with Tailwind, SASS, theming, dark mode, and smooth motion design." data-ar="اصنع واجهات مصقولة باستخدام Tailwind و SASS والثيمات والوضع الداكن وتصميم الحركة السلس.">اصنع واجهات مصقولة باستخدام Tailwind و SASS والثيمات والوضع الداكن وتصميم الحركة السلس.</p>
-        <ul class="topics">
-          <li data-en="Tailwind CSS" data-ar="Tailwind CSS">Tailwind CSS</li>
-          <li data-en="SASS / SCSS" data-ar="SASS / SCSS">SASS / SCSS</li>
-          <li data-en="Theming" data-ar="الثيمات">الثيمات</li>
-          <li data-en="Dark mode" data-ar="الوضع الداكن">الوضع الداكن</li>
-          <li data-en="Animations" data-ar="الحركات">الحركات</li>
-        </ul>
-      </article>
-
-      <!-- 10 -->
-      <article class="module reveal">
-        <div class="module-top">
-          <div class="module-num">10</div>
-          <span class="module-level adv" data-en="Advanced" data-ar="متقدم">متقدم</span>
-        </div>
-        <h3 data-en="Performance & Deployment" data-ar="الأداء والنشر">الأداء والنشر</h3>
-        <p data-en="Ship production apps that are fast, tested, secure, and automatically deployed to the cloud." data-ar="أطلق تطبيقات إنتاج سريعة ومُختبرة وآمنة وذات نشر تلقائي إلى السحابة.">أطلق تطبيقات إنتاج سريعة ومُختبرة وآمنة وذات نشر تلقائي إلى السحابة.</p>
-        <ul class="topics">
-          <li data-en="Lighthouse" data-ar="Lighthouse">Lighthouse</li>
-          <li data-en="Core Web Vitals" data-ar="Core Web Vitals">Core Web Vitals</li>
-          <li data-en="Testing" data-ar="الاختبار">الاختبار</li>
-          <li data-en="CI/CD" data-ar="CI/CD">CI/CD</li>
-          <li data-en="Vercel / Netlify" data-ar="Vercel / Netlify">Vercel / Netlify</li>
-        </ul>
-      </article>
-
-    </div>
+    <div class="modules-grid" id="modulesGrid"></div>
   </div>
 </section>
 
-<!-- PROJECTS -->
 <section id="projects">
   <div class="container">
     <div class="sec-head reveal">
       <span class="sec-eyebrow" data-en="Hands-on Practice" data-ar="تطبيق عملي">تطبيق عملي</span>
       <h2 data-en="Build a portfolio that speaks for you." data-ar="ابنِ معرض أعمال يتحدث عنك.">ابنِ معرض أعمال يتحدث عنك.</h2>
-      <p data-en="Six real projects, ordered from easy to professional — each one adds a new skill to your toolkit." data-ar="ستة مشاريع حقيقية مرتبة من السهل إلى الاحترافي — كل مشروع يضيف مهارة جديدة إلى أدواتك.">ستة مشاريع حقيقية مرتبة من السهل إلى الاحترافي — كل مشروع يضيف مهارة جديدة إلى أدواتك.</p>
+      <p data-en="Six real projects, ordered from easy to professional — each one adds a new skill to your toolkit." data-ar="ستة مشاريع حقيقية مرتبة من السهل إلى الاحترافي — كل مشروع يضيف مهارة جديدة لأدواتك.">ستة مشاريع حقيقية مرتبة من السهل إلى الاحترافي — كل مشروع يضيف مهارة جديدة لأدواتك.</p>
     </div>
-
     <div class="projects-grid">
-
       <article class="project reveal">
         <div class="project-visual"><div class="emoji">👤</div></div>
         <div class="project-body">
           <span class="project-lvl" data-en="Beginner" data-ar="مبتدئ">مبتدئ</span>
           <h4 data-en="Personal Portfolio" data-ar="معرض أعمال شخصي">معرض أعمال شخصي</h4>
-          <p data-en="A single-page portfolio with hero, about, projects, and contact — your very first deployed website." data-ar="صفحة معرض أعمال واحدة تتضمن مقدمة ونبذة ومشاريع وتواصل — أول موقع تنشره.">صفحة معرض أعمال واحدة تتضمن مقدمة ونبذة ومشاريع وتواصل — أول موقع تنشره.</p>
+          <p data-en="A single-page portfolio with hero, about, projects and contact — your very first deployed website." data-ar="صفحة معرض واحدة تتضمن مقدمة ونبذة ومشاريع وتواصل — أول موقع تنشره.">صفحة معرض واحدة تتضمن مقدمة ونبذة ومشاريع وتواصل — أول موقع تنشره.</p>
           <div class="project-stack"><span>HTML</span><span>CSS</span><span>Responsive</span></div>
         </div>
       </article>
-
       <article class="project reveal">
         <div class="project-visual"><div class="emoji">🎯</div></div>
         <div class="project-body">
           <span class="project-lvl" data-en="Beginner" data-ar="مبتدئ">مبتدئ</span>
           <h4 data-en="Landing Page" data-ar="صفحة هبوط">صفحة هبوط</h4>
-          <p data-en="A modern marketing landing page with hero, features, pricing, and a strong call to action." data-ar="صفحة تسويقية حديثة تتضمن مقدمة ومزايا وأسعاراً ودعوة قوية لاتخاذ إجراء.">صفحة تسويقية حديثة تتضمن مقدمة ومزايا وأسعاراً ودعوة قوية لاتخاذ إجراء.</p>
+          <p data-en="A modern marketing landing page with hero, features, pricing and a strong call to action." data-ar="صفحة تسويقية حديثة تتضمن مقدمة ومزايا وأسعاراً ودعوة قوية.">صفحة تسويقية حديثة تتضمن مقدمة ومزايا وأسعاراً ودعوة قوية.</p>
           <div class="project-stack"><span>HTML</span><span>CSS Grid</span><span>Flexbox</span></div>
         </div>
       </article>
-
       <article class="project reveal">
         <div class="project-visual"><div class="emoji">✅</div></div>
         <div class="project-body">
           <span class="project-lvl mid" data-en="Intermediate" data-ar="متوسط">متوسط</span>
           <h4 data-en="Todo App" data-ar="تطبيق مهام">تطبيق مهام</h4>
-          <p data-en="Add, edit, complete and delete tasks with localStorage persistence — your first real JavaScript app." data-ar="أضف وعدّل وأكمل واحذف المهام مع حفظ في localStorage — أول تطبيق JavaScript حقيقي لك.">أضف وعدّل وأكمل واحذف المهام مع حفظ في localStorage — أول تطبيق JavaScript حقيقي لك.</p>
+          <p data-en="Add, edit, complete and delete tasks with localStorage persistence — your first real JavaScript app." data-ar="أضف وعدّل وأكمل واحذف المهام مع حفظ في localStorage — أول تطبيق JavaScript حقيقي.">أضف وعدّل وأكمل واحذف المهام مع حفظ في localStorage — أول تطبيق JavaScript حقيقي.</p>
           <div class="project-stack"><span>JavaScript</span><span>DOM</span><span>LocalStorage</span></div>
         </div>
       </article>
-
       <article class="project reveal">
         <div class="project-visual"><div class="emoji">🌤️</div></div>
         <div class="project-body">
           <span class="project-lvl mid" data-en="Intermediate" data-ar="متوسط">متوسط</span>
           <h4 data-en="Weather App" data-ar="تطبيق الطقس">تطبيق الطقس</h4>
-          <p data-en="Search any city and display live weather data using the Fetch API and an external weather service." data-ar="ابحث عن أي مدينة واعرض بيانات الطقس الحية باستخدام Fetch API وخدمة طقس خارجية.">ابحث عن أي مدينة واعرض بيانات الطقس الحية باستخدام Fetch API وخدمة طقس خارجية.</p>
+          <p data-en="Search any city and display live weather data using the Fetch API and an external service." data-ar="ابحث عن أي مدينة واعرض بيانات طقس حية عبر Fetch API وخدمة خارجية.">ابحث عن أي مدينة واعرض بيانات طقس حية عبر Fetch API وخدمة خارجية.</p>
           <div class="project-stack"><span>Fetch API</span><span>Async</span><span>JSON</span></div>
         </div>
       </article>
-
       <article class="project reveal">
         <div class="project-visual"><div class="emoji">🛍️</div></div>
         <div class="project-body">
           <span class="project-lvl adv" data-en="Advanced" data-ar="متقدم">متقدم</span>
           <h4 data-en="E-commerce UI" data-ar="واجهة متجر إلكتروني">واجهة متجر إلكتروني</h4>
-          <p data-en="Product grid, filters, cart state, and routing — built with React and a clean component architecture." data-ar="شبكة منتجات وفلاتر وسلة تسوق وتوجيه — مبنية بـ React ومعمارية مكونات نظيفة.">شبكة منتجات وفلاتر وسلة تسوق وتوجيه — مبنية بـ React ومعمارية مكونات نظيفة.</p>
+          <p data-en="Product grid, filters, cart state and routing — built with React and clean component architecture." data-ar="شبكة منتجات وفلاتر وسلة وتسوق وتوجيه — مبنية بـ React ومعمارية مكونات نظيفة.">شبكة منتجات وفلاتر وسلة وتسوق وتوجيه — مبنية بـ React ومعمارية مكونات نظيفة.</p>
           <div class="project-stack"><span>React</span><span>Hooks</span><span>Router</span></div>
         </div>
       </article>
-
       <article class="project reveal">
         <div class="project-visual"><div class="emoji">📊</div></div>
         <div class="project-body">
           <span class="project-lvl adv" data-en="Advanced" data-ar="متقدم">متقدم</span>
           <h4 data-en="SaaS Dashboard" data-ar="لوحة تحكم SaaS">لوحة تحكم SaaS</h4>
-          <p data-en="A complete dashboard with charts, tables, auth flow, dark mode, and deployment — your capstone project." data-ar="لوحة تحكم كاملة برسوم بيانية وجداول وتدفق مصادقة ووضع داكن ونشر — مشروع تخرجك.">لوحة تحكم كاملة برسوم بيانية وجداول وتدفق مصادقة ووضع داكن ونشر — مشروع تخرجك.</p>
+          <p data-en="Charts, tables, auth flow, dark mode and deployment — your capstone project." data-ar="رسوم بيانية وجداول وتدفق مصادقة ووضع داكن ونشر — مشروع تخرجك.">رسوم بيانية وجداول وتدفق مصادقة ووضع داكن ونشر — مشروع تخرجك.</p>
           <div class="project-stack"><span>React</span><span>Tailwind</span><span>API</span><span>Vercel</span></div>
         </div>
       </article>
-
     </div>
   </div>
 </section>
 
-<!-- CTA -->
 <section id="cta">
   <div class="container">
     <div class="cta reveal">
       <h2 data-en="Your journey starts with one line of code." data-ar="رحلتك تبدأ بسطر واحد من الكود.">رحلتك تبدأ بسطر واحد من الكود.</h2>
-      <p data-en="Pick a module, open your editor, and build something today. Progress compounds — one commit at a time." data-ar="اختر وحدة، افتح محررك، وابنِ شيئاً اليوم. التقدم يتراكم — كوميت واحد في كل مرة.">اختر وحدة، افتح محررك، وابنِ شيئاً اليوم. التقدم يتراكم — كوميت واحد في كل مرة.</p>
+      <p data-en="Pick Module 01, open your editor, and write your first HTML file today. Progress compounds — one commit at a time." data-ar="اختر الوحدة 01، افتح محررك، واكتب أول ملف HTML اليوم. التقدم يتراكم — كوميت واحد في كل مرة.">اختر الوحدة 01، افتح محررك، واكتب أول ملف HTML اليوم. التقدم يتراكم — كوميت واحد في كل مرة.</p>
       <a href="#modules" class="btn btn-primary">
-        <span data-en="Start Module 01" data-ar="ابدأ الوحدة 01">ابدأ الوحدة 01</span>
+        <span data-en="Open Module 01" data-ar="افتح الوحدة 01">افتح الوحدة 01</span>
         <svg class="arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
@@ -849,16 +490,12 @@ footer{
 
 </main>
 
-<!-- FOOTER -->
 <footer>
   <div class="container">
     <div class="footer-inner">
       <a href="#top" class="logo">
         <div class="logo-mark"><span>&lt;/&gt;</span></div>
-        <div class="logo-text">
-          <span class="t1">Frontend</span>
-          <span class="t2">Mastery</span>
-        </div>
+        <div class="logo-text"><span class="t1">Frontend</span><span class="t2">Mastery</span></div>
       </a>
       <div class="footer-links">
         <a href="#stages" data-en="Roadmap" data-ar="المسار">المسار</a>
@@ -873,44 +510,1338 @@ footer{
   </div>
 </footer>
 
-<!-- THREE.JS -->
+<!-- LESSON MODAL -->
+<div class="lesson-overlay" id="lessonOverlay" aria-hidden="true">
+  <div class="lesson-modal" id="lessonModal"></div>
+</div>
+
+<div class="toast" id="toast">Copied!</div>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
 <script>
 /* ============================================================
-   1. LANGUAGE SYSTEM
+   CURRICULUM DATA — real teaching content, bilingual
    ============================================================ */
-const langBtn   = document.getElementById('langBtn');
-const langLabel = document.getElementById('langLabel');
-const body      = document.body;
+const curriculum = [
+
+/* ---------- MODULE 1 ---------- */
+{
+  id: 1, level: 'beginner',
+  title_en: "How the Web Actually Works",
+  title_ar: "كيف يعمل الويب فعلياً",
+  short_en: "Before writing any code, understand what happens between typing a URL and seeing a page.",
+  short_ar: "قبل كتابة أي كود، افهم ما يحدث بين كتابة الرابط وظهور الصفحة.",
+  tags_en: ["Browsers","DNS","HTTP","DevTools"],
+  tags_ar: ["المتصفحات","DNS","HTTP","أدوات المطور"],
+  objectives_en: [
+    "Explain the difference between client and server",
+    "Describe how a URL becomes a rendered page",
+    "Open DevTools and inspect a real website",
+    "Set up VS Code for frontend work"
+  ],
+  objectives_ar: [
+    "اشرح الفرق بين العميل (client) والخادم (server)",
+    "صف كيف يتحول الرابط إلى صفحة معروضة",
+    "افتح أدوات المتصفح وافحص موقعاً حقيقياً",
+    "جهّز VS Code للعمل على الواجهات"
+  ],
+  lessons: [
+    {
+      title_en: "Client and Server",
+      title_ar: "العميل والخادم",
+      content_en: "The web is a conversation between two computers. Your <strong>client</strong> (the browser on your phone or laptop) asks for something. A <strong>server</strong> (a powerful computer somewhere in the world) answers with files. Every website you've ever visited works this way.<br><br>The browser's job is to <em>render</em> — to turn HTML, CSS and JavaScript into the page you see. The server's job is to <em>store and send</em> those files.",
+      content_ar: "الويب هو محادثة بين جهازين. <strong>العميل</strong> (المتصفح على هاتفك أو حاسبك) يطلب شيئاً. و<strong>الخادم</strong> (حاسب قوي في مكان ما في العالم) يجيب بملفات. كل موقع زرته يعمل بهذه الطريقة.<br><br>وظيفة المتصفح هي <em>العرض (render)</em> — تحويل HTML و CSS و JavaScript إلى الصفحة التي تراها. ووظيفة الخادم هي <em>التخزين والإرسال</em> لهذه الملفات.",
+      code: `Browser (Client)          Server
+   |                        |
+   |  "Give me /index.html" |
+   | ---------------------> |
+   |                        |
+   | <---- HTML file ------ |
+   |                        |
+   | Renders the page       |`,
+      codeLang: "text"
+    },
+    {
+      title_en: "DNS — the phonebook of the internet",
+      title_ar: "DNS — دليل الهاتف للإنترنت",
+      content_en: "When you type <code>google.com</code>, your computer has no idea where that is. <strong>DNS (Domain Name System)</strong> translates the human-friendly name into a numeric IP address like <code>142.250.190.46</code> — the actual location of the server. Think of it as the phonebook of the internet.",
+      content_ar: "عندما تكتب <code>google.com</code>، حاسبك لا يعرف أين هذا. <strong>DNS</strong> يحوّل الاسم البشري إلى عنوان IP رقمي مثل <code>142.250.190.46</code> — الموقع الفعلي للخادم. فكّر فيه كدليل هاتف الإنترنت.",
+      code: `google.com   →  142.250.190.46
+youtube.com  →  142.250.72.14
+localhost    →  127.0.0.1`,
+      codeLang: "text"
+    },
+    {
+      title_en: "HTTP — how they talk",
+      title_ar: "HTTP — كيف يتحدثان",
+      content_en: "<strong>HTTP (HyperText Transfer Protocol)</strong> is the language client and server use. When you visit a page, the browser sends a <code>GET</code> request; the server responds with a status code like <code>200 OK</code> (success) or <code>404 Not Found</code>. HTTPS is the same protocol but encrypted — always use HTTPS in production.",
+      content_ar: "<strong>HTTP</strong> هي اللغة التي يستخدمها العميل والخادم. عندما تزور صفحة، يرسل المتصفح طلب <code>GET</code>؛ يرد الخادم برمز حالة مثل <code>200 OK</code> (نجاح) أو <code>404 Not Found</code> (غير موجود). HTTPS هو نفس البروتوكول لكن مشفّر — استخدم HTTPS دائماً في الإنتاج.",
+      code: `GET /index.html HTTP/1.1
+Host: example.com
+
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 1256
+
+<!DOCTYPE html>...`,
+      codeLang: "http"
+    },
+    {
+      title_en: "Your first HTML file",
+      title_ar: "أول ملف HTML لك",
+      content_en: "Create a folder, open it in VS Code, and add a file called <code>index.html</code>. Paste this, save it, and double-click to open in your browser — you just built a website.",
+      content_ar: "أنشئ مجلداً، افتحه في VS Code، وأضف ملفاً باسم <code>index.html</code>. الصق هذا الكود، احفظه، وافتحه بنقرة مزدوجة في المتصفح — لقد بنيت موقعاً.",
+      code: `<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>My First Site</title>
+</head>
+<body>
+  <h1>Hello, world!</h1>
+  <p>I just built my first website.</p>
+</body>
+</html>`,
+      codeLang: "html"
+    }
+  ],
+  mistakes_en: [
+    "Skipping DevTools — F12 is your best debugging friend",
+    "Confusing the server with the browser (browsers cannot store your data)",
+    "Working without an editor like VS Code — Notepad slows you down"
+  ],
+  mistakes_ar: [
+    "تجاهل أدوات المتصفح — F12 هو أفضل صديق لك في التصحيح",
+    "الخلط بين الخادم والمتصفح (المتصفح لا يخزّن بياناتك)",
+    "العمل بدون محرر مثل VS Code — Notepad يبطئك"
+  ],
+  exercises_en: [
+    "Open any website, press F12, and look at the Network tab while reloading. What files were loaded?",
+    "View the page source (Ctrl+U) of a site you like. Find one <code>&lt;h1&gt;</code> tag.",
+    "Create your own <code>index.html</code> with your name and a short paragraph about yourself."
+  ],
+  exercises_ar: [
+    "افتح أي موقع، اضغط F12، وراقب تبويب Network أثناء إعادة التحميل. ما الملفات التي حُمّلت؟",
+    "اعرض الكود المصدري (Ctrl+U) لموقع تحبه. ابحث عن وسم <code>&lt;h1&gt;</code> واحد.",
+    "أنشئ <code>index.html</code> خاصاً بك يحتوي اسمك وفقرة قصيرة عنك."
+  ]
+},
+
+/* ---------- MODULE 2 ---------- */
+{
+  id: 2, level: 'beginner',
+  title_en: "HTML5 Essentials",
+  title_ar: "أساسيات HTML5",
+  short_en: "Build clean, semantic structure that browsers, search engines and screen readers all understand.",
+  short_ar: "ابنِ هيكلاً نظيفاً ودلالياً تفهمه المتصفحات ومحركات البحث وقارئات الشاشة.",
+  tags_en: ["Semantic tags","Forms","Media","Accessibility"],
+  tags_ar: ["الوسوم الدلالية","النماذج","الوسائط","سهولة الوصول"],
+  objectives_en: [
+    "Write valid HTML5 documents from scratch",
+    "Use semantic tags instead of generic divs",
+    "Build accessible forms with proper labels",
+    "Embed images, video and audio correctly"
+  ],
+  objectives_ar: [
+    "كتابة مستندات HTML5 صحيحة من الصفر",
+    "استخدام الوسوم الدلالية بدلاً من divs العامة",
+    "بناء نماذج سهلة الوصول مع تسميات صحيحة",
+    "إدراج الصور والفيديو والصوت بشكل صحيح"
+  ],
+  lessons: [
+    {
+      title_en: "The anatomy of an HTML document",
+      title_ar: "تشريح مستند HTML",
+      content_en: "Every HTML page follows the same skeleton. The <code>&lt;head&gt;</code> holds information <em>about</em> the page (title, character encoding, styles). The <code>&lt;body&gt;</code> holds everything users actually see.",
+      content_ar: "كل صفحة HTML تتبع نفس الهيكل. يحمل <code>&lt;head&gt;</code> معلومات <em>عن</em> الصفحة (العنوان، ترميز الأحرف، الأنماط). ويحمل <code>&lt;body&gt;</code> كل ما يراه المستخدم فعلاً.",
+      code: `<!DOCTYPE html>          <!-- tells browser: this is HTML5 -->
+<html lang="ar">        <!-- language matters for accessibility -->
+<head>
+  <meta charset="UTF-8">   <!-- supports Arabic, emojis, all characters -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Page</title>   <!-- shown on the browser tab -->
+</head>
+<body>
+  <!-- Everything users see goes here -->
+</body>
+</html>`,
+      codeLang: "html"
+    },
+    {
+      title_en: "Semantic vs non-semantic tags",
+      title_ar: "الوسوم الدلالية وغير الدلالية",
+      content_en: "A <code>&lt;div&gt;</code> says nothing about its purpose. Semantic tags like <code>&lt;header&gt;</code>, <code>&lt;nav&gt;</code>, <code>&lt;article&gt;</code> and <code>&lt;footer&gt;</code> tell the browser <em>and</em> screen readers what each section means. This helps SEO and accessibility — and makes your code easier to read.",
+      content_ar: "<code>&lt;div&gt;</code> لا يخبر شيئاً عن غرضه. الوسوم الدلالية مثل <code>&lt;header&gt;</code> و <code>&lt;nav&gt;</code> و <code>&lt;article&gt;</code> و <code>&lt;footer&gt;</code> تخبر المتصفح <em>وقارئات الشاشة</em> بمعنى كل قسم. هذا يساعد SEO وسهولة الوصول — ويجعل الكود أسهل قراءة.",
+      code: `<!-- ❌ Non-semantic: works, but means nothing -->
+<div class="top">
+  <div class="nav">...</div>
+</div>
+<div class="content">
+  <div class="post">...</div>
+</div>
+
+<!-- ✅ Semantic: clear, accessible, SEO-friendly -->
+<header>
+  <nav>...</nav>
+</header>
+<main>
+  <article>...</article>
+</main>
+<footer>...</footer>`,
+      codeLang: "html"
+    },
+    {
+      title_en: "Headings and text",
+      title_ar: "العناوين والنصوص",
+      content_en: "Use <code>&lt;h1&gt;</code> for the main page heading, <code>&lt;h2&gt;</code> for sections, <code>&lt;h3&gt;</code> for subsections — never skip levels. Use <code>&lt;p&gt;</code> for paragraphs, <code>&lt;strong&gt;</code> for important words, and <code>&lt;em&gt;</code> for emphasis.",
+      content_ar: "استخدم <code>&lt;h1&gt;</code> للعنوان الرئيسي للصفحة، و<code>&lt;h2&gt;</code> للأقسام، و<code>&lt;h3&gt;</code> للأقسام الفرعية — لا تتخطَّ المستويات. استخدم <code>&lt;p&gt;</code> للفقرات، و<code>&lt;strong&gt;</code> للكلمات المهمة، و<code>&lt;em&gt;</code> للتأكيد.",
+      code: `<h1>Learn Frontend</h1>
+<h2>Stage 1: Foundations</h2>
+<p>
+  This is a <strong>very important</strong> sentence.
+  Use <em>emphasis</em> sparingly.
+</p>
+
+<h2>Stage 2: Mastery</h2>
+<p>...</p>`,
+      codeLang: "html"
+    },
+    {
+      title_en: "Links, images and accessibility",
+      title_ar: "الروابط والصور وسهولة الوصول",
+      content_en: "Every image needs an <code>alt</code> attribute describing it — it helps blind users and shows when an image fails to load. Links should describe their destination: <code>Read more</code> is worse than <code>Read our HTML guide</code>.",
+      content_ar: "كل صورة تحتاج خاصية <code>alt</code> تصفها — تساعد المكفوفين وتظهر عند فشل تحميل الصورة. يجب أن تصف الروابط وجهتها: <code>اقرأ المزيد</code> أسوأ من <code>اقرأ دليل HTML</code>.",
+      code: `<!-- ✅ Good: descriptive alt and link text -->
+<img src="cat.jpg" alt="A ginger cat sleeping on a keyboard">
+<a href="/html-guide">Read our HTML guide</a>
+
+<!-- ❌ Bad: no alt, vague link -->
+<img src="cat.jpg">
+<a href="/html-guide">Click here</a>`,
+      codeLang: "html"
+    }
+  ],
+  mistakes_en: [
+    "Using <code>&lt;div&gt;</code> for everything instead of semantic tags",
+    "Skipping heading levels (h1 directly to h4)",
+    "Forgetting alt text on images — breaks accessibility and SEO",
+    "Using <code>&lt;br&gt;</code> for spacing instead of CSS"
+  ],
+  mistakes_ar: [
+    "استخدام <code>&lt;div&gt;</code> لكل شيء بدلاً من الوسوم الدلالية",
+    "تخطي مستويات العناوين (h1 ثم h4 مباشرة)",
+    "نسيان نص alt للصور — يكسر سهولة الوصول و SEO",
+    "استخدام <code>&lt;br&gt;</code> للمسافات بدلاً من CSS"
+  ],
+  exercises_en: [
+    "Build a personal bio page using only semantic tags (no divs).",
+    "Create a contact form with name, email and message using proper <code>&lt;label&gt;</code> elements.",
+    "Add three images with meaningful alt text — one decorative (alt=\"\")."
+  ],
+  exercises_ar: [
+    "ابنِ صفحة نبذة شخصية باستخدام الوسوم الدلالية فقط (بدون divs).",
+    "أنشئ نموذج تواصل بالاسم والبريد والرسالة مع استخدام عناصر <code>&lt;label&gt;</code> صحيحة.",
+    "أضف ثلاث صور مع نص alt ذي معنى — واحدة زخرفية (alt=\"\")."
+  ]
+},
+
+/* ---------- MODULE 3 ---------- */
+{
+  id: 3, level: 'beginner',
+  title_en: "CSS3 Essentials",
+  title_ar: "أساسيات CSS3",
+  short_en: "Turn plain HTML into a beautiful, modern interface with layout, color and typography.",
+  short_ar: "حوّل HTML البسيط إلى واجهة جميلة حديثة عبر التخطيط والألوان والخطوط.",
+  tags_en: ["Selectors","Box model","Flexbox","Grid"],
+  tags_ar: ["المحددات","نموذج الصندوق","Flexbox","Grid"],
+  objectives_en: [
+    "Connect CSS to HTML (external, internal, inline)",
+    "Master the box model and spacing",
+    "Build layouts with Flexbox and Grid",
+    "Use CSS variables for theming"
+  ],
+  objectives_ar: [
+    "ربط CSS بـ HTML (خارجي، داخلي، مضمّن)",
+    "إتقان نموذج الصندوق والمسافات",
+    "بناء تخطيطات بـ Flexbox و Grid",
+    "استخدام متغيرات CSS للثيمات"
+  ],
+  lessons: [
+    {
+      title_en: "Connecting CSS to HTML",
+      title_ar: "ربط CSS بـ HTML",
+      content_en: "The best method is a separate <code>.css</code> file linked in the <code>&lt;head&gt;</code>. This keeps structure and style separate — exactly how professionals work.",
+      content_ar: "أفضل طريقة هي ملف <code>.css</code> منفصل مرتبط في <code>&lt;head&gt;</code>. هذا يبقي الهيكل والتنسيق منفصلين — تماماً كما يعمل المحترفون.",
+      code: `<!-- In your HTML <head> -->
+<link rel="stylesheet" href="styles.css">`,
+      codeLang: "html"
+    },
+    {
+      title_en: "Selectors and specificity",
+      title_ar: "المحددات والأولوية",
+      content_en: "You target elements with selectors. <code>p</code> targets all paragraphs; <code>.card</code> targets class \"card\"; <code>#main</code> targets id \"main\". IDs win over classes, classes win over tags. Avoid <code>!important</code> — it always wins and breaks maintainability.",
+      content_ar: "تستهدف العناصر بالمحددات. <code>p</code> يستهدف كل الفقرات؛ <code>.card</code> يستهدف صنف \"card\"؛ <code>#main</code> يستهدف المعرّف \"main\". المعرّفات تتغلب على الأصناف، والأصناف تتغلب على الوسوم. تجنّب <code>!important</code> — فهو يتغلب دائماً ويكسر قابلية الصيانة.",
+      code: `/* Tag selector — targets every <p> */
+p { color: #333; }
+
+/* Class selector — reusable, most common */
+.card { padding: 20px; border-radius: 12px; }
+
+/* ID selector — unique, high priority */
+#main-header { background: #111; }
+
+/* Combining */
+.card .title { font-size: 1.2rem; }`,
+      codeLang: "css"
+    },
+    {
+      title_en: "The box model",
+      title_ar: "نموذج الصندوق",
+      content_en: "Every element is a box: <strong>content</strong> surrounded by <strong>padding</strong>, then a <strong>border</strong>, then <strong>margin</strong>. Add <code>box-sizing: border-box</code> to every element (via the universal selector) so padding and border are included in the width — this is how everyone works in 2024.",
+      content_ar: "كل عنصر هو صندوق: <strong>محتوى</strong> محاط بـ <strong>padding</strong>، ثم <strong>border</strong>، ثم <strong>margin</strong>. أضف <code>box-sizing: border-box</code> لكل عنصر (عبر المحدد العام) حتى تُحسب الحدود والحشوة داخل العرض — هكذا يعمل الجميع في 2024.",
+      code: `*, *::before, *::after {
+  box-sizing: border-box;  /* the modern default */
+}
+
+.card {
+  width: 320px;
+  padding: 20px;           /* inside the box */
+  border: 1px solid #333;  /* around the padding */
+  margin: 16px;            /* outside the box */
+  background: #1a1b2e;
+}`,
+      codeLang: "css"
+    },
+    {
+      title_en: "Flexbox — one-dimensional layout",
+      title_ar: "Flexbox — تخطيط أحادي البعد",
+      content_en: "Flexbox arranges items in a row or column. Set <code>display: flex</code> on the parent; then use <code>justify-content</code> (main axis) and <code>align-items</code> (cross axis) to place children. It's the go-to tool for navbars, toolbars and centering.",
+      content_ar: "Flexbox يرتب العناصر في صف أو عمود. ضع <code>display: flex</code> على الأب؛ ثم استخدم <code>justify-content</code> (المحور الرئيسي) و<code>align-items</code> (المحور المتعامد) لتوزيع الأبناء. هو الأداة المفضلة لأشرطة التنقل وأشرطة الأدوات والتوسيط.",
+      code: `.nav {
+  display: flex;
+  justify-content: space-between;  /* push items apart */
+  align-items: center;             /* vertically centered */
+  gap: 20px;                       /* space between items */
+  padding: 16px 24px;
+}
+
+/* Perfect centering — the classic use case */
+.center-me {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}`,
+      codeLang: "css"
+    },
+    {
+      title_en: "CSS Grid — two-dimensional layout",
+      title_ar: "CSS Grid — تخطيط ثنائي الأبعاد",
+      content_en: "Grid handles rows <em>and</em> columns together. Perfect for page-level layouts, dashboards and image galleries. Use <code>grid-template-columns</code> to define the columns.",
+      content_ar: "Grid يتعامل مع الصفوف <em>والأعمدة</em> معاً. مثالي لتخطيطات الصفحات ولوحات التحكم ومعارض الصور. استخدم <code>grid-template-columns</code> لتحديد الأعمدة.",
+      code: `.cards {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* 3 equal columns */
+  gap: 20px;
+}
+
+/* Auto-responsive — as many columns as fit */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 16px;
+}`,
+      codeLang: "css"
+    }
+  ],
+  mistakes_en: [
+    "Not using <code>box-sizing: border-box</code> — widths become unpredictable",
+    "Using <code>!important</code> to fix specificity issues instead of refactoring",
+    "Reaching for Flexbox for everything — Grid is better for full layouts",
+    "Hardcoding colors — use CSS variables instead"
+  ],
+  mistakes_ar: [
+    "عدم استخدام <code>box-sizing: border-box</code> — تصبح العروض غير متوقعة",
+    "استخدام <code>!important</code> لحل مشاكل الأولوية بدلاً من إعادة الهيكلة",
+    "استخدام Flexbox لكل شيء — Grid أفضل للتخطيطات الكاملة",
+    "ترميز الألوان يدوياً — استخدم متغيرات CSS بدلاً"
+  ],
+  exercises_en: [
+    "Style a card component with padding, border-radius and a subtle shadow.",
+    "Build a navbar using Flexbox with a logo on one side and links on the other.",
+    "Create a 3-column grid of cards that becomes 1 column on mobile."
+  ],
+  exercises_ar: [
+    "نسّق مكوّن بطاقة (card) بحشوة وزوايا مستديرة وظل خفيف.",
+    "ابنِ شريط تنقل بـ Flexbox مع شعار على جهة وروابط على الأخرى.",
+    "أنشئ شبكة من 3 أعمدة تصبح عموداً واحداً على الموبايل."
+  ]
+},
+
+/* ---------- MODULE 4 ---------- */
+{
+  id: 4, level: 'beginner',
+  title_en: "Responsive Design",
+  title_ar: "التصميم المتجاوب",
+  short_en: "Make every layout look perfect on phones, tablets and desktops — mobile-first.",
+  short_ar: "اجعل كل تخطيط مثالياً على الهواتف والأجهزة اللوحية والحواسيب — الموبايل أولاً.",
+  tags_en: ["Media queries","Mobile-first","Fluid type","Images"],
+  tags_ar: ["استعلامات الوسائط","الموبايل أولاً","خطوط مرنة","الصور"],
+  objectives_en: [
+    "Design mobile-first and scale up",
+    "Use media queries correctly",
+    "Write fluid typography with clamp()",
+    "Serve responsive images"
+  ],
+  objectives_ar: [
+    "التصميم للموبايل أولاً ثم التوسع",
+    "استخدام استعلامات الوسائط بشكل صحيح",
+    "كتابة خطوط مرنة باستخدام clamp()",
+    "تقديم صور متجاوبة"
+  ],
+  lessons: [
+    {
+      title_en: "Mobile-first thinking",
+      title_ar: "تفكير الموبايل أولاً",
+      content_en: "Mobile-first means you design for the smallest screen first, then <em>add</em> complexity for larger screens using <code>min-width</code> media queries. This produces cleaner code and better performance on phones — where most users are.",
+      content_ar: "الموبايل أولاً يعني أن تصمم للشاشة الأصغر أولاً، ثم <em>تضيف</em> تعقيداً للشاشات الأكبر عبر استعلامات <code>min-width</code>. هذا ينتج كوداً أنظف وأداءً أفضل على الهواتف — حيث معظم المستخدمين.",
+      code: `/* Mobile first — start simple */
+.container {
+  padding: 16px;
+  font-size: 16px;
+}
+
+/* Add complexity as screen grows */
+@media (min-width: 768px) {
+  .container { padding: 32px; font-size: 18px; }
+}
+@media (min-width: 1200px) {
+  .container { padding: 48px; max-width: 1240px; margin: 0 auto; }
+}`,
+      codeLang: "css"
+    },
+    {
+      title_en: "Fluid typography with clamp()",
+      title_ar: "خطوط مرنة باستخدام clamp()",
+      content_en: "Instead of hardcoding font sizes at every breakpoint, <code>clamp(min, preferred, max)</code> lets text scale smoothly between limits. It's a one-line responsive solution.",
+      content_ar: "بدلاً من ترميز أحجام الخطوط عند كل نقطة توقف، تسمح <code>clamp(min, preferred, max)</code> للنص بالتحجيم السلس بين حدين. إنها حل متجاوب بسطر واحد.",
+      code: `h1 {
+  /* min 2rem, preferred 5vw, max 4rem */
+  font-size: clamp(2rem, 5vw, 4rem);
+}`,
+      codeLang: "css"
+    },
+    {
+      title_en: "Responsive images",
+      title_ar: "الصور المتجاوبة",
+      content_en: "Large images slow down phones. Use the <code>&lt;picture&gt;</code> element or the <code>srcset</code> attribute to serve smaller images to smaller screens. Also always set <code>max-width: 100%</code> on images so they never overflow.",
+      content_ar: "الصور الكبيرة تبطئ الهواتف. استخدم عنصر <code>&lt;picture&gt;</code> أو خاصية <code>srcset</code> لتقديم صور أصغر للشاشات الأصغر. وضع أيضاً <code>max-width: 100%</code> على الصور دائماً حتى لا تتجاوز.",
+      code: `img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+<!-- Serve a smaller file to smaller screens -->
+<img
+  src="hero-large.jpg"
+  srcset="hero-small.jpg 640w,
+          hero-medium.jpg 1024w,
+          hero-large.jpg 1600w"
+  sizes="(max-width: 640px) 100vw, 1024px"
+  alt="Hero image">`,
+      codeLang: "html"
+    }
+  ],
+  mistakes_en: [
+    "Designing desktop-first then squeezing mobile",
+    "Using <code>max-width</code> media queries instead of <code>min-width</code>",
+    "Hardcoding px font sizes instead of using rem and clamp()",
+    "Forgetting <code>max-width: 100%</code> on images"
+  ],
+  mistakes_ar: [
+    "التصميم للحاسوب أولاً ثم ضغط الموبايل",
+    "استخدام استعلامات <code>max-width</code> بدلاً من <code>min-width</code>",
+    "ترميز أحجام الخطوط بـ px بدلاً من rem و clamp()",
+    "نسيان <code>max-width: 100%</code> على الصور"
+  ],
+  exercises_en: [
+    "Take a desktop-only page and rewrite it mobile-first.",
+    "Replace all your hardcoded font sizes with clamp().",
+    "Test your site using Chrome DevTools' device toolbar at 375px, 768px, 1440px."
+  ],
+  exercises_ar: [
+    "خذ صفحة مصممة للحاسوب وأعد كتابتها بمنهج الموبايل أولاً.",
+    "استبدل كل أحجام الخطوط المرمّزة بـ clamp().",
+    "اختبر موقعك عبر شريط الأجهزة في Chrome DevTools عند 375px و 768px و 1440px."
+  ]
+},
+
+/* ---------- MODULE 5 ---------- */
+{
+  id: 5, level: 'mid',
+  title_en: "JavaScript Basics",
+  title_ar: "أساسيات JavaScript",
+  short_en: "The language that makes pages interactive — variables, logic, functions and the DOM.",
+  short_ar: "اللغة التي تجعل الصفحات تفاعلية — المتغيرات والمنطق والدوال والـ DOM.",
+  tags_en: ["Variables","Functions","Arrays","DOM","Events"],
+  tags_ar: ["المتغيرات","الدوال","المصفوفات","DOM","الأحداث"],
+  objectives_en: [
+    "Declare variables with let and const correctly",
+    "Write functions and understand scope",
+    "Manipulate arrays and objects",
+    "Select and change DOM elements",
+    "Respond to user events"
+  ],
+  objectives_ar: [
+    "إعلان المتغيرات بـ let و const بشكل صحيح",
+    "كتابة الدوال وفهم النطاق (scope)",
+    "التعامل مع المصفوفات والكائنات",
+    "اختيار وتعديل عناصر DOM",
+    "الاستجابة لأحداث المستخدم"
+  ],
+  lessons: [
+    {
+      title_en: "Variables: let, const and var",
+      title_ar: "المتغيرات: let و const و var",
+      content_en: "Use <code>const</code> by default — it can't be reassigned, so it's safer. Use <code>let</code> when you need to change the value later. Forget <code>var</code> — it has confusing scoping rules that cause bugs.",
+      content_ar: "استخدم <code>const</code> كافتراضي — لا يمكن إعادة إسناده، لذا هو أأمن. استخدم <code>let</code> عندما تحتاج تغيير القيمة لاحقاً. انسَ <code>var</code> — لديه قواعد نطاق مربكة تسبب أخطاء.",
+      code: `const name = "Sara";       // cannot be reassigned
+let age = 25;              // can be reassigned
+age = 26;                  // ✅ works
+
+const PI = 3.14159;
+// PI = 3;                 // ❌ TypeError
+
+// var — avoid it
+var old = "don't use this";`,
+      codeLang: "javascript"
+    },
+    {
+      title_en: "Functions",
+      title_ar: "الدوال",
+      content_en: "A function is a reusable block of code. Modern JavaScript favors <strong>arrow functions</strong> for short operations. Functions can <code>return</code> a value, which the caller uses.",
+      content_ar: "الدالة هي كتلة كود قابلة لإعادة الاستخدام. JavaScript الحديثة تفضّل <strong>دوال السهم (arrow functions)</strong> للعمليات القصيرة. يمكن للدوال أن <code>return</code> قيمة يستخدمها المُنادي.",
+      code: `// Classic function
+function add(a, b) {
+  return a + b;
+}
+
+// Arrow function — same thing, shorter
+const add = (a, b) => a + b;
+
+// With a block (when you need multiple lines)
+const greet = (name) => {
+  const message = \`Hello, \${name}!\`;
+  return message;
+};
+
+console.log(greet("Sara"));  // "Hello, Sara!"`,
+      codeLang: "javascript"
+    },
+    {
+      title_en: "Arrays and objects",
+      title_ar: "المصفوفات والكائنات",
+      content_en: "Arrays store ordered lists; objects store named keys. Together they model almost all real data. Learn <code>map</code>, <code>filter</code> and <code>find</code> — you'll use them every day.",
+      content_ar: "المصفوفات تخزّن قوائم مرتبة؛ والكائنات تخزّن مفاتيح مسماة. معاً تمثّلان تقريباً كل البيانات الحقيقية. تعلّم <code>map</code> و <code>filter</code> و <code>find</code> — ستستخدمها كل يوم.",
+      code: `const users = [
+  { name: "Sara", age: 25 },
+  { name: "Omar", age: 31 },
+  { name: "Lina", age: 28 }
+];
+
+// map — transform every item
+const names = users.map(u => u.name);
+// ["Sara", "Omar", "Lina"]
+
+// filter — keep only some items
+const adults = users.filter(u => u.age >= 30);
+// [{ name: "Omar", age: 31 }]
+
+// find — get the first match
+const sara = users.find(u => u.name === "Sara");`,
+      codeLang: "javascript"
+    },
+    {
+      title_en: "The DOM and events",
+      title_ar: "الـ DOM والأحداث",
+      content_en: "The <strong>DOM</strong> is the browser's representation of your HTML as a JavaScript object. You can select elements with <code>querySelector</code>, change their content or style, and react to clicks and input.",
+      content_ar: "<strong>DOM</strong> هو تمثيل المتصفح لـ HTML ككائن JavaScript. يمكنك اختيار العناصر بـ <code>querySelector</code>، وتغيير محتواها أو نمطها، والاستجابة للنقرات والمدخلات.",
+      code: `const btn = document.querySelector("#btn");
+const title = document.querySelector("h1");
+
+btn.addEventListener("click", () => {
+  title.textContent = "You clicked!";
+  title.style.color = "#a855f7";
+});
+
+// Reading input
+const input = document.querySelector("#name-input");
+input.addEventListener("input", (e) => {
+  console.log("User typed:", e.target.value);
+});`,
+      codeLang: "javascript"
+    }
+  ],
+  mistakes_en: [
+    "Using <code>var</code> instead of <code>const</code> / <code>let</code>",
+    "Trying to use <code>querySelector</code> before the DOM is ready",
+    "Mutating arrays with <code>push</code> when <code>map</code> would be cleaner",
+    "Forgetting that <code>const</code> objects can still be mutated"
+  ],
+  mistakes_ar: [
+    "استخدام <code>var</code> بدلاً من <code>const</code> / <code>let</code>",
+    "محاولة <code>querySelector</code> قبل جاهزية DOM",
+    "تعديل المصفوفات بـ <code>push</code> بينما <code>map</code> أنظف",
+    "نسيان أن كائنات <code>const</code> يمكن تعديل محتواها"
+  ],
+  exercises_en: [
+    "Build a counter: a button increments a number shown on screen.",
+    "Given an array of numbers, use <code>filter</code> to keep only even numbers.",
+    "Create a button that toggles a dark mode class on the body."
+  ],
+  exercises_ar: [
+    "ابنِ عدّاداً: زر يزيد رقماً معروضاً على الشاشة.",
+    "بالنظر لمصفوفة أرقام، استخدم <code>filter</code> للاحتفاظ بالأرقام الزوجية فقط.",
+    "أنشئ زراً يبدّل صنف الوضع الداكن على body."
+  ]
+},
+
+/* ---------- MODULE 6 ---------- */
+{
+  id: 6, level: 'mid',
+  title_en: "Advanced JavaScript",
+  title_ar: "JavaScript المتقدمة",
+  short_en: "Async programming, Fetch API, real data — the tools that separate beginners from pros.",
+  short_ar: "البرمجة غير المتزامنة و Fetch API والبيانات الحقيقية — أدوات تميّز المبتدئين عن المحترفين.",
+  tags_en: ["Promises","async/await","Fetch","Closures"],
+  tags_ar: ["Promises","async/await","Fetch","Closures"],
+  objectives_en: [
+    "Understand and use Promises",
+    "Write async functions with await",
+    "Fetch real data from public APIs",
+    "Handle errors gracefully"
+  ],
+  objectives_ar: [
+    "فهم واستخدام Promises",
+    "كتابة دوال async مع await",
+    "جلب بيانات حقيقية من APIs عامة",
+    "التعامل مع الأخطاء بأناقة"
+  ],
+  lessons: [
+    {
+      title_en: "Why async?",
+      title_ar: "لماذا البرمجة غير المتزامنة؟",
+      content_en: "Some operations take time — fetching data from a server, reading a file. If JavaScript <em>waited</em> for them, the whole page would freeze. Async code lets the page stay responsive while waiting.",
+      content_ar: "بعض العمليات تحتاج وقتاً — جلب بيانات من خادم، قراءة ملف. إذا <em>انتظرت</em> JavaScript، ستتجمّد الصفحة كلها. الكود غير المتزامن يحافظ على استجابة الصفحة أثناء الانتظار.",
+      code: `// Blocking — bad
+const data = fetchDataSlowly();  // page freezes
+
+// Non-blocking — good
+fetchDataSlowly().then(data => {
+  console.log(data);  // runs when ready
+});`,
+      codeLang: "javascript"
+    },
+    {
+      title_en: "async / await",
+      title_ar: "async / await",
+      content_en: "The modern way to write async code. Mark a function <code>async</code>, and use <code>await</code> before any Promise. The code reads like synchronous code — but stays non-blocking.",
+      content_ar: "الطريقة الحديثة لكتابة الكود غير المتزامن. ضع <code>async</code> أمام الدالة، واستخدم <code>await</code> قبل أي Promise. يُقرأ الكود كأنه متزامن — لكنه غير متزامن.",
+      code: `async function getUser(id) {
+  try {
+    const res = await fetch(\`https://api.example.com/users/\${id}\`);
+    if (!res.ok) throw new Error("User not found");
+    const data = await res.json();
+    return data;
+  } catch (err) {
+    console.error("Failed:", err.message);
+    return null;
+  }
+}`,
+      codeLang: "javascript"
+    },
+    {
+      title_en: "Fetching real data",
+      title_ar: "جلب بيانات حقيقية",
+      content_en: "The <code>fetch</code> function requests data from a URL and returns a Promise. Use it with real public APIs — weather, images, country data — to practice. Always check <code>res.ok</code> and wrap in try/catch.",
+      content_ar: "دالة <code>fetch</code> تطلب بيانات من رابط وتعيد Promise. استخدمها مع APIs عامة حقيقية — طقس، صور، بيانات دول — للتدريب. افحص <code>res.ok</code> دائماً وغلّف بـ try/catch.",
+      code: `async function getWeather(city) {
+  try {
+    const res = await fetch(
+      \`https://api.weatherapi.com/v1/current.json?key=YOUR_KEY&q=\${city}\`
+    );
+    if (!res.ok) throw new Error("Weather not available");
+    const data = await res.json();
+    return data.current.temp_c;
+  } catch (err) {
+    console.error(err);
+  }
+}`,
+      codeLang: "javascript"
+    }
+  ],
+  mistakes_en: [
+    "Forgetting <code>await</code> and getting a Promise instead of data",
+    "Not handling errors — one network hiccup breaks the app",
+    "Forgetting to check <code>res.ok</code> — a 404 still returns a Promise",
+    "Writing async code without try/catch"
+  ],
+  mistakes_ar: [
+    "نسيان <code>await</code> والحصول على Promise بدلاً من بيانات",
+    "عدم معالجة الأخطاء — خطأ شبكة واحد يكسر التطبيق",
+    "نسيان فحص <code>res.ok</code> — استجابة 404 تعيد Promise",
+    "كتابة كود async بدون try/catch"
+  ],
+  exercises_en: [
+    "Fetch a random user from <code>https://randomuser.me/api/</code> and display their name.",
+    "Build a search box that fetches country data from <code>restcountries.com</code>.",
+    "Add loading and error states to your UI."
+  ],
+  exercises_ar: [
+    "اجلب مستخدماً عشوائياً من <code>https://randomuser.me/api/</code> واعرض اسمه.",
+    "ابنِ مربع بحث يجلب بيانات دولة من <code>restcountries.com</code>.",
+    "أضف حالات تحميل وخطأ في واجهتك."
+  ]
+},
+
+/* ---------- MODULE 7 ---------- */
+{
+  id: 7, level: 'mid',
+  title_en: "Git & Developer Tools",
+  title_ar: "Git وأدوات المطور",
+  short_en: "Work like a professional team: version control, packages, and modern tooling.",
+  short_ar: "اعمل كفريق احترافي: إدارة النسخ والحزم والأدوات الحديثة.",
+  tags_en: ["Git","GitHub","npm","Vite","ESLint"],
+  tags_ar: ["Git","GitHub","npm","Vite","ESLint"],
+  objectives_en: [
+    "Track changes with Git",
+    "Push to GitHub and open a PR",
+    "Use npm to install packages",
+    "Scaffold a project with Vite"
+  ],
+  objectives_ar: [
+    "تتبّع التغييرات بـ Git",
+    "الرفع إلى GitHub وفتح PR",
+    "استخدام npm لتثبيت الحزم",
+    "إنشاء مشروع بـ Vite"
+  ],
+  lessons: [
+    {
+      title_en: "Git basics",
+      title_ar: "أساسيات Git",
+      content_en: "Git saves snapshots (commits) of your code. You <strong>init</strong> a repo, <strong>add</strong> files, <strong>commit</strong> with a message, then <strong>push</strong> to GitHub. This is the loop you'll run hundreds of times.",
+      content_ar: "Git يحفظ لقطات (commits) لكودك. تُنشئ مستودعاً بـ <strong>init</strong>، ثم <strong>add</strong> للملفات، ثم <strong>commit</strong> برسالة، ثم <strong>push</strong> إلى GitHub. هذه الحلقة ستكررها مئات المرات.",
+      code: `git init
+git add .
+git commit -m "Add hero section"
+git push origin main
+
+# Daily workflow
+git status            # what changed?
+git add file.html     # stage a specific file
+git commit -m "Fix navbar spacing"
+git push`,
+      codeLang: "bash"
+    },
+    {
+      title_en: "npm and packages",
+      title_ar: "npm والحزم",
+      content_en: "<code>npm</code> is the package manager for JavaScript. You install libraries (like React) with <code>npm install</code>. They live in <code>node_modules/</code> — never commit that folder.",
+      content_ar: "<code>npm</code> هو مدير حزم JavaScript. تثبّت المكتبات (مثل React) بـ <code>npm install</code>. تسكن في <code>node_modules/</code> — لا ترفع هذا المجلد أبداً.",
+      code: `npm init -y
+npm install react react-dom
+npm install -D vite
+npm run dev`,
+      codeLang: "bash"
+    },
+    {
+      title_en: "Start a Vite project",
+      title_ar: "ابدأ مشروع Vite",
+      content_en: "Vite is the modern replacement for older tools. It starts a dev server in milliseconds and bundles production builds. This is what most professional teams use in 2024.",
+      content_ar: "Vite هو البديل الحديث للأدوات القديمة. يشغّل خادم تطوير في أجزاء من الثانية ويحزم بناء الإنتاج. هذه هي الأداة التي تستخدمها معظم الفرق الاحترافية في 2024.",
+      code: `npm create vite@latest my-app
+cd my-app
+npm install
+npm run dev
+# Open http://localhost:5173`,
+      codeLang: "bash"
+    }
+  ],
+  mistakes_en: [
+    "Committing <code>node_modules/</code> — always use a <code>.gitignore</code>",
+    "Writing vague commit messages like \"update\" or \"fix\"",
+    "Working on <code>main</code> directly instead of feature branches",
+    "Committing secrets (.env files, API keys)"
+  ],
+  mistakes_ar: [
+    "رفع <code>node_modules/</code> — استخدم <code>.gitignore</code> دائماً",
+    "كتابة رسائل كوميت غامضة مثل \"update\" أو \"fix\"",
+    "العمل على <code>main</code> مباشرة بدلاً من فروع الميزات",
+    "رفع الأسرار (ملفات .env، مفاتيح API)"
+  ],
+  exercises_en: [
+    "Create a GitHub repo and push your first HTML project.",
+    "Install Vite and scaffold a fresh project.",
+    "Add a <code>.gitignore</code> that excludes node_modules."
+  ],
+  exercises_ar: [
+    "أنشئ مستودع GitHub وارفع مشروع HTML الأول.",
+    "ثبّت Vite وأنشئ مشروعاً جديداً.",
+    "أضف <code>.gitignore</code> يستثني node_modules."
+  ]
+},
+
+/* ---------- MODULE 8 ---------- */
+{
+  id: 8, level: 'adv',
+  title_en: "React Fundamentals",
+  title_ar: "أساسيات React",
+  short_en: "Build modern apps with components, state, hooks and routing.",
+  short_ar: "ابنِ تطبيقات حديثة بمكونات وحالة وhooks وتوجيه.",
+  tags_en: ["Components","Props","useState","useEffect","Router"],
+  tags_ar: ["المكونات","Props","useState","useEffect","Router"],
+  objectives_en: [
+    "Create reusable components",
+    "Pass data with props",
+    "Manage state with useState",
+    "Fetch data in useEffect"
+  ],
+  objectives_ar: [
+    "إنشاء مكونات قابلة لإعادة الاستخدام",
+    "تمرير البيانات عبر props",
+    "إدارة الحالة بـ useState",
+    "جلب البيانات في useEffect"
+  ],
+  lessons: [
+    {
+      title_en: "Components",
+      title_ar: "المكونات",
+      content_en: "A component is a JavaScript function that returns JSX (HTML-like syntax). Think of it as a reusable custom HTML tag. Build small components and compose them.",
+      content_ar: "المكوّن هو دالة JavaScript تعيد JSX (نحو شبيه بـ HTML). فكّر فيه كوسم HTML مخصص قابل لإعادة الاستخدام. ابنِ مكونات صغيرة وركّبها.",
+      code: `function Button({ label, onClick }) {
+  return (
+    <button className="btn" onClick={onClick}>
+      {label}
+    </button>
+  );
+}
+
+// Use it anywhere — even multiple times
+<Button label="Start" onClick={handleStart} />
+<Button label="Cancel" onClick={handleCancel} />`,
+      codeLang: "jsx"
+    },
+    {
+      title_en: "State with useState",
+      title_ar: "الحالة بـ useState",
+      content_en: "<strong>State</strong> is data that changes over time. When state updates, React re-renders the component. Use <code>useState</code> for anything the user can modify: input values, toggles, counts.",
+      content_ar: "<strong>الحالة</strong> هي بيانات تتغير مع الوقت. عندما تتحدث الحالة، يعيد React عرض المكون. استخدم <code>useState</code> لكل ما يمكن للمستخدم تعديله: قيم الإدخال، المفاتيح، العدادات.",
+      code: `import { useState } from "react";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  return (
+    <div>
+      <p>Count: {count}</p>
+      <button onClick={() => setCount(count + 1)}>
+        Increment
+      </button>
+    </div>
+  );
+}`,
+      codeLang: "jsx"
+    },
+    {
+      title_en: "Effects and data fetching",
+      title_ar: "التأثيرات وجلب البيانات",
+      content_en: "Use <code>useEffect</code> to run code after render — fetching data, subscribing to events, setting timers. Pass a dependency array to control when it re-runs.",
+      content_ar: "استخدم <code>useEffect</code> لتشغيل الكود بعد العرض — جلب البيانات، الاشتراك في الأحداث، إعداد المؤقتات. مرّر مصفوفة تبعيات للتحكم بمتى يُعاد التشغيل.",
+      code: `function Users() {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    async function load() {
+      const res = await fetch("https://jsonplaceholder.typicode.com/users");
+      const data = await res.json();
+      setUsers(data);
+    }
+    load();
+  }, []);  // empty array = run once on mount
+
+  return (
+    <ul>
+      {users.map(u => <li key={u.id}>{u.name}</li>)}
+    </ul>
+  );
+}`,
+      codeLang: "jsx"
+    }
+  ],
+  mistakes_en: [
+    "Forgetting the <code>key</code> prop in lists — causes subtle bugs",
+    "Mutating state directly instead of using the setter",
+    "Missing dependency arrays in <code>useEffect</code> — infinite loops",
+    "Building huge components instead of small reusable ones"
+  ],
+  mistakes_ar: [
+    "نسيان <code>key</code> في القوائم — يسبب أخطاء خفية",
+    "تعديل الحالة مباشرة بدلاً من استخدام المُحدِّث",
+    "نسيان مصفوفة التبعيات في <code>useEffect</code> — حلقات لا نهائية",
+    "بناء مكونات ضخمة بدلاً من مكونات صغيرة قابلة لإعادة الاستخدام"
+  ],
+  exercises_en: [
+    "Build a counter app with increment, decrement and reset buttons.",
+    "Fetch users from JSONPlaceholder and render them in a list.",
+    "Create a reusable <code>Card</code> component used three times."
+  ],
+  exercises_ar: [
+    "ابنِ تطبيق عدّاد بأزرار زيادة ونقصان وإعادة تعيين.",
+    "اجلب مستخدمين من JSONPlaceholder واعرضهم في قائمة.",
+    "أنشئ مكوّن <code>Card</code> قابلاً لإعادة الاستخدام واستخدمه ثلاث مرات."
+  ]
+},
+
+/* ---------- MODULE 9 ---------- */
+{
+  id: 9, level: 'adv',
+  title_en: "Advanced Styling Systems",
+  title_ar: "أنظمة التنسيق المتقدمة",
+  short_en: "Tailwind, SASS, theming, dark mode and motion design.",
+  short_ar: "Tailwind و SASS والثيمات والوضع الداكن وتصميم الحركة.",
+  tags_en: ["Tailwind","SASS","Theming","Dark mode","Animations"],
+  tags_ar: ["Tailwind","SASS","الثيمات","الوضع الداكن","الحركات"],
+  objectives_en: [
+    "Style apps quickly with Tailwind",
+    "Structure CSS with SASS",
+    "Implement dark mode with CSS variables",
+    "Add tasteful animations"
+  ],
+  objectives_ar: [
+    "تنسيق التطبيقات بسرعة بـ Tailwind",
+    "هيكلة CSS بـ SASS",
+    "تنفيذ الوضع الداكن بمتغيرات CSS",
+    "إضافة حركات أنيقة"
+  ],
+  lessons: [
+    {
+      title_en: "Utility-first with Tailwind",
+      title_ar: "المنفعة أولاً مع Tailwind",
+      content_en: "Tailwind provides tiny utility classes (<code>p-4</code>, <code>text-lg</code>, <code>flex</code>) that compose into any design. It eliminates naming headaches and keeps styles next to structure.",
+      content_ar: "يوفّر Tailwind أصناف منفعة صغيرة (<code>p-4</code>، <code>text-lg</code>، <code>flex</code>) تتكوّن لتشكّل أي تصميم. يقضي على صداع التسمية ويُبقي الأنماط قريبة من الهيكل.",
+      code: `<div class="p-6 rounded-xl bg-slate-900 text-white
+            flex items-center justify-between">
+  <h2 class="text-xl font-bold">Dashboard</h2>
+  <button class="px-4 py-2 rounded-lg bg-indigo-500
+                 hover:bg-indigo-400 transition">
+    New
+  </button>
+</div>`,
+      codeLang: "html"
+    },
+    {
+      title_en: "Dark mode with CSS variables",
+      title_ar: "الوضع الداكن بمتغيرات CSS",
+      content_en: "Define colors as variables, then swap them on a <code>data-theme</code> attribute. One toggle switches the whole site — no duplicated styles.",
+      content_ar: "عرّف الألوان كمتغيرات، ثم بدّلها عبر خاصية <code>data-theme</code>. مفتاح واحد يبدّل الموقع كله — دون تكرار الأنماط.",
+      code: `:root {
+  --bg: #ffffff;
+  --text: #0f172a;
+  --accent: #6366f1;
+}
+[data-theme="dark"] {
+  --bg: #05060f;
+  --text: #e8ecf4;
+  --accent: #a855f7;
+}
+body {
+  background: var(--bg);
+  color: var(--text);
+}
+
+// JS toggles: document.documentElement.dataset.theme = "dark"`,
+      codeLang: "css"
+    }
+  ],
+  mistakes_en: [
+    "Fighting Tailwind instead of learning its scale",
+    "Overusing global CSS when utilities would do",
+    "Animating properties that cause layout thrash (use transform/opacity)",
+    "Hardcoding dark-mode colors instead of using variables"
+  ],
+  mistakes_ar: [
+    "محاربة Tailwind بدلاً من تعلّم سلّمه",
+    "الإفراط في CSS العام بينما تكفي المنافع",
+    "تحريك خصائص تسبب إعادة تخطيط (استخدم transform/opacity)",
+    "ترميز ألوان الوضع الداكن يدوياً بدلاً من المتغيرات"
+  ],
+  exercises_en: [
+    "Rebuild one of your CSS pages using Tailwind classes.",
+    "Add a dark-mode toggle that persists across reloads with localStorage.",
+    "Add a hover animation to a card using transform and transition."
+  ],
+  exercises_ar: [
+    "أعد بناء إحدى صفحات CSS الخاصة بك باستخدام أصناف Tailwind.",
+    "أضف مفتاح وضع داكن يحتفظ بالحالة عبر إعادة التحميل بـ localStorage.",
+    "أضف حركة hover لبطاقة باستخدام transform و transition."
+  ]
+},
+
+/* ---------- MODULE 10 ---------- */
+{
+  id: 10, level: 'adv',
+  title_en: "Performance & Deployment",
+  title_ar: "الأداء والنشر",
+  short_en: "Ship fast, tested, deployed apps that score green on Lighthouse.",
+  short_ar: "أطلق تطبيقات سريعة ومختبرة ومنشورة بدرجات خضراء في Lighthouse.",
+  tags_en: ["Lighthouse","Core Web Vitals","Testing","CI/CD","Vercel"],
+  tags_ar: ["Lighthouse","Core Web Vitals","الاختبار","CI/CD","Vercel"],
+  objectives_en: [
+    "Measure performance with Lighthouse",
+    "Optimize for Core Web Vitals",
+    "Write basic tests",
+    "Deploy via GitHub to Vercel"
+  ],
+  objectives_ar: [
+    "قياس الأداء بـ Lighthouse",
+    "تحسين Core Web Vitals",
+    "كتابة اختبارات أساسية",
+    "النشر عبر GitHub إلى Vercel"
+  ],
+  lessons: [
+    {
+      title_en: "What Core Web Vitals measure",
+      title_ar: "ماذا تقيس Core Web Vitals",
+      content_en: "<strong>LCP</strong> (Largest Contentful Paint) measures how fast the main content loads. <strong>INP</strong> (Interaction to Next Paint) measures responsiveness. <strong>CLS</strong> (Cumulative Layout Shift) measures visual stability. Aim for green scores on all three.",
+      content_ar: "<strong>LCP</strong> يقيس سرعة تحميل المحتوى الرئيسي. <strong>INP</strong> يقيس الاستجابة. <strong>CLS</strong> يقيس استقرار التصميم. استهدف درجات خضراء في الثلاثة.",
+      code: `LCP  →  under 2.5s   (main content visible)
+INP  →  under 200ms  (responds to clicks fast)
+CLS  →  under 0.1    (no jumpy layout)`,
+      codeLang: "text"
+    },
+    {
+      title_en: "Quick performance wins",
+      title_ar: "انتصارات أداء سريعة",
+      content_en: "Compress images, lazy-load below-the-fold content, defer non-critical scripts, and set explicit width/height on images to prevent layout shift. These four changes often double your score.",
+      content_ar: "اضغط الصور، حمّل الكسول ما هو خارج الشاشة، أجّل السكربتات غير الحرجة، وضع عرضاً وارتفاعاً صريحين للصور لمنع إزاحة التخطيط. هذه التغييرات الأربعة غالباً تضاعف درجتك.",
+      code: `<!-- Lazy load below the fold -->
+<img src="hero.jpg" alt="..." loading="lazy" width="800" height="500">
+
+<!-- Defer non-critical JS -->
+<script src="analytics.js" defer></script>
+
+<!-- Preconnect to APIs -->
+<link rel="preconnect" href="https://api.example.com">`,
+      codeLang: "html"
+    },
+    {
+      title_en: "Deploy with Vercel",
+      title_ar: "النشر عبر Vercel",
+      content_en: "Push your project to GitHub. Connect the repo to Vercel. Every push automatically rebuilds and deploys — with a preview URL for every pull request. This is modern CI/CD in action.",
+      content_ar: "ارفع مشروعك إلى GitHub. اربط المستودع بـ Vercel. كل push يعيد البناء والنشر تلقائياً — مع رابط معاينة لكل pull request. هذا هو CI/CD الحديث عملياً.",
+      code: `1. Push code to GitHub
+2. Go to vercel.com → Import Project
+3. Select your repo → Deploy
+4. Every push to main is live in ~30s`,
+      codeLang: "text"
+    }
+  ],
+  mistakes_en: [
+    "Shipping uncompressed images — the #1 perf killer",
+    "Loading every script synchronously in the <head>",
+    "Skipping explicit image dimensions — causes layout shift",
+    "Deploying without testing on a real phone"
+  ],
+  mistakes_ar: [
+    "نشر صور غير مضغوطة — القاتل الأول للأداء",
+    "تحميل كل السكربتات بشكل متزامن في <code>&lt;head&gt;</code>",
+    "تجاهل الأبعاد الصريحة للصور — يسبب إزاحة التخطيط",
+    "النشر دون اختبار على هاتف حقيقي"
+  ],
+  exercises_en: [
+    "Run Lighthouse on your portfolio and fix the top 3 issues.",
+    "Add <code>loading=\"lazy\"</code> and explicit dimensions to all images.",
+    "Deploy your final project to Vercel and share the link."
+  ],
+  exercises_ar: [
+    "شغّل Lighthouse على معرض أعمالك وأصلح أعلى 3 مشاكل.",
+    "أضف <code>loading=\"lazy\"</code> وأبعاداً صريحة لكل الصور.",
+    "انشر مشروعك النهائي على Vercel وشارك الرابط."
+  ]
+}
+
+];
+
+/* ============================================================
+   LANGUAGE SYSTEM
+   ============================================================ */
+let currentLang = localStorage.getItem('fm-lang') || 'ar';
+let currentModule = null;
 
 function setLang(lang){
+  currentLang = lang;
   document.documentElement.lang = lang;
-  document.documentElement.dir  = (lang === 'ar') ? 'rtl' : 'ltr';
-  body.classList.toggle('lang-en', lang === 'en');
-  body.classList.toggle('lang-ar', lang === 'ar');
-
+  document.documentElement.dir = (lang === 'ar') ? 'rtl' : 'ltr';
+  document.body.classList.toggle('lang-en', lang === 'en');
+  document.body.classList.toggle('lang-ar', lang === 'ar');
   document.querySelectorAll('[data-en][data-ar]').forEach(el => {
     el.innerHTML = el.dataset[lang];
   });
-
-  langLabel.textContent = (lang === 'ar') ? 'EN' : 'AR';
+  document.getElementById('langLabel').textContent = (lang === 'ar') ? 'EN' : 'AR';
   localStorage.setItem('fm-lang', lang);
+  renderModules();
+  if (currentModule !== null) openLesson(currentModule);
 }
 
-const savedLang = localStorage.getItem('fm-lang') || 'ar';
-setLang(savedLang);
-
-langBtn.addEventListener('click', () => {
-  const next = (document.documentElement.lang === 'ar') ? 'en' : 'ar';
-  setLang(next);
+document.getElementById('langBtn').addEventListener('click', () => {
+  setLang(currentLang === 'ar' ? 'en' : 'ar');
 });
 
 /* ============================================================
-   2. NAVBAR SCROLL STATE + PROGRESS
+   RENDER MODULE CARDS
    ============================================================ */
+function renderModules(){
+  const grid = document.getElementById('modulesGrid');
+  const L = currentLang;
+  grid.innerHTML = curriculum.map(m => {
+    const levelLabel = {
+      beginner: L==='ar'?'مبتدئ':'Beginner',
+      mid: L==='ar'?'متوسط':'Intermediate',
+      adv: L==='ar'?'متقدم':'Advanced'
+    }[m.level];
+    const levelClass = m.level === 'mid' ? 'mid' : m.level === 'adv' ? 'adv' : '';
+    const tags = L==='ar' ? m.tags_ar : m.tags_en;
+    return `
+      <article class="module reveal" data-id="${m.id}">
+        <div class="module-top">
+          <div class="module-num">${String(m.id).padStart(2,'0')}</div>
+          <span class="module-level ${levelClass}">${levelLabel}</span>
+        </div>
+        <h3>${L==='ar'?m.title_ar:m.title_en}</h3>
+        <p>${L==='ar'?m.short_ar:m.short_en}</p>
+        <ul class="topics">${tags.map(t=>`<li>${t}</li>`).join('')}</ul>
+        <div class="module-cta">
+          <span>${L==='ar'?'افتح الدرس كاملاً':'Open full lesson'}</span>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </div>
+      </article>`;
+  }).join('');
+
+  grid.querySelectorAll('.module').forEach(card => {
+    card.addEventListener('click', () => openLesson(parseInt(card.dataset.id)));
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      card.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    });
+    observeReveal(card);
+  });
+}
+
+/* ============================================================
+   CODE HIGHLIGHTER (simple, safe)
+   ============================================================ */
+function highlightCode(code, lang){
+  const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  let h = esc(code);
+
+  if (lang === 'html' || lang === 'jsx'){
+    // comments
+    h = h.replace(/(&lt;!--[\s\S]*?--&gt;)/g, '<span class="tok-comment">$1</span>');
+    // strings
+    h = h.replace(/(&quot;[^&]*?&quot;|&#39;[^&]*?&#39;|'[^'\n]*'|"[^"\n]*")/g, '<span class="tok-str">$1</span>');
+    // tags
+    h = h.replace(/(&lt;\/?)([a-zA-Z][\w-]*)/g, '$1<span class="tok-tag">$2</span>');
+    // attributes
+    h = h.replace(/(\s)([a-zA-Z-]+)(=)/g, '$1<span class="tok-attr">$2</span>$3');
+    return h;
+  }
+
+  if (lang === 'css'){
+    h = h.replace(/(\/\*[\s\S]*?\*\/)/g, '<span class="tok-comment">$1</span>');
+    h = h.replace(/(&quot;[^&]*?&quot;|'[^'\n]*')/g, '<span class="tok-str">$1</span>');
+    // selectors before {
+    h = h.replace(/(^|\n)([^\n{}]+?)(\s*\{)/g, (m,p1,p2,p3)=>p1+'<span class="tok-sel">'+p2+'</span>'+p3);
+    // properties
+    h = h.replace(/([\w-]+)(\s*:)/g, '<span class="tok-prop">$1</span>$2');
+    // values
+    h = h.replace(/(:\s*)([^;\n]+)/g, (m,p1,p2)=>p1+'<span class="tok-val">'+p2+'</span>');
+    return h;
+  }
+
+  if (lang === 'javascript'){
+    h = h.replace(/(\/\/[^\n]*)/g, '<span class="tok-comment">$1</span>');
+    h = h.replace(/(&quot;[^&]*?&quot;|'[^'\n]*'|`[^`]*`)/g, '<span class="tok-str">$1</span>');
+    h = h.replace(/\b(const|let|var|function|return|if|else|for|while|try|catch|throw|new|async|await|import|export|from|of|in|class|extends)\b/g, '<span class="tok-kw">$1</span>');
+    h = h.replace(/\b(true|false|null|undefined)\b/g, '<span class="tok-kw">$1</span>');
+    h = h.replace(/\b(\d+)\b/g, '<span class="tok-num">$1</span>');
+    h = h.replace(/(\b[a-zA-Z_$][\w$]*)(\s*\()/g, '<span class="tok-fn">$1</span>$2');
+    return h;
+  }
+
+  if (lang === 'bash'){
+    h = h.replace(/(#[^\n]*)/g, '<span class="tok-comment">$1</span>');
+    h = h.replace(/\b(git|npm|cd|mkdir|ls|echo|node|yarn|pnpm)\b/g, '<span class="tok-kw">$1</span>');
+    return h;
+  }
+
+  return h;
+}
+
+/* ============================================================
+   LESSON MODAL
+   ============================================================ */
+function openLesson(id){
+  const m = curriculum.find(x => x.id === id);
+  if (!m) return;
+  currentModule = id;
+  const L = currentLang;
+  const overlay = document.getElementById('lessonOverlay');
+  const modal = document.getElementById('lessonModal');
+
+  const levelLabel = {
+    beginner: L==='ar'?'مبتدئ':'Beginner',
+    mid: L==='ar'?'متوسط':'Intermediate',
+    adv: L==='ar'?'متقدم':'Advanced'
+  }[m.level];
+
+  const levelClass = m.level === 'mid' ? 'mid' : m.level === 'adv' ? 'adv' : '';
+
+  const objectives = (L==='ar'?m.objectives_ar:m.objectives_en)
+    .map(o => `<li>${o}</li>`).join('');
+
+  const lessonsHTML = m.lessons.map((lesson, idx) => `
+    <div class="lesson-section">
+      <h3><span class="lnum">${idx+1}</span>${L==='ar'?lesson.title_ar:lesson.title_en}</h3>
+      <p>${L==='ar'?lesson.content_ar:lesson.content_en}</p>
+      ${lesson.code ? `
+        <div class="code-block">
+          <div class="code-head">
+            <span class="code-lang">${lesson.codeLang}</span>
+            <button class="code-copy" data-copy="${idx}">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              ${L==='ar'?'نسخ':'Copy'}
+            </button>
+          </div>
+          <pre>${highlightCode(lesson.code, lesson.codeLang)}</pre>
+        </div>` : ''}
+    </div>
+  `).join('');
+
+  const mistakes = (L==='ar'?m.mistakes_ar:m.mistakes_en).map(x => `<li>${x}</li>`).join('');
+  const exercises = (L==='ar'?m.exercises_ar:m.exercises_en).map(x => `<li>${x}</li>`).join('');
+
+  const total = curriculum.length;
+  const hasPrev = id > 1;
+  const hasNext = id < total;
+
+  modal.innerHTML = `
+    <div class="lesson-head">
+      <div class="lesson-head-left">
+        <div class="lesson-kicker">${L==='ar'?'الوحدة':'Module'} ${String(m.id).padStart(2,'0')} · ${levelLabel}</div>
+        <h2>${L==='ar'?m.title_ar:m.title_en}</h2>
+        <p>${L==='ar'?m.short_ar:m.short_en}</p>
+      </div>
+      <button class="lesson-close" id="lessonClose" aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6L6 18M6 6l12 12"/></svg>
+      </button>
+    </div>
+    <div class="lesson-body">
+      <div class="objectives">
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+          ${L==='ar'?'ماذا ستتعلم في هذه الوحدة':'What you will learn'}
+        </h4>
+        <ul>${objectives}</ul>
+      </div>
+
+      ${lessonsHTML}
+
+      <div class="mistakes">
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 8v4M12 16h.01"/></svg>
+          ${L==='ar'?'أخطاء شائعة يجب تجنّبها':'Common mistakes to avoid'}
+        </h4>
+        <ul>${mistakes}</ul>
+      </div>
+
+      <div class="exercises">
+        <h4>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          ${L==='ar'?'تمارين عملية':'Practice exercises'}
+        </h4>
+        <ol>${exercises}</ol>
+      </div>
+
+      <div class="lesson-nav">
+        <button id="prevLesson" ${hasPrev?'':'disabled'}>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+          ${L==='ar'?'السابق':'Previous'}
+        </button>
+        <span class="mid-info">${m.id} / ${total}</span>
+        <button id="nextLesson" ${hasNext?'':'disabled'}>
+          ${L==='ar'?'التالي':'Next'}
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  `;
+
+  // bind close
+  document.getElementById('lessonClose').addEventListener('click', closeLesson);
+  if (hasPrev) document.getElementById('prevLesson').addEventListener('click', () => openLesson(id - 1));
+  if (hasNext) document.getElementById('nextLesson').addEventListener('click', () => openLesson(id + 1));
+
+  // bind copy buttons
+  modal.querySelectorAll('.code-copy').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.copy);
+      const code = m.lessons[idx].code;
+      navigator.clipboard.writeText(code).then(() => showToast(L==='ar'?'تم النسخ':'Copied to clipboard'));
+    });
+  });
+
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  overlay.scrollTop = 0;
+}
+
+function closeLesson(){
+  const overlay = document.getElementById('lessonOverlay');
+  overlay.classList.remove('open');
+  overlay.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  currentModule = null;
+}
+
+document.getElementById('lessonOverlay').addEventListener('click', e => {
+  if (e.target.id === 'lessonOverlay') closeLesson();
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && currentModule !== null) closeLesson();
+});
+
+/* Toast */
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 1800);
+}
+
+/* ============================================================
+   INIT
+   ============================================================ */
+setLang(currentLang);
+
+/* Scroll progress + nav */
 const nav = document.getElementById('nav');
 const progress = document.getElementById('scrollProgress');
-
 function onScroll(){
   const y = window.scrollY;
   nav.classList.toggle('scrolled', y > 30);
@@ -920,227 +1851,24 @@ function onScroll(){
 window.addEventListener('scroll', onScroll, { passive:true });
 onScroll();
 
-/* ============================================================
-   3. REVEAL ON SCROLL
-   ============================================================ */
-const revealEls = document.querySelectorAll('.reveal');
-const io = new IntersectionObserver((entries) => {
-  entries.forEach((entry, i) => {
+/* Reveal observer */
+const revealIO = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
     if (entry.isIntersecting){
       const el = entry.target;
       const siblings = Array.from(el.parentElement.children).filter(c => c.classList.contains('reveal'));
       const idx = siblings.indexOf(el);
       el.style.transitionDelay = (Math.min(idx, 5) * 0.08) + 's';
       el.classList.add('visible');
-      io.unobserve(el);
+      revealIO.unobserve(el);
     }
   });
-}, { threshold: 0.12, rootMargin: '0px 0px -60px 0px' });
+}, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
 
-revealEls.forEach(el => io.observe(el));
+function observeReveal(el){ revealIO.observe(el); }
+document.querySelectorAll('.reveal').forEach(observeReveal);
 
-/* ============================================================
-   4. MODULE CARD MOUSE GLOW
-   ============================================================ */
-document.querySelectorAll('.module').forEach(card => {
-  card.addEventListener('mousemove', e => {
-    const r = card.getBoundingClientRect();
-    card.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    card.style.setProperty('--my', (e.clientY - r.top) + 'px');
-  });
-});
-
-/* ============================================================
-   5. THREE.JS 3D BACKGROUND
-   ============================================================ */
-(function init3D(){
-  if (typeof THREE === 'undefined') return;
-
-  const container = document.getElementById('bg3d');
-  const scene = new THREE.Scene();
-
-  const camera = new THREE.PerspectiveCamera(
-    70,
-    window.innerWidth / window.innerHeight,
-    0.1,
-    2000
-  );
-  camera.position.z = 55;
-
-  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  container.appendChild(renderer.domElement);
-
-  /* ---- Particles field ---- */
-  const COUNT = 2600;
-  const positions = new Float32Array(COUNT * 3);
-  const colors    = new Float32Array(COUNT * 3);
-
-  const palette = [
-    new THREE.Color(0x6366f1),
-    new THREE.Color(0x8b5cf6),
-    new THREE.Color(0xa855f7),
-    new THREE.Color(0x06b6d4)
-  ];
-
-  for (let i = 0; i < COUNT; i++){
-    positions[i*3]     = (Math.random() - 0.5) * 380;
-    positions[i*3 + 1] = (Math.random() - 0.5) * 380;
-    positions[i*3 + 2] = (Math.random() - 0.5) * 380;
-
-    const c = palette[Math.floor(Math.random() * palette.length)];
-    colors[i*3]     = c.r;
-    colors[i*3 + 1] = c.g;
-    colors[i*3 + 2] = c.b;
-  }
-
-  const pGeo = new THREE.BufferGeometry();
-  pGeo.setAttribute('position', new THREE.BufferAttribute(positions, 3));
-  pGeo.setAttribute('color',    new THREE.BufferAttribute(colors, 3));
-
-  const pMat = new THREE.PointsMaterial({
-    size: 0.55,
-    vertexColors: true,
-    transparent: true,
-    opacity: 0.75,
-    sizeAttenuation: true,
-    depthWrite: false,
-    blending: THREE.AdditiveBlending
-  });
-
-  const particles = new THREE.Points(pGeo, pMat);
-  scene.add(particles);
-
-  /* ---- Wireframe icosahedron ---- */
-  const icoGeo = new THREE.IcosahedronGeometry(16, 1);
-  const icoMat = new THREE.MeshBasicMaterial({
-    color: 0x6366f1,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.22
-  });
-  const ico = new THREE.Mesh(icoGeo, icoMat);
-  scene.add(ico);
-
-  /* ---- Wireframe torus knot ---- */
-  const knotGeo = new THREE.TorusKnotGeometry(9, 2.6, 140, 18);
-  const knotMat = new THREE.MeshBasicMaterial({
-    color: 0xa855f7,
-    wireframe: true,
-    transparent: true,
-    opacity: 0.10
-  });
-  const knot = new THREE.Mesh(knotGeo, knotMat);
-  scene.add(knot);
-
-  /* ---- Small floating shapes ---- */
-  const shapes = [];
-  const shapeGeos = [
-    new THREE.OctahedronGeometry(1.6, 0),
-    new THREE.TetrahedronGeometry(1.8, 0),
-    new THREE.BoxGeometry(2, 2, 2)
-  ];
-  const shapeColors = [0x22d3ee, 0xa855f7, 0x818cf8];
-
-  for (let i = 0; i < 14; i++){
-    const g = shapeGeos[i % shapeGeos.length];
-    const m = new THREE.MeshBasicMaterial({
-      color: shapeColors[i % shapeColors.length],
-      wireframe: true,
-      transparent: true,
-      opacity: 0.28
-    });
-    const mesh = new THREE.Mesh(g, m);
-    mesh.position.set(
-      (Math.random() - 0.5) * 100,
-      (Math.random() - 0.5) * 80,
-      (Math.random() - 0.5) * 60 - 10
-    );
-    mesh.userData = {
-      speedX: (Math.random() - 0.5) * 0.006,
-      speedY: (Math.random() - 0.5) * 0.006,
-      floatSpeed: 0.4 + Math.random() * 0.8,
-      floatOffset: Math.random() * Math.PI * 2,
-      baseY: mesh.position.y
-    };
-    shapes.push(mesh);
-    scene.add(mesh);
-  }
-
-  /* ---- Mouse parallax ---- */
-  const mouse = { x: 0, y: 0 };
-  const target = { x: 0, y: 0 };
-
-  window.addEventListener('mousemove', e => {
-    mouse.x = (e.clientX / window.innerWidth)  * 2 - 1;
-    mouse.y = (e.clientY / window.innerHeight) * 2 - 1;
-  });
-
-  window.addEventListener('touchmove', e => {
-    if (!e.touches[0]) return;
-    mouse.x = (e.touches[0].clientX / window.innerWidth)  * 2 - 1;
-    mouse.y = (e.touches[0].clientY / window.innerHeight) * 2 - 1;
-  }, { passive:true });
-
-  /* ---- Resize ---- */
-  window.addEventListener('resize', () => {
-    camera.aspect = window.innerWidth / window.innerHeight;
-    camera.updateProjectionMatrix();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  });
-
-  /* ---- Animation loop ---- */
-  const clock = new THREE.Clock();
-  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-  function animate(){
-    requestAnimationFrame(animate);
-
-    const t = clock.getElapsedTime();
-
-    // smooth mouse
-    target.x += (mouse.x * 8 - target.x) * 0.045;
-    target.y += (mouse.y * 6 - target.y) * 0.045;
-
-    // camera parallax
-    camera.position.x = target.x;
-    camera.position.y = -target.y;
-    camera.lookAt(0, 0, 0);
-
-    if (!reduceMotion){
-      // particles slow rotation
-      particles.rotation.y = t * 0.025;
-      particles.rotation.x = t * 0.012;
-
-      // central shapes
-      ico.rotation.x = t * 0.10;
-      ico.rotation.y = t * 0.14;
-
-      knot.rotation.x = -t * 0.08;
-      knot.rotation.y = t * 0.11;
-    }
-
-    // floating shapes
-    shapes.forEach(s => {
-      s.rotation.x += s.userData.speedX;
-      s.rotation.y += s.userData.speedY;
-      if (!reduceMotion){
-        s.position.y = s.userData.baseY +
-          Math.sin(t * s.userData.floatSpeed + s.userData.floatOffset) * 2.2;
-      }
-    });
-
-    renderer.render(scene, camera);
-  }
-
-  animate();
-})();
-
-/* ============================================================
-   6. SMOOTH ANCHOR OFFSET (navbar compensation)
-   ============================================================ */
+/* Smooth anchors */
 document.querySelectorAll('a[href^="#"]').forEach(link => {
   link.addEventListener('click', e => {
     const id = link.getAttribute('href');
@@ -1152,6 +1880,104 @@ document.querySelectorAll('a[href^="#"]').forEach(link => {
     window.scrollTo({ top: y, behavior: 'smooth' });
   });
 });
+
+/* ============================================================
+   THREE.JS BACKGROUND
+   ============================================================ */
+(function init3D(){
+  if (typeof THREE === 'undefined') return;
+  const container = document.getElementById('bg3d');
+  const scene = new THREE.Scene();
+  const camera = new THREE.PerspectiveCamera(70, window.innerWidth/window.innerHeight, 0.1, 2000);
+  camera.position.z = 55;
+  const renderer = new THREE.WebGLRenderer({ antialias:true, alpha:true });
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  container.appendChild(renderer.domElement);
+
+  const COUNT = 2400;
+  const positions = new Float32Array(COUNT*3);
+  const colors = new Float32Array(COUNT*3);
+  const palette = [new THREE.Color(0x6366f1), new THREE.Color(0x8b5cf6), new THREE.Color(0xa855f7), new THREE.Color(0x06b6d4)];
+  for (let i=0;i<COUNT;i++){
+    positions[i*3] = (Math.random()-0.5)*380;
+    positions[i*3+1] = (Math.random()-0.5)*380;
+    positions[i*3+2] = (Math.random()-0.5)*380;
+    const c = palette[Math.floor(Math.random()*palette.length)];
+    colors[i*3]=c.r; colors[i*3+1]=c.g; colors[i*3+2]=c.b;
+  }
+  const pGeo = new THREE.BufferGeometry();
+  pGeo.setAttribute('position', new THREE.BufferAttribute(positions,3));
+  pGeo.setAttribute('color', new THREE.BufferAttribute(colors,3));
+  const pMat = new THREE.PointsMaterial({ size:0.55, vertexColors:true, transparent:true, opacity:0.7, sizeAttenuation:true, depthWrite:false, blending:THREE.AdditiveBlending });
+  const particles = new THREE.Points(pGeo, pMat);
+  scene.add(particles);
+
+  const ico = new THREE.Mesh(
+    new THREE.IcosahedronGeometry(16,1),
+    new THREE.MeshBasicMaterial({ color:0x6366f1, wireframe:true, transparent:true, opacity:0.2 })
+  );
+  scene.add(ico);
+
+  const knot = new THREE.Mesh(
+    new THREE.TorusKnotGeometry(9,2.6,140,18),
+    new THREE.MeshBasicMaterial({ color:0xa855f7, wireframe:true, transparent:true, opacity:0.09 })
+  );
+  scene.add(knot);
+
+  const shapes = [];
+  const geos = [new THREE.OctahedronGeometry(1.6,0), new THREE.TetrahedronGeometry(1.8,0), new THREE.BoxGeometry(2,2,2)];
+  const scols = [0x22d3ee,0xa855f7,0x818cf8];
+  for (let i=0;i<12;i++){
+    const mesh = new THREE.Mesh(geos[i%3], new THREE.MeshBasicMaterial({ color:scols[i%3], wireframe:true, transparent:true, opacity:0.26 }));
+    mesh.position.set((Math.random()-0.5)*100,(Math.random()-0.5)*80,(Math.random()-0.5)*60-10);
+    mesh.userData = { sx:(Math.random()-0.5)*0.006, sy:(Math.random()-0.5)*0.006, fs:0.4+Math.random()*0.8, fo:Math.random()*Math.PI*2, by:mesh.position.y };
+    shapes.push(mesh); scene.add(mesh);
+  }
+
+  const mouse = { x:0, y:0 }, target = { x:0, y:0 };
+  window.addEventListener('mousemove', e => {
+    mouse.x = (e.clientX/window.innerWidth)*2-1;
+    mouse.y = (e.clientY/window.innerHeight)*2-1;
+  });
+
+  window.addEventListener('resize', () => {
+    camera.aspect = window.innerWidth/window.innerHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  });
+
+  const clock = new THREE.Clock();
+  const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function animate(){
+    requestAnimationFrame(animate);
+    const t = clock.getElapsedTime();
+    target.x += (mouse.x*8 - target.x)*0.045;
+    target.y += (mouse.y*6 - target.y)*0.045;
+    camera.position.x = target.x;
+    camera.position.y = -target.y;
+    camera.lookAt(0,0,0);
+    if (!reduceMotion){
+      particles.rotation.y = t*0.025;
+      particles.rotation.x = t*0.012;
+      ico.rotation.x = t*0.10;
+      ico.rotation.y = t*0.14;
+      knot.rotation.x = -t*0.08;
+      knot.rotation.y = t*0.11;
+    }
+    shapes.forEach(s => {
+      s.rotation.x += s.userData.sx;
+      s.rotation.y += s.userData.sy;
+      if (!reduceMotion){
+        s.position.y = s.userData.by + Math.sin(t*s.userData.fs + s.userData.fo)*2.2;
+      }
+    });
+    renderer.render(scene, camera);
+  }
+  animate();
+})();
 </script>
 </body>
 </html>
